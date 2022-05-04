@@ -1,0 +1,17 @@
+{
+  "name": "VizzlyDocs",
+  "version": "1.0.0",
+  "type": "module",
+  "repository": "git@github.com:vizzly-co/docs.git",
+  "author": "James Bowers",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "node ./build.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.1"
+  }
+}
