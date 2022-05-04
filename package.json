@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "node ./build.js"
+    "build": "mkdir -p .build && node ./build.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
