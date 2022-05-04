@@ -1,1 +1,1 @@
-# docs
+# Vizzly docs
