@@ -16,7 +16,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 16.14.2
-      run: 'yarn install && yarn build'
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -24,6 +23,9 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-2
+
+    - name: Install and build
+      run: 'yarn install && yarn build'
 
     - name: Deploy to S3 bucket
       run: aws s3 sync ./.build/ s3://live-vizzly-docs --delete
