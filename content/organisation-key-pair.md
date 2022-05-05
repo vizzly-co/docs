@@ -11,7 +11,7 @@ Organisation key pairs are used for Vizzly's secure filters feature.
 
 To provide a secure filter to Vizzly, you'll first need to create a key pair. The private key will be stored on your servers, and you'll share the public key with Vizzly on the [public keys page of your dashboard](/organisation/key-pairs).
 
-### Generating the Elliptical Curve certificate
+## Generating the Elliptical Curve certificate
 
 First, run the following command to generate the private key:
 
