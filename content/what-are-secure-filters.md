@@ -26,7 +26,12 @@ const field = "user_id";
 const operator = "=";
 const value = anAuthenticatedUserId;
 
-let regionSecuredFilter = await vizzAuth.signFilter({
+const vizzAuth = VizzLib.auth({
+  privateKey,
+  ttlInMinutes: 60,
+});
+
+let securedFilter = await vizzAuth.signFilter({
   field,
   operator,
   value
