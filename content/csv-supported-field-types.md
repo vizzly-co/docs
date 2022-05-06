@@ -9,22 +9,19 @@ ogImage:
 
 As a CSV doesn't provide the data types of each field, in Vizzly we predict the field types based on what we can parse.
 
-Currently the rules are strict, but we hope to make this more flexible as we continue to develop the product. If there's a format you'd expect us to support, please let us know.
+Currently the rules are strict, but are working on expanding these rules. If there's a format you'd like us to support, please let us know.
 
-Here are the rules on how we'd parse your CSV.
-
-## Dates & Times
-We support
+## Date Times
 - ISO 8601
-- `MM/DD/YYYY hh:mm`
-- `YYYY-MM-DD`
+- MM/DD/YYYY hh:mm
+- YYYY-MM-DD
 
-## Just a date
+## Date
 - ISO 8601
-- `YYYY/MM/DD`
+- YYYY/MM/DD
 
-## Just a time
-For fields which just contain times, we support the ISO8601 format.
+## Time
+- ISO 8601
 
 ## Decimal
 We currently only support decimals with a `.` deliminator. Thousands separators are currently not supported. For example `3,000.45` is not supported, but `3000.45` is.
