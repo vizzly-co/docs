@@ -36,18 +36,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/vizzly-co/docs/tree/main',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/vizzly-co/docs/tree/main',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -62,7 +57,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Vizzly Logo',
-          src: '/docs/img/logo-blue.png',
+          src: '/docs/img/logo.png',
           srcDark: '/docs/img/logo-white.png'
         },
         // items: [
