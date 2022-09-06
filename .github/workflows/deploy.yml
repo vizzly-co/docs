@@ -28,4 +28,4 @@ jobs:
       run: 'yarn install && yarn build'
 
     - name: Deploy to S3 bucket
-      run: aws s3 sync ./.build/ s3://live-vizzly-docs --delete
+      run: aws s3 sync ./build/ s3://live-vizzly-docs --delete
