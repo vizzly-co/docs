@@ -60,20 +60,9 @@ const config = {
           src: '/img/logo.png',
           srcDark: '/img/logo-white.png'
         },
-        // items: [
-        //   {
-        //     type: 'doc',
-        //     docId: 'intro',
-        //     position: 'left',
-        //     label: 'Tutorial',
-        //   },
-        //   {to: '/blog', label: 'Blog', position: 'left'},
-        //   {
-        //     href: 'https://github.com/facebook/docusaurus',
-        //     label: 'GitHub',
-        //     position: 'right',
-        //   },
-        // ],
+        items: [
+          {to: 'https://app.vizzly.co', label: 'App', position: 'right'},
+        ],
       },
       prism: {
         theme: lightCodeTheme,

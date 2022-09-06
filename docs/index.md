@@ -3,7 +3,7 @@ slug: /
 sidebar_position: 1
 ---
 
-# Vizzly
+# Docs
 
 Vizzly offers embeddable dashboards your users can customize.
 
