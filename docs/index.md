@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Vizzly Intro
+# Vizzly
 
 Let's discover **Vizzly in less than 5 minutes**.
 
