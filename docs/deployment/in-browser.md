@@ -50,6 +50,8 @@ export const RenderVizzlyStudio = () => (
 ## Multi-tenancy
 To make this work in a multi-tenancy environment, the dataset that’s downloaded must only contain data for the currently active user.
 
+As this download happens in a JS callback function, you're in complete control over how that happens, so long as you return the data in the format Vizzly requires.
+
 ## Limitations
 The trade-off here is the initially blocking network call required to load all the data that’s available to a user for querying.
 

@@ -7,7 +7,7 @@ sidebar_position: 7
 Keeping your data, and your customer's data secure is our highest priority. With this in-mind, we require that the identity config is signed using a private key, so that we can verify the integrity and origin of the config.
 
 ### Setting up organisation key-pairs
-To work securely with Vizzly, you'll first need to create a key pair and add it to your organisation. The private key will be stored on your servers, and you'll share the public key with Vizzly on the [public keys page of your dashboard](/organisation/key-pairs).
+To work securely with Vizzly, you'll first need to create a key pair and add it to your organisation. The private key will be stored on your servers, and you'll share the public key with Vizzly on the [public keys page of your dashboard](https://app.vizzly.co/organisation/key-pairs).
 
 #### Generating the Elliptical Curve certificate
 
@@ -25,7 +25,7 @@ Next, we will create the public key that allows anyone to verify the identity co
 openssl ec -in ecprivkey.pem -pubout -out ecpubkey.pem
 ```
 
-The last step is saving the contents of `ecpubkey.pem` to the Vizzly servers. You can do that on [the organisation key pairs page](/organisation/key-pairs).
+The last step is saving the contents of `ecpubkey.pem` to the Vizzly servers. You can do that on [the organisation key pairs page](https://app.vizzly.co/organisation/key-pairs).
 
 ### Signing the identity config
 If you're utilising JavaScript on your backend servers, you can use Vizzly's library to aid the signing of the identity config.

@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  favicon: '/docs/img/favicon.png',
 
   stylesheets: ["https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"],
   
@@ -62,8 +62,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Vizzly Logo',
-          src: 'img/logo.png',
-          srcDark: 'img/logo-white.png'
+          src: '/docs/img/logo-blue.png',
+          srcDark: '/docs/img/logo-white.png'
         },
         // items: [
         //   {
