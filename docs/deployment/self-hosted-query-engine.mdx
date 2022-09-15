@@ -10,6 +10,12 @@ To make it easy to get started, Vizzly provides a docker image that when ran, wi
 
 The query engine requires some configuration to allow it to connect to your database, and know how to map queries to how your data is structured. For example, if you're running a SQL database, the docker image might need to know how to join tables together to produce the dataset that's available for querying.
 
+#### File location
+The Vizzly config file will need to be mounted into the Vizzly docker image, located at `/etc/config.vizzly.json`.
+
+#### Security
+The config file should be treated as a secret, as it will contain read-only credentials to your database.
+
 #### Connection credentials
 The Vizzly docker image will need read-only access to your database. These credentials are specified in the Vizzly config file, and therefore the entire config file should be treated as a secret.
 
