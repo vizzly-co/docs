@@ -102,7 +102,7 @@ The typescript definition of a data set is as follows:
 ```
 
 #### Optional secure filters
-Secure filters are typically defined in the [identity callback](/callbacks/identity). However if you want to protect against the worst case scenario of your private key becoming compromised, you can also define the secure filters for each of the data sets here. The trade-off here is between flexibility of dynamic secure filters and an additional level of security.
+Secure filters are typically defined in the [identity callback](/callbacks/identity). However if you want to reduce the impact of your private key becoming compromised, you can also define the secure filters for each of the data sets here. The trade-off here is between flexibility of dynamic secure filters and an additional level of security. This will not completely prevent unauthorised access, however it might reduce the amount of data an attacker has access too even if they manage to steal your private key.
 
 The typescript definition of a secure filter is as follows:
 

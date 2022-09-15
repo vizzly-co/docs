@@ -102,5 +102,8 @@ To define a data set which is available to all users in a non-multi-tenant envir
 }
 ```
 
+### Reducing impact of a private key compromise
+If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/deployment/self-hosted-query-engine#optional-secure-filters)
+
 ### Integrity signature
 For help with signing the identity config and generating the `integritySignature` value, please see the [security docs](/security) for generating the private and public keys, as well as [this nextJs example identity callback](https://github.com/vizzly-co/library-examples/blob/50091b6451da18b7fd159593a8d73c233a4c5259/examples/next-js/pages/api/identity.js#L37-L45).
