@@ -1,0 +1,200 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Setup the project
+
+#### 1. Create the NextJs app
+Run the following command and follow the prompts to setup your nextJs project.
+
+```bash
+yarn create next-app
+```
+
+then navigate into the root directory of this new project.
+
+#### 2. Install the Vizzly library
+In the root of the nextJs application you've just initiated, install Vizzly by running
+
+```bash
+yarn add @vizzly/components@0.0.170
+```
+
+#### 3. Embed the Vizzly dashboard
+From the [Vizzly studio page](https://app.vizzly.co/studio), click on the "code embed" icon in the header menu.
+
+You'll then see a modal appear on screen, with the different code snippet options available to you. Go ahead and click on
+the "Docker image" tab.
+
+<img src="/img/docker-image-embed-snippet.png" />
+
+<br /><br />
+Using this information, we can replace the `pages/index.jsx` file with the following;
+
+```jsx title="/pages/index.jsx"
+import Head from 'next/head'
+import { Components, VizzlyGlobalStyles, vizzlySelfHosted } from '@vizzly/components';
+
+export default function Home() {
+  return (
+    <>
+      <Head><title>Vizzly self-hosted query engine example</title></Head>
+      <VizzlyGlobalStyles />
+      <header style={{marginBottom: "10px", height: "45px", background: "rgba(0, 0, 0, .8)"}} />
+      <Components.Studio
+        {...vizzlySelfHosted("http://0.0.0.0:8000")}
+        identityCallback={async () => {
+          const response = await fetch("/api/identity");
+          if(response.ok) {
+            const identityConfig = await response.json();
+
+            return identityConfig;
+          };
+
+          return null;
+        }}
+        />
+    </>
+  )
+};
+```
+
+#### 4. Setting up the local environment
+To complete the local setup, we'll need to run the Vizzly docker image with a Vizzly config file, and run a
+local database to simulate your production database. For this example we'll use a postgres database to host our
+pretend "production" US sales data.
+
+To achieve this you'll need to add the following files to your project;
+
+
+
+<Tabs>
+<TabItem value="/docker-compose.yaml" label="/docker-compose.yaml">
+
+```docker-compose
+version: '3.1'
+
+services:
+  vizzly:
+    image: ghcr.io/vizzly-co/query-engine:v0.0.4
+    ports:
+      - 8000:8000
+    volumes:
+      - ./datadir:/etc
+
+  customer_postgres_14_2:
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: customer
+      POSTGRES_USER: customer
+    ports:
+      - 6400:5432
+    volumes:
+      - ./inits/postgres-us-sales-data.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./datasets:/var/lib/postgresql/csvs
+```
+</TabItem>
+<TabItem value="/inits/postgres-us-sales-data.sql" label="/inits/postgres-us-sales-data.sql">
+
+```sql
+CREATE DATABASE my_database;
+
+\c my_database;
+
+CREATE TABLE us_sales (
+    order_id bigint,
+    order_date date,
+    status text,
+    item_id float,
+    sku text,
+    qty_ordered float,
+    price float,
+    value float,
+    discount_amount float,
+    total float,
+    category text,
+    payment_method text,
+    bi_st text,
+    cust_id float,
+    year int,
+    month text,
+    ref_num bigint,
+    customer_since date,
+    place_name text,
+    county text,
+    city text,
+    state text,
+    zip text,
+    region text,
+    discount_percent float
+);
+
+COPY us_sales (order_id,order_date,status,item_id,sku,qty_ordered,price,value,discount_amount,total,category,payment_method,bi_st,cust_id,year,month,ref_num,customer_since,place_name,county,city,state,zip,region,discount_percent) FROM '/var/lib/postgresql/csvs/sales.csv' DELIMITER ',' CSV HEADER;
+```
+</TabItem>
+<TabItem value="/datasets/sales.csv" label="/datasets/sales.csv">
+
+[Download the compressed CSV](./us-sales-tutorial-full-data.zip), then expand and save it to `/datasets/sales.csv`
+</TabItem>
+<TabItem value="/pages/api/identity.js" label="/pages/api/identity.js">
+
+```js
+
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { auth } from "@vizzly/components";
+
+// DO NOT DO THIS IN YOUR APP!
+// This is for example purposes only.
+// Instead, you should store this securely.
+const PRIVATE_KEY = `
+-----BEGIN EC PRIVATE KEY-----
+MHcCAQEEIMd64JFtp7nbYIsws03dy6fBirhpio4aLwPdW/6Xg1WRoAoGCCqGSM49
+AwEHoUQDQgAERbmqmGHbjlNMXjHZMJsoFsDnQDT7k4aV5wBdlXIKe0GH+FWSwawt
+c8XAMURwSA7iAY2QzmzJ4RQ6ZKp1UVkpLA==
+-----END EC PRIVATE KEY-----
+`;
+
+const IDENTITY_TTL = 120;
+
+/*
+  Receives HTTP requests, and responds with the user's
+  identity information.
+*/
+export default async function handler(req, res) {
+  const vizzAuth = auth({
+    privateKey: PRIVATE_KEY,
+    ttlInMinutes: IDENTITY_TTL,
+  });
+
+  // TODO
+  // Obtain a unique identifier for the current user,
+  // which is used by Vizzly to store this user's dashboard configuration.
+  let userReference = "usr-1"
+
+  // TODO
+  // Obtain your provided identity config
+  // from the Vizzly studio. https://app.vizzly.co/studio
+  let identityConfig = << Identity config  >>
+
+  identityConfig.integritySignature = await vizzAuth.signIdentityConfig(identityConfig);
+
+  res.status(200).json(identityConfig);
+}
+```
+</TabItem>
+</Tabs>
+
+#### 5. Upload the organisation public key
+For Vizzly to fetch the user's dashboard config securely, you'll need to upload the following public key
+to the [organisation key-pairs page](https://app.vizzly.co/organisation/key-pairs).
+
+```
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERbmqmGHbjlNMXjHZMJsoFsDnQDT7
+k4aV5wBdlXIKe0GH+FWSwawtc8XAMURwSA7iAY2QzmzJ4RQ6ZKp1UVkpLA==
+-----END PUBLIC KEY-----
+```
+
+#### 6. Run it
+Now that you have your local environment setup, we'll be able to run the setup and see the dashboard embedded in your
+own nextJs application.

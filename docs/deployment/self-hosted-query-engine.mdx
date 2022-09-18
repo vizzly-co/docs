@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# Self-hosted query engine
+# Self-hosted
 
-To make it easy to get started, Vizzly provides a docker image that when ran, will provide an endpoint that transforms Vizzly queries into Vizzly results. You will provide it read-only credentials to your underlying database, and it will run queries safely against your database. [Learn more about Vizzly security here](/security).
+To make it easy to get started, Vizzly provides a docker image that securely queries your database to power the dashboards your users see.
 
 ### Config file
 
@@ -172,6 +172,22 @@ type Operator =
   ]
 }
 ```
+
+### Performance and resiliency
+
+#### Workload
+The docker image we provide does not do computationally heavy lifting. The noteworthy operations include validating JWTs and transforming Vizzly queries into the language your underlying database requires.
+
+#### Hardware considerations
+The recommended hardware requirements will depend on a number of different factors, including:
+- The number of concurrent users you expect to be viewing the dashboard.
+- How many charts a typical user has on their dashboard.
+- How many additional data controls exist on each chart.
+
+To increase performance, consider scaling horizontally by adding more containers running the Vizzly docker image, or vertically by provisioning larger compute resource.
+
+#### Resiliency
+The query engine in the docker image is stateless and so it can be easily scaled horizontally to reduce performance or resiliency concerns and also auto-scaled if your traffic pattern is spiky.
 
 ### Limitations
 
