@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 To make it easy to get started, Vizzly provides a docker image that securely queries your database to power the dashboards your users see.
 
+[The docker image can be found here](https://github.com/vizzly-co/query-engine/pkgs/container/query-engine)
+
 ### Config file
 
 The query engine requires some configuration to allow it to connect to your database, and to learn how to map queries to your database.
@@ -151,7 +153,7 @@ The typescript definition of the credentials is as follows:
 {
   client: "bigquery";
   connection: {
-    projectId: stringl
+    projectId: string;
     location: string;
     keyFilename: string;
   }
