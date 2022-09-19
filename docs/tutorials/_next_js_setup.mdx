@@ -182,6 +182,210 @@ export default async function handler(req, res) {
 }
 ```
 </TabItem>
+<TabItem value="/datadir/config.vizzly.json" label="/datadir/config.vizzly.json">
+
+```json
+{
+  "connection": {
+    "client": "postgres",
+    "connection": {
+      "password": "customer",
+      "database": "my_database",
+      "user": "customer",
+      "host": "host.docker.internal",
+      "port": 6400
+    }
+  },
+  "dataSets": [
+    {
+      "id": << TODO Set the data set ID here >>,
+      "name": "US Sales",
+      "fields": [
+        {
+          "id": "order_id",
+          "name": "order_id",
+          "dataType": "number",
+          "publicName": "Order ID",
+          "table": "us_sales"
+        },
+        {
+          "id": "order_date",
+          "name": "order_date",
+          "dataType": "date_time",
+          "publicName": "Order Date",
+          "table": "us_sales"
+        },
+        {
+          "id": "status",
+          "name": "status",
+          "dataType": "string",
+          "publicName": "Status",
+          "table": "us_sales"
+        },
+        {
+          "id": "item_id",
+          "name": "item_id",
+          "dataType": "number",
+          "publicName": "Item ID",
+          "table": "us_sales"
+        },
+        {
+          "id": "sku",
+          "name": "sku",
+          "dataType": "string",
+          "publicName": "Sku",
+          "table": "us_sales"
+        },
+        {
+          "id": "qty_ordered",
+          "name": "qty_ordered",
+          "dataType": "number",
+          "publicName": "Qty Ordered",
+          "table": "us_sales"
+        },
+        {
+          "id": "price",
+          "name": "price",
+          "dataType": "number",
+          "publicName": "Price",
+          "table": "us_sales"
+        },
+        {
+          "id": "value",
+          "name": "value",
+          "dataType": "number",
+          "publicName": "Value",
+          "table": "us_sales"
+        },
+        {
+          "id": "discount_amount",
+          "name": "discount_amount",
+          "dataType": "number",
+          "publicName": "Discount amount",
+          "table": "us_sales"
+        },
+        {
+          "id": "total",
+          "name": "total",
+          "dataType": "number",
+          "publicName": "Total",
+          "table": "us_sales"
+        },
+        {
+          "id": "category",
+          "name": "category",
+          "dataType": "string",
+          "publicName": "Category",
+          "table": "us_sales"
+        },
+        {
+          "id": "payment_method",
+          "name": "payment_method",
+          "dataType": "string",
+          "publicName": "Payment Method",
+          "table": "us_sales"
+        },
+        {
+          "id": "bi_st",
+          "name": "bi_st",
+          "dataType": "string",
+          "publicName": "Bi St",
+          "table": "us_sales"
+        },
+        {
+          "id": "cust_id",
+          "name": "cust_id",
+          "dataType": "number",
+          "publicName": "Customer ID",
+          "table": "us_sales"
+        },
+        {
+          "id": "year",
+          "name": "year",
+          "dataType": "number",
+          "publicName": "Year",
+          "table": "us_sales"
+        },
+        {
+          "id": "month",
+          "name": "month",
+          "dataType": "string",
+          "publicName": "Month",
+          "table": "us_sales"
+        },
+        {
+          "id": "ref_num",
+          "name": "ref_num",
+          "dataType": "number",
+          "publicName": "Ref Num",
+          "table": "us_sales"
+        },
+        {
+          "id": "customer_since",
+          "name": "customer_since",
+          "dataType": "date_time",
+          "publicName": "Customer Since",
+          "table": "us_sales"
+        },
+        {
+          "id": "place_name",
+          "name": "place_name",
+          "dataType": "string",
+          "publicName": "Place Name",
+          "table": "us_sales"
+        },
+        {
+          "id": "county",
+          "name": "county",
+          "dataType": "string",
+          "publicName": "County",
+          "table": "us_sales"
+        },
+        {
+          "id": "city",
+          "name": "city",
+          "dataType": "string",
+          "publicName": "City",
+          "table": "us_sales"
+        },
+        {
+          "id": "state",
+          "name": "state",
+          "dataType": "string",
+          "publicName": "State",
+          "table": "us_sales"
+        },
+        {
+          "id": "zip",
+          "name": "zip",
+          "dataType": "string",
+          "publicName": "Zip",
+          "table": "us_sales"
+        },
+        {
+          "id": "region",
+          "name": "region",
+          "dataType": "string",
+          "publicName": "Region",
+          "table": "us_sales"
+        },
+        {
+          "id": "discount_percent",
+          "name": "discount_percent",
+          "dataType": "number",
+          "publicName": "Discount %",
+          "table": "us_sales"
+        }
+      ],
+      "joins": []
+    }
+  ],
+  "publicKeyCertificates": [
+    "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERbmqmGHbjlNMXjHZMJsoFsDnQDT7\nk4aV5wBdlXIKe0GH+FWSwawtc8XAMURwSA7iAY2QzmzJ4RQ6ZKp1UVkpLA==\n-----END PUBLIC KEY-----"
+  ]
+}
+```
+</TabItem>
 </Tabs>
 
 #### 5. Upload the organisation public key
