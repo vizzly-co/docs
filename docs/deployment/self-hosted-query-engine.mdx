@@ -351,6 +351,81 @@ type Operator =
 };
 ```
 
+### Joins
+
+In the Vizzly config file, it is possible to join fields that reside across multiple tables. Below is an example of how
+you would join two tables. One which has city information, and another table which has temperature information for each city.
+
+```json
+
+{
+  "connection": {
+    // ...
+  },
+  "dataSets": [
+    {
+      "id": "weather-by-city",
+      "name": "Weather by city",
+      "fields": [
+        {
+          "id": "field_1",
+          "publicName": "City ID",
+          "name": "id",
+          "table": "cities",
+          "dataType": "number"
+        },
+        {
+          "id": "field_2",
+          "publicName": "City",
+          "name": "name",
+          "table": "cities",
+          "dataType": "number"
+        },
+        {
+          "id": "field_3",
+          "publicName": "Weather record ID",
+          "name": "id",
+          "table": "weather",
+          "dataType": "number"
+        },
+        {
+          "id": "field_4",
+          "publicName": "City ID",
+          "name": "city_id",
+          "table": "weather",
+          "dataType": "number"
+        },
+        {
+          "id": "field_5",
+          "publicName": "High temperature",
+          "name": "high_temperature",
+          "table": "weather",
+          "dataType": "number"
+        }
+      ],
+      "joins": [
+        {
+          "type": "leftJoin",
+          "left": {
+            "field": "id",
+            "table": "cities"
+          },
+          "right": {
+            "field": "city_id",
+            "table": "weather"
+          }
+        }
+      ],
+      "secureFilters": []
+    },
+    // ...
+  ],
+  "publicKeyCertificates": [
+    // ...
+  ]
+}
+```
+
 ### Performance and resiliency
 
 #### Workload
