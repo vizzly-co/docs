@@ -121,7 +121,17 @@ The following are two examples of a config file, for Postgres and BigQuery conne
 </Tabs>
 
 #### File location
-The Vizzly config file will need to be mounted into the Vizzly docker image, located at `/etc/config.vizzly.json`.
+The Vizzly config file will need to be mounted into the Vizzly docker image, located at `/etc/vizzly/vizzly.config.json`.
+
+#### AWS Deployment
+To pull down configuration from an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
+
+For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=secure-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=eu-west-2`.
+
+This will download all the files in the bucket `secure-vizzly-config` in the region `VIZZLY_CONFIG_S3_BUCKET_REGION`, and save them to `/etc/vizzly`, so
+naming the config file `vizzly.config.json` will download the config to the correct place.
+
+As this config file will contain read-only database credentials, be sure to store this securely in S3 with the correct permissions.
 
 #### Security
 The config file should be treated as a secret, as it will contain read-only credentials to your database.
@@ -391,7 +401,7 @@ you would join two tables on a foreign key `city_id`.
           }
         }
       ],
-      "secureFilters": []
+      "secureFilterGuards": []
     },
     // ...
   ],
@@ -401,10 +411,12 @@ you would join two tables on a foreign key `city_id`.
 }
 ```
 
-#### Optional secure filters
-Secure filters are typically defined in the [identity callback](/callbacks/identity). However if you want to reduce the impact of your private key becoming compromised, you can also define the secure filters for each of the data sets here. The trade-off here is between flexibility of dynamic secure filters and an additional level of security. This will not completely prevent unauthorised access, however it might reduce the amount of data an attacker has access too even if they manage to steal your private key.
+#### Optional secure filter guards
+Secure filters are defined in the [identity config](/callbacks/identity). However if you want to reduce the impact of your private key becoming compromised, you can also
+define secure filter guards for each of the data sets. The purpose of filter guards is not to prevent unauthorised access, only to limit the amount of data an attacker has
+access too if they manage to steal your private key used for Vizzly.
 
-The typescript definition of a secure filter is as follows:
+The typescript definition of a secure filter guard is as follows:
 
 ```ts
 type Operator =
@@ -421,7 +433,7 @@ type Operator =
     | "does_not_contain_substring";
 
 {
-  field: string; // '<<table>>.<<field name>>', e.g users.id
+  fieldId: string; // The `id` of the field
   op: Operator;
 };
 ```
