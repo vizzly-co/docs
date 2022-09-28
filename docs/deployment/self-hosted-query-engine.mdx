@@ -11,6 +11,30 @@ To make it easy to get started, Vizzly provides a docker image that securely que
 
 [The docker image can be found here](https://github.com/vizzly-co/query-engine/pkgs/container/query-engine)
 
+### The CLI
+The fastest way to get started with the self-hosted docker image, is
+to use our Vizzly CLI.
+
+#### Install the CLI by running 
+
+```shell
+npm i @vizzly/cli -g
+```
+
+Then to see all available commands, run `vizzly -h`.
+
+#### Creating a key-pair
+To create a private and public certificate key-pair to use with Vizzly, you can run the following command
+```shell
+vizzly create-key-pair
+```
+
+#### Creating a Vizzly config template
+After creating your key-pair, you can run the following command to create a template of the Vizzly config:
+```shell
+vizzly init
+```
+
 ### Config file
 
 The query engine requires some configuration to allow it to connect to your database, and to learn how to map queries to your database.

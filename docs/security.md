@@ -10,22 +10,14 @@ Keeping your data, and your customer's data secure is our highest priority. With
 To work securely with Vizzly, you'll first need to create a key pair and add it to your organisation. The private key will be stored on your servers, and you'll share the public key with Vizzly on the [public keys page of your dashboard](https://app.vizzly.co/organisation/key-pairs).
 
 #### Generating the Elliptical Curve certificate
+Vizzly provides a CLI tool, that allows you to generate the required certificates.
 
-First, run the following command to generate the private key:
+1. `npm i @vizzly/cli -g`
+2. `vizzly create-key-pair`
 
-```shell
-openssl ecparam -name secp256r1 -genkey -noout -out ecprivkey.pem
-```
+You'll see the private and public certificates written to your current working directory.
 
-This private key now located in `ecprivkey.pem` should be securely stored on your server. This private key will be used to sign the identity config to ensure its integrity and origin.
-
-Next, we will create the public key that allows anyone to verify the identity config originated from your servers, and has not been tampered with. Let's generate it by running the following command:
-
-```shell
-openssl ec -in ecprivkey.pem -pubout -out ecpubkey.pem
-```
-
-The last step is saving the contents of `ecpubkey.pem` to the Vizzly servers. You can do that on [the organisation key pairs page](https://app.vizzly.co/organisation/key-pairs).
+The next step is saving the contents of your public key, (default file name is `vizzly-public.pem`) to your Vizzly account. You can do that on [the organisation key pairs page](https://app.vizzly.co/organisation/key-pairs).
 
 ### Signing the identity config
 If you're utilising JavaScript on your backend servers, you can use Vizzly's library to aid the signing of the identity config.
