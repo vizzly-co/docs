@@ -10,11 +10,9 @@ The callback is an async function that returns an identity config, the typescrip
 
 ```tsx
 type IdentityConfig = {
-    // What data sets does this person
-    // have access too? 
-
-    // If strings are provided, then an additional callback is required.
-    dataSets?: (string | DataSet)[];
+    // IDs of data sets that this user has access too, or a '*'
+    // if it's all of them.
+    dataSets: string[] | '*';
 
     /*
       This is your Vizzly organisation ID, we provide this to you.
@@ -31,7 +29,16 @@ type IdentityConfig = {
       This is the ID of the dashboard you want the user to be shown
       when they first land on your page.
     */
-    initialDashboard: string;
+    dashboardId: string;
+
+    // ISO 8601 format.
+    expires: string;
+
+    /*
+      Is the user a standard user (your customer), or are they an admin editor 
+      who can edit the default dashboard & theme?
+    */
+    userType: 'standard' | 'editor';
 
     /*
       A signature that ensures all other attributes
@@ -66,7 +73,7 @@ type IdentityConfig = {
 ```
 
 ### Finding parameters
-To find your `organisationId` and `initialDashboard` values, see the [parameters](/parameters) doc.
+To find your `organisationId` and `initialDashboard` values of your live dashboards, see the [parameters](/parameters) doc.
 
 ### Controlling data set access
 If you're running the Vizzly query engine, the `dataSets` value of the identity config is where you can control what data sets your
@@ -92,15 +99,6 @@ a data set with an ID of `das_1`, and you want to only show users there own data
 ```
 
 These secure filters will be signed and sent to the Vizzly query engine by the Vizzly react embed, where they will be validated using your organisation's public key and ensure that each user only ever has access to their own data.
-
-### Public data set access
-To define a data set which is available to all users in a non-multi-tenant environment, you'll need to explicitly define this by setting an empty list of secure filters for the data set. For example, if this public data set has an ID of `das_1`, then the `secureFilters` value will be defined as;
-```ts
-{
-  secureFilters: { "das_1": [] },
-  // ... rest of identity config
-}
-```
 
 ### Reducing impact of a private key compromise
 If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/deployment/self-hosted-query-engine#optional-secure-filters)
