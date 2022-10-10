@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 10
 ---
 
 # Custom
@@ -14,9 +14,10 @@ to benefit from your existing authentication or query functionality.
 - [Next JS project](https://github.com/vizzly-co/library-examples/blob/c1906a671aab4c050e90e1c8bd4a489790d2545e/examples/static-next-js/pages/custom.jsx)
 
 ```typescript
-import { Components as Vizzly } from "@vizzly/components";
+import Vizzly from "@vizzly/dashboard";
 
-<Vizzly.Studio
+<Vizzly.Dashboard
+  type='custom'
   runQueriesCallback={async (queries) => {
     const response = await fetch('/api/create-results', {
       method: "post",

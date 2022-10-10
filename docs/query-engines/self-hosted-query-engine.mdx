@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
@@ -7,21 +7,15 @@ import TabItem from '@theme/TabItem';
 
 # Self-hosted
 
-To make it easy to get started, Vizzly provides a docker image that securely queries your database to power the dashboards your users see.
+Vizzly provides a docker image that is provisioned in your cloud, and runs queries against your database to power the dashboards your users see.
 
-[The docker image can be found here](https://github.com/vizzly-co/query-engine/pkgs/container/query-engine)
-
-### The CLI
-The fastest way to get started with the self-hosted docker image, is
-to use our Vizzly CLI.
-
-#### Install the CLI by running 
+The fastest way to get started with the self-hosted docker image, is to use our Vizzly CLI, which you can install by running the following command;
 
 ```shell
 npm i @vizzly/cli -g
 ```
 
-Then to see all available commands, run `vizzly -h`.
+To see all available commands, run `vizzly -h`.
 
 #### Creating a key-pair
 To create a private and public certificate key-pair to use with Vizzly, you can run the following command
@@ -208,10 +202,6 @@ The typescript definition of a data set is as follows:
 {
   /*
     ID of the data set that remains constant.
-
-    For data sets used in default dashboards, this ID will be prefixed
-    with `das_` and will be provided for you in the studio. For additional data
-    sets you will define this unique ID yourself.
   */
   id: string;
 
@@ -281,10 +271,6 @@ The typescript definition of a data set is as follows:
 {
   /*
     ID of the data set that remains constant.
-
-    For data sets used in default dashboards, this ID will be prefixed
-    with `das_` and will be provided for you in the studio. For additional data
-    sets you will define this unique ID yourself.
   */
   id: string;
 

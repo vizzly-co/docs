@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 5
 ---
 
 # In-browser
@@ -12,12 +12,12 @@ In some cases, the data set you'll want to make available to each of your custom
 - [Next JS project](https://github.com/vizzly-co/library-examples/blob/c1906a671aab4c050e90e1c8bd4a489790d2545e/examples/static-next-js/pages/in-browser.jsx)
 
 ```jsx title="/src/Dashboard.jsx"
-import { Components as Vizzly, VizzlyGlobalStyles } from '@vizzly/components';
+import Vizzly from "@vizzly/dashboard";
 
-export const RenderVizzlyStudio = () => (
+export const RenderVizzlyDashboard = () => (
   <>
-    <VizzlyGlobalStyles />
-    <Vizzly.LocalDataStudio
+    <Vizzly.Dashbaord
+      type='local'
       loadDataCallback={async (dataSet) => {
         // TODO Your code to fetch the data set for
         // the current customer.
