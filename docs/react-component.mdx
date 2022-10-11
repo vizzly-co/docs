@@ -1,0 +1,67 @@
+---
+sidebar_position: 2
+---
+
+# React Component
+
+There is a single react component that renders the dashboard. The method parameter required depends on the value of the `type` property you provide it.
+
+The available types include are `in-browser`, `self-hosted` and `custom`.
+
+### Self-hosted
+Fetches the query results from a provisioned Vizzly query engined docker image.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+<Vizzly.Dashboard
+  type='self-hosted'
+
+  // e.g 'https://analytics.example.com'
+  vizzlyDockerImageEndpoint: string;
+
+  // https://docs.vizzly.co/callbacks/identity
+  identityCallback: VizzlyComponents.identityCallback;
+/>
+```
+
+### In-browser
+Loads all data into the browser, and runs the queries in the browser.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+<Vizzly.Dashboard
+  type='self-hosted'
+
+  // https://docs.vizzly.co/callbacks/identity
+  identityCallback: VizzlyComponents.identityCallback;
+
+  // https://docs.vizzly.co/callbacks/loadDataCallback
+  loadDataCallback: VizzlyComponents.loadDataCallback;
+
+  // https://docs.vizzly.co/callbacks/loadDataSetsCallback
+  loadDataSetsCallback: VizzlyComponents.loadDataSetsCallback;
+/>
+```
+
+
+### Custom
+Runs a custom `runQueriesCallback` which translates the queries into results.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+<Vizzly.Dashboard
+  type='custom'
+
+  // https://docs.vizzly.co/callbacks/identity
+  identityCallback: VizzlyComponents.identityCallback;
+
+  // https://docs.vizzly.co/callbacks/runQueriesCallback
+  runQueriesCallback: VizzlyComponents.runQueriesCallback;
+
+  // https://docs.vizzly.co/callbacks/loadDataSetsCallback
+  loadDataSetsCallback: VizzlyComponents.loadDataSetsCallback;
+/>
+```

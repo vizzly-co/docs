@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Self-hosted
 
-Vizzly provides a docker image that is provisioned in your cloud, and runs queries against your database to power the dashboards your users see.
+Run a docker image in your cloud to run queries against your database and power the dashboards your users see.
 
 The fastest way to get started with the self-hosted docker image, is to use our Vizzly CLI, which you can install by running the following command;
 
@@ -31,10 +31,9 @@ vizzly init
 
 ### Config file
 
-The query engine requires some configuration to allow it to connect to your database, and to learn how to map queries to your database.
+The query engine requires some configuration to allow it to connect to your database, and to define virtual tables which are exposed to your users from which they can build their own dashboards.
 
 The following are two examples of a config file, for Postgres and BigQuery connections.
-
 
 <Tabs groupId="integration-type">
 <TabItem value="postgres" label="Postgres">
@@ -140,19 +139,6 @@ The following are two examples of a config file, for Postgres and BigQuery conne
 
 #### File location
 The Vizzly config file will need to be mounted into the Vizzly docker image, located at `/etc/vizzly/vizzly.config.json`.
-
-#### AWS Deployment
-To pull down configuration from an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
-
-For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=secure-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=eu-west-2`.
-
-This will download all the files in the bucket `secure-vizzly-config` in the region `VIZZLY_CONFIG_S3_BUCKET_REGION`, and save them to `/etc/vizzly`, so
-naming the config file `vizzly.config.json` will download the config to the correct place.
-
-As this config file will contain read-only database credentials, be sure to store this securely in S3 with the correct permissions.
-
-#### Security
-The config file should be treated as a secret, as it will contain read-only credentials to your database.
 
 #### Connection credentials
 The Vizzly docker image will need read-only access to your database. These credentials are specified in the Vizzly config file, and therefore the entire config file should be treated as a secret.
@@ -448,6 +434,51 @@ type Operator =
 };
 ```
 
+### Cloud deployment
+
+<Tabs>
+<TabItem value="aws" label="Amazon Web Services (AWS)">
+
+To pull down configuration from an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
+
+For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=secure-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=eu-west-2`.
+
+This will download all the files in the bucket `secure-vizzly-config` in the region `VIZZLY_CONFIG_S3_BUCKET_REGION`, and save them to `/etc/vizzly`, so
+naming the config file `vizzly.config.json` will download the config to the correct place.
+
+As this config file will contain read-only database credentials, be sure to store this securely in S3 with the correct permissions.
+
+</TabItem>
+<TabItem value="gcp" label="Google Cloud Platform (GCP)">
+
+Please contact us for support setting up on Google Cloud Platform.
+</TabItem>
+</Tabs>
+
+### Environment variables
+
+#### `VIZZLY_QUERY_ENGINE_HOST`
+The protocol and host domain of the query engine. This excludes the base path which can be configured using the `VIZZLY_BASE_PATH` variable.
+For example `https://query.example.co` would be a valid query engine host value.
+
+This environment variable is required.
+
+#### `VIZZLY_BASE_PATH`
+This changes the base path of the Vizzly query engine. For example you might have a routing layer that matches requests for `/vizzly-query-engine/*`, and forwards them too the 
+query engine. In which case, you'd set this value too `/vizzly-query-engine` so the requests match the path matchers in the query engine.
+
+This environment variable is not required, and defaults too `''`.
+
+#### `VIZZLY_RESPONSE_LIMIT`
+This sets the maximum size of query result responses. We only recommended changing this value if you're lowering it.
+
+This environment variable is not required, and defaults to `5mb`.
+
+#### `VIZZLY_CONFIG_FILE`
+Changes the path at which the config file resides inside the running container.
+
+This environment variable is not required, and defaults to `/etc/vizzly/vizzly.config.json`.
+
 ### Performance and resiliency
 
 #### Workload
@@ -462,7 +493,7 @@ The recommended hardware requirements will depend on a number of different facto
 To increase performance, consider scaling horizontally by adding more containers running the Vizzly docker image, or vertically by provisioning larger compute resource.
 
 #### Resiliency
-The query engine in the docker image is stateless and so it can be easily scaled horizontally to reduce performance or resiliency concerns and also auto-scaled if your traffic pattern is spiky.
+The query engine in the docker image is stateless and so it can be easily scaled horizontally to reduce performance or resiliency concerns and easily auto-scaled on all major cloud providers if your traffic pattern is spiky.
 
 ### Limitations
 

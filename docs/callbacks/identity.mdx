@@ -1,8 +1,4 @@
----
-sidebar_position: 1
----
-
-# Identity Callback
+# Identity
 
 The purpose of the identity callback is to securely identify the current user. This information will be signed with your private key, and validated with the public key you upload to Vizzly.
 
@@ -100,7 +96,7 @@ a data set with an ID of `das_1`, and you want to only show users there own data
 
 These secure filters will be signed and sent to the Vizzly query engine by the Vizzly react embed, where they will be validated using your organisation's public key and ensure that each user only ever has access to their own data.
 
-### Reducing impact of a private key compromise
+#### Reduce the impact of a compromised private key
 If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/implementation/self-hosted-query-engine#optional-secure-filters)
 
 ### Integrity signature

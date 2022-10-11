@@ -1,8 +1,4 @@
----
-sidebar_position: 2
----
-
-# Load Data Callback
+# Load data
 
 This callback loads all the current user's data, for a data set. This data is then queried in the browser's memory, using Vizzly's in-browser query engine.
 
@@ -10,29 +6,42 @@ We strongly advise that this strategy is only used for small data sets, as the u
 
 The data returned from this callback, should be in the following format:
 
-```ts
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs>
+<TabItem value="type" label="Type definition">
+
+```typescript
 export type Result = {
   content: any[][];
   fields: {
-    name: string;
+    id: string;
+    publicName: string;
     dataType: 'number' | 'boolean' | 'string' | 'date_time';
   }[];
 };
 ```
+</TabItem>
+<TabItem value="example" label="Example">
 
 ```json
 {
   "fields": [
     {
-      "name": "Order ID",
+      "id": "fie_1",
+      "publicName": "Order ID",
       "dataType": "number"
     },
     {
-      "name": "Order Date",
+      "id": "fie_2",
+      "publicName": "Order Date",
       "dataType": "date_time"
     },
     {
-      "name": "Status",
+      "id": "fie_3",
+      "publicName": "Status",
       "dataType": "string"
     },
     // ...
@@ -45,6 +54,8 @@ export type Result = {
   ]
 }
 ```
+</TabItem>
+</Tabs>
 
 An implementation of this can be seen in [the nextJS example repo](https://github.com/vizzly-co/library-examples/blob/b962329aa4e0d8ba3c49595e69120e1be8cdcfbb/examples/next-js/pages/in-browser.jsx#L14-L26).
 
