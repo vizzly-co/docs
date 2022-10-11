@@ -48,7 +48,7 @@ export const RenderVizzlyDashboard = () => (
 ```
 
 ## Callbacks
-We have more information on the [identity](/callbacks/identity), and [load data](/callbacks/load-data) callbacks available to you.
+We have more information on the [identity](/callbacks/identity), and [load data](/callbacks/loadDataCallback) callbacks available to you.
 
 ## Multi-tenancy
 To make this work in a multi-tenancy environment, the dataset that’s downloaded must only contain data for the currently active user.

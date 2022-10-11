@@ -97,7 +97,7 @@ a data set with an ID of `das_1`, and you want to only show users there own data
 These secure filters will be signed and sent to the Vizzly query engine by the Vizzly react embed, where they will be validated using your organisation's public key and ensure that each user only ever has access to their own data.
 
 #### Reduce the impact of a compromised private key
-If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/implementation/self-hosted-query-engine#optional-secure-filters)
+If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/query-engines/self-hosted-query-engine#optional-secure-filter-guards)
 
 ### Integrity signature
 For help with signing the identity config and generating the `integritySignature` value, please see the [security docs](/security) for generating the private and public keys, as well as [this nextJs example identity callback](https://github.com/vizzly-co/library-examples/blob/50091b6451da18b7fd159593a8d73c233a4c5259/examples/next-js/pages/api/identity.js#L37-L45).
