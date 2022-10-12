@@ -9,7 +9,7 @@ Benefit from Vizzly's in-browser query engine, by fetching the user's data set w
 In some cases, the data set you'll want to make available to each of your customers will be small, and in such a case you can instruct the Vizzly React component to load the entirety of a data set into the browser. The Vizzly React component will then manage all of the queries on the client’s browser and therefore no further network calls or database queries will be made for each render of the chart.
 
 ## Examples
-- [Next JS project](https://github.com/vizzly-co/library-examples/blob/c1906a671aab4c050e90e1c8bd4a489790d2545e/examples/static-next-js/pages/in-browser.jsx)
+- [Next JS project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/in-browser.jsx)
 
 ```jsx title="/src/Dashboard.jsx"
 import Vizzly from "@vizzly/dashboard";

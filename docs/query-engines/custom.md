@@ -11,7 +11,7 @@ to benefit from your existing authentication or query functionality.
 
 
 ## Examples
-- [Next JS project](https://github.com/vizzly-co/library-examples/blob/c1906a671aab4c050e90e1c8bd4a489790d2545e/examples/static-next-js/pages/custom.jsx)
+- [Next JS project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/custom.jsx)
 
 ```typescript
 import Vizzly from "@vizzly/dashboard";
