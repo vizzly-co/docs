@@ -439,21 +439,39 @@ type Operator =
 <Tabs>
 <TabItem value="aws" label="Amazon Web Services (AWS)">
 
-To pull down configuration from an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
+After uploading the `vizzly.config.json` file securely to an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
 
 For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=secure-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=eu-west-2`.
 
 This will download all the files in the bucket `secure-vizzly-config` in the region `VIZZLY_CONFIG_S3_BUCKET_REGION`, and save them to `/etc/vizzly`, so
 naming the config file `vizzly.config.json` will download the config to the correct place.
 
-As this config file will contain read-only database credentials, be sure to store this securely in S3 with the correct permissions.
+As this config file will contain read-only database credentials, be sure to store this securely in S3.
 
 </TabItem>
 <TabItem value="gcp" label="Google Cloud Platform (GCP)">
 
-Please contact us for support setting up on Google Cloud Platform.
+To run the Vizzly query engine on GCP, we recommend using [Google's Cloud Run product](https://cloud.google.com/run).
+
+The Vizzly container image URL is `eu.gcr.io/vizzly/query-engine`, and it runs on port `8000`. You'll also need to set the number of minimum instances to at least `1`
+to avoid the "cold start time".
+
+To add the config and GCP service account credentials to the docker image, we suggest uploading these files to the Google Secret Manager. You can then mount these files
+to the docker container whilst provisioning the Google Cloud Run service to run Vizzly, as shown in the screenshots below;
+
+<details>
+  <summary>Mounting the service account config</summary>
+  <img src="/img/google-cloud-run-setting-service-account.png" />
+</details>
+
+<details>
+  <summary>Mounting the Vizzly config</summary>
+  <img src="/img/google-cloud-run-setting-vizzly-config.png" />
+</details>
 </TabItem>
 </Tabs>
+
+Remember to set the `keyFilename` value in the BigQuery connection to the same location as where you've mounted the service account config JSON file.
 
 ### Environment variables
 
