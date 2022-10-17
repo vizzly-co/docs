@@ -135,6 +135,52 @@ The following are two examples of a config file, for Postgres and BigQuery conne
 }
 ```
 </TabItem>
+<TabItem value="elasticsearch" label="ElasticSearch">
+
+```json
+{
+  "connection": {
+    "client": "elasticsearch",
+    "connection": {
+      node: "https://my-elastic-search-endpoint.com",
+      apiKey: "<< a secret >>"
+    }
+  },
+  "dataSets": [
+    {
+      "id": "das_e400b5180d9f419db9418510383cfb0e",
+      "name": "US Sales",
+      "fields": [
+        {
+          "name": "order_id",
+          "dataType": "number",
+          "id": "Order ID",
+          "publicName": "Order ID",
+          "table": "us_sales"
+        },
+        {
+          "name": "order_date",
+          "dataType": "date_time",
+          "id": "Order Date",
+          "publicName": "Order Date",
+          "table": "us_sales"
+        },
+        {
+          "name": "status",
+          "dataType": "string",
+          "publicName": "Status",
+          "table": "us_sales_smlr_no_pii"
+        },
+        // ...
+      ],
+    }
+  ],
+  "publicKeyCertificates": [
+    "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERbmqmGHbjlNMXjHZMJsoFsDnQDT7\nk4aV5wBdlXIKe0GH+FWSwawtc8XAMURwSA7iAY2QzmzJ4RQ6ZKp1UVkpLA==\n-----END PUBLIC KEY-----"
+  ]
+}
+```
+</TabItem>
 </Tabs>
 
 #### File location
@@ -174,6 +220,25 @@ The typescript definition of the credentials is as follows:
 }
 ```
 </TabItem>
+
+<TabItem value="elasticsearch" label="ElasticSearch">
+
+```ts
+{
+  client: "elasticsearch";
+  connection: {
+    cloud?: {
+      id: string;
+    },
+    auth: 
+      | { username: string; password: string; }
+      | { apiKey: string; }
+      | { id: string; api_key: string; }
+      | { bearer: string; }
+  }
+}
+```
+</TabItem>
 </Tabs>
 
 #### Data sets
@@ -181,7 +246,7 @@ You'll need to define the available data sets for your users. You'll be able to 
 
 The typescript definition of a data set is as follows:
 
-<Tabs>
+<Tabs groupId="integration-type">
 <TabItem value="postgres" label="Postgres">
 
 ```ts
@@ -227,10 +292,6 @@ The typescript definition of a data set is as follows:
     table: string;
   }[];
 
-  /*
-    If you're using a SQL database, then you might need to join tables
-    together to define your data set.
-  */
   joins: {
       type:
         | "rightJoin"
@@ -306,10 +367,6 @@ The typescript definition of a data set is as follows:
     table: string;
   }[];
 
-  /*
-    If you're using a SQL database, then you might need to join tables
-    together to define your data set.
-  */
   joins: {
       type:
         | "rightJoin"
@@ -330,14 +387,63 @@ The typescript definition of a data set is as follows:
 }
 ```
 </TabItem>
+<TabItem value="elasticsearch" label="ElasticSearch">
+
+```ts
+{
+  /*
+    ID of the data set that remains constant.
+  */
+  id: string;
+
+  /*
+    A public name that describes this data set to your users.
+  */
+  name: string;
+
+  /*
+    Fields that define the flat schema of the data set.
+  */
+  fields: {
+    /*
+      A unique reference to this field, and should remain constant.
+    */
+    id: string;
+
+    /*
+      The name of the field. For example, this would be the column
+      name if you're running a postgres database.
+    */
+    name: string;
+
+    /*
+      What type of data does this field contain?
+    */
+    dataType: 'number' | 'boolean' | 'string' | 'date_time';
+
+    /*
+      The name of this field that your users will see.
+    */
+    publicName: string;
+
+    /*
+      The name of the table in the database
+    */
+    table: string;
+  }[];
+}
+```
+</TabItem>
 </Tabs>
 
 #### Joins
+If you're using an integration with a SQL database, then in the Vizzly config file, it is possible to join fields that reside across multiple tables.
 
-In the Vizzly config file, it is possible to join fields that reside across multiple tables. Below is an example of how
-you would join two tables on a foreign key `city_id`.
+<details>
+  <summary>Expand to see an example of how you would join two tables on a foreign key `city_id`.</summary>
+  
 
-```json
+  ```json
 
 {
   "connection": {
@@ -406,10 +512,12 @@ you would join two tables on a foreign key `city_id`.
   ]
 }
 ```
+</details>
+
 
 #### Optional secure filter guards
-Secure filters are defined in the [identity config](/callbacks/identity). However if you want to reduce the impact of your private key becoming compromised, you can also
-define secure filter guards for each of the data sets. The purpose of filter guards is not to prevent unauthorised access, only to limit the amount of data an attacker has
+Secure filters are used to provide Vizzly's multi-tenancy feature, and they are defined in the [identity config](/callbacks/identity). However if you want to reduce the impact of your private key being compromised, you can also
+define "secure filter guards" for each of the data sets. The purpose of a filter guard to limit the amount of data an attacker has
 access too if they manage to steal your private key used for Vizzly.
 
 The typescript definition of a secure filter guard is as follows:
