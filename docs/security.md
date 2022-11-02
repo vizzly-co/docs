@@ -21,4 +21,4 @@ The next step is saving the contents of your public key, (default file name is `
 
 ### Signing the identity config
 If you're utilising JavaScript on your backend servers, you can use Vizzly's library to aid the signing of the identity config.
-An example of how to achieve this [is provided in the Vizzly examples repository](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/api/identity.js#L29-L59).
+An example of how to achieve this [is provided in the Vizzly examples repository](https://github.com/vizzly-co/library-examples/blob/90026e292e021172608a7262cbf40a4f737bac7e/examples/next-js/pages/api/identity.js#L30-L58).
