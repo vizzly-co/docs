@@ -1,0 +1,38 @@
+---
+sidebar_position: 20
+---
+
+# Performance
+
+Performance is a critical part of the user's experience, which is why we have designed features to reduce query response times.
+
+### Field usage
+
+One feature of our data sets, allows you to choose which fields can be used as dimensions and measures, and limit the granularity that can be applied to date time fields. For example, you could only allow grouping by hour, day or year instead of per second or per minute.
+
+If you have an SQL integration, this can be used to your advantage by creating indexes based exclusively from the fields you intend to be used as dimensions.
+
+Another time to consider turning to indexes is for fields you think will be commonly used in filters and sorts. However, be aware that whilst indexes are optimal for read heavy tables, they can impact write performance.
+
+<details>
+  <summary>Usage in the config</summary>
+
+Each field in a data set can optionally provide a `canBeDimension` or `canBeMeasure` key with a boolean value. For example;
+
+```jsonc
+{
+  "canBeDimension": true,
+  "canBeMeasure": false
+}
+```
+
+By default, the values of these properties are both `true`, and setting `false` will remove the field as an option in the chart editor.
+
+**NOTE:** This requires a version of the Vizzly Query Engine > 0.2.11 and of our [dashboard react library](https://www.npmjs.com/package/@vizzly/dashboard) > 0.0.35
+</details>
+
+### SQL table structure
+
+Although we do support joins in SQL integrations, they can be the cause of slow queries and therefore we'd recommend avoiding them if at all possible.
+
+In an ideal world, each Vizzly data set would pull data from its own table, thus eliminating the need for joins.
