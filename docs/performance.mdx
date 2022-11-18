@@ -36,3 +36,34 @@ By default, the values of these properties are both `true`, and setting `false` 
 Although we do support joins in SQL integrations, they can be the cause of slow queries and therefore we'd recommend avoiding them if at all possible.
 
 In an ideal world, each Vizzly data set would pull data from its own table, thus eliminating the need for joins.
+
+### Caching
+
+Vizzly comes packaged with a smart client side cache for all queries, which will reduce the load on your underlying database. The Vizzly query engine also has a shared cache for 
+queries that only include fields which you've specified are cache-able.
+
+To flag a field as being allowed for use in a public cache, you will need to set the `"canBeUsedInSharedResultCache": true` property on the field in your data set.
+The key points to note are;
+
+- The result will only be cached if all fields used in the query have the `canBeUsedInSharedResultCache` property set to true in the data set.
+- Any secure filters which make the query personalized will not be added to the query.
+- Only certain queries from the Vizzly dashboard allows the shared cache to be used.
+
+By default, the `canBeUsedInSharedResultCache` property is set to `false` for all fields.
+
+<details>
+  <summary>An example use case</summary>
+
+Commonly, local and global filters are based upon fields that don't contain private information. For example, say we have this table of data;
+
+| Order ID | Customer Email     | Total Paid | Category      |
+|----------|--------------------|------------|---------------|
+| 1        | james@example.com  | 35.00      | Entertainment |
+| 2        | sophie@example.com | 35.00      | Sports        |
+
+Clearly, the "Customer Email" field contains private information, however the "Category" field does not, and the "Category" field is the most likely field that you'd want to specify a global or local filter for.
+
+Therefore, if we were to mark the "Category" field with `"canBeUsedInSharedResultCache": true` in the Vizzly data set, then the Vizzly query engine will use this information
+to optimize the performance of queries used to offer the global or local filter based on the "Category" field.
+
+</details>
