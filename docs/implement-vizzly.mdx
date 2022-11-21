@@ -15,30 +15,41 @@ In this document, we'll go through the recommended step-by-step procedure to add
 
 `vizzly create-key-pair`
 
-#### 3. Upload the public key
-Upload the public key to your [organisation's public key pair store](https://app.vizzly.co/organisation/key-pairs).
+Next, upload the public key you generated to your [organisation's public key pair store](https://app.vizzly.co/organisation/key-pairs).
 
-#### 4. Create the config file
+Keep the private certificate very safe, as this will be used to authorize access to your database.
 
-`vizzly init`
+#### 3. Create the config file
+Now we'll create the vizzly config.
 
-#### 5. Complete the config file
+`vizzly init -i <<integration>>`
 
-This will be different depending on where your data is housed, and therefore [we have documentation on setting up the config
+Remember, you can run `vizzly init --help` to see how to use this command, and see a list of all available integrations.
+
+#### 4. Define the data sets
+
+The Vizzly config which you've created contains a `dataSets` key. This is where you'll specify the fields which are made available
+to your users.
+
+This will be different depending on which integration you are using, and therefore [we have documentation on setting up the config
 file](/query-engines/self-hosted-query-engine#config-file).
 
-#### 6. Implement identity API endpoint
-This is the API endpoint on your servers, where you'll authenticate the user, and authorize their access to certain data sets
+Whilst you build your Vizzly config, you can validate it using the Vizzly CLI by running;
+
+`vizzly validate -c ./vizzly.config.json`
+
+#### 5. Implement the identity endpoint
+This is an API endpoint on your servers, where you'll authenticate the user, and authorize their access to certain data sets
 and provide the secure filters required for a multi-tenancy environment.
 
 If your dashboard will be using publicly available data, then you can skip this step!
 
-Be sure to set the `userType` to `'editor'` for your own, and other admin accounts. This will let you customize the initial
+Be sure to set the `userType` to `'editor'` for your own company accounts. This will let you customize the initial
 dashboard and theme once it is embedded into your application.
 
-#### 7. Add the Vizzly React component
+#### 6. Add the Vizzly React component
 Add the [Vizzly component to your application](/react-component) and deploy!
 
-#### 8. Configuring the default dashboard
-As a user, visit the Vizzly dashboard in your application, and if you've set your account to be an `'editor'` `userType` in the identity
-callback, then you'll be able to configure the initial dashboard users see when first using the Vizzly dashboard, and its theme.
+#### 7. Managing the template dashboard
+As a user, visit the Vizzly dashboard in your application, and so long as the identity endpoint sets `userType` to be an `'editor'` for your session, 
+then you'll be able to configure the template dashboard that your users first see when using the Vizzly dashboard.
