@@ -147,7 +147,9 @@ Please note, that the `table` field refers to an elastic search `index`.
   "connection": {
     "client": "elasticsearch",
     "node": "https://my-elastic-search-endpoint.com",
-    "apiKey": "<< a secret >>"
+    "auth": {
+      "apiKey": "<< a secret >>"
+    }
   },
   "dataSets": [
     {
@@ -230,16 +232,14 @@ The typescript definition of the credentials is as follows:
 ```ts
 {
   client: "elasticsearch";
-  connection: {
-    cloud?: {
-      id: string;
-    },
-    auth: 
-      | { username: string; password: string; }
-      | { apiKey: string; }
-      | { id: string; api_key: string; }
-      | { bearer: string; }
-  }
+  cloud?: {
+    id: string;
+  },
+  auth: 
+    | { username: string; password: string; }
+    | { apiKey: string; }
+    | { id: string; api_key: string; }
+    | { bearer: string; }
 }
 ```
 </TabItem>
