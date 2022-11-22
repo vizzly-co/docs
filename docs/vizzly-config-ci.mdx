@@ -1,0 +1,30 @@
+---
+sidebar_position: 25
+---
+
+# CI with Vizzly
+
+It's easy to add a validation step to your CI process, that installs the Vizzly CLI
+and runs the `vizzly validate` command.
+
+If you're using GitHub, we have an officially supported GitHub action that makes this even easier. All you have to do is create a GitHub action file in your
+project; `/.github/workflows/validate-configs.yml` and add the following configuration.
+
+```yaml
+on: [push]
+
+jobs:
+  validate_vizzly_configs:
+    runs-on: ubuntu-latest
+    name: A job to validate Vizzly config examples
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate Vizzly configs
+        uses: vizzly-co/validate-config-action@main
+        with:
+          config-file-glob: './config-examples/*.config.json'
+```
+
+***NOTE*** In the example we set the `config-file-glob` argument to check for config files in the `config-examples` directory, but you will likely want to change this so your Vizzly config file is detected and validated.
+
+We use this github action on [our own library examples repository](https://github.com/vizzly-co/library-examples), to ensure all our example configs are up-to-date.
