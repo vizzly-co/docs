@@ -5,7 +5,8 @@ sidebar_position: 25
 # CI with Vizzly
 
 It's easy to add a validation step to your CI process, that installs the Vizzly CLI
-and runs the `vizzly validate` command.
+and runs the `vizzly validate` command. This ensures that your Vizzly configs stored in version control
+are valid, and will work when deployed to your running Vizzly query engine.
 
 If you're using GitHub, we have an officially supported GitHub action that makes this even easier. All you have to do is create a GitHub action file in your
 project; `/.github/workflows/validate-configs.yml` and add the following configuration.
