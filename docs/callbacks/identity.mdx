@@ -2,7 +2,15 @@
 
 The purpose of the identity callback is to securely identify the current user. This information will be signed with your private key on your server, and validated with the public key you upload to Vizzly.
 
-The callback is an async function that returns an identity config, the typescript definition of which is outlined below.
+At it's simplest, this is a sequence diagram of how Vizzly works in a multi-tenant environment.
+
+<img style={{padding: "20px", background: "white", borderRadius: "20px"}} src="/img/vizzly-high-level-how-it-works.svg" />
+
+The Vizzly identity config contains a signature that ensure its validity when sent to the Vizzly query engine.
+
+The API call will be made within an async function that you define, and returns an identity config.
+
+The typescript definition of the identity config is outlined below.
 
 ```tsx
 type IdentityConfig = {
@@ -67,6 +75,44 @@ type IdentityConfig = {
     };
   };
 ```
+
+#### Generating test identity configs
+
+A test identity config can be generated using our CLI tool. To do this you will need to collect your organisation ID and template dashboard ID
+from [the live dashboards page](https://app.vizzly.co/dashboards) on the Vizzly website after signing in.
+
+<img src="/img/live-dashboards-screenshot.png" />
+
+You will then be able to run the command which __MUST__ only be used in development environments;
+
+```shell
+vizzly generate-identity-signature \
+  -o org_<<rest of organisation ID>> \
+  -d dsh_<<rest of dashboard ID>> \
+  -u "user 123456" \
+  -t editor \
+  --private-key vizzly-private.pem
+```
+That will generate an identity signature that you can use for testing. This __MUST__ only be used in test environments, as it grants full read access to all the data 
+in the database.
+
+<details>
+  <summary>Example test identity config</summary>
+
+```json
+{
+  "dataSets": "*",
+  "userType": "editor",
+  "organisationId": "org_9817c013a.....",
+  "dashboardId": "dsh_c630d48....",
+  "secureFilters": {},
+  "userReference": "user 123456",
+  "integritySignature": "..."
+  "expires": "2022-11-23T02:39:14.457Z"
+}
+```
+
+</details>
 
 ### Finding parameters
 To find your `organisationId` and `initialDashboard` values of your live dashboards, see the [parameters](/parameters) doc.

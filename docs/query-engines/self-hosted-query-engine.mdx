@@ -26,14 +26,15 @@ vizzly create-key-pair
 #### Creating a Vizzly config template
 After creating your key-pair, you can run the following command to create a template of the Vizzly config:
 ```shell
-vizzly init
+vizzly init -i <<integration>>
 ```
+Remember, you can run `vizzly init --help` to see how to use this command, and see a list of all available integrations.
 
 ### Config file
 
 The query engine requires some configuration to allow it to connect to your database, and to define virtual tables which are exposed to your users from which they can build their own dashboards.
 
-The following are two examples of a config file, for Postgres and BigQuery connections.
+The following are examples of a Vizzly config file for various integrations;
 
 <Tabs groupId="integration-type">
 <TabItem value="postgres" label="Postgres">
