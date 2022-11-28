@@ -1,0 +1,117 @@
+---
+sidebar_position: 35
+---
+
+# Custom themes
+
+Vizzly ships with a `VizzlyTheme` react component which provides a sensible default theme to get you started quickly. However, when the time comes to customize the look and
+feel of the dashboard, we make this easy for you by exposing CSS classes on our HTML which you can configure the style of.
+
+To make the dashboard look and feel like the rest of your website, we've added CSS class names which allow you to customize the look and feel of the dashboard.
+
+You can write a CSS file that uses the `vizzly_` prefixed CSS class names to override the Vizzly base styles.
+
+Before you start writing your CSS, remember to remove the `VizzlyTheme` component and then start making your CSS changes. You'll see a more un-opinionated version of
+the Vizzly dashboard, and it will be easier to add your own theme and maintain in the future.
+
+For example, if you're using a library such as [`react-helmet`](https://www.npmjs.com/package/react-helmet) that supplies the `Head` component in this example,
+then your diff might look something like this;
+
+````diff
+import Vizzly from "@vizzly/dashboard";
+
+
+export default () => (
+  <>
++    <Head>
++      <style>
++       .vizzly_button {
++           background: green;
++       }
++      </style>
++    </Head>
+
+-   <Vizzly.Theme />
+
+    <Vizzly.Dashboard {/* ... dashboard props ... */ } />
+  </>
+)
+````
+
+## Importing the CSS
+As you customize the Vizzly dashboard using CSS classes, you can import these styles in the idiomatic ways;
+
+- You can set the styles in the `head` tag of the HTML document.
+- As a separate CSS file referenced in the `head` tag of the HTML document.
+- Using a CSS in JS approach such as [styled-components](https://styled-components.com) to create global styles.
+
+## Available CSS classes
+
+This is an exhaustive list of CSS classes which can be used to customize the Vizzly dashboard. We recommend combining this list
+with [searching through the elements using the inspector developer tool](https://developer.chrome.com/docs/devtools/dom/) to target
+the components which you want to customize.
+
+If there is a part of the Vizzly dashboard that you'd like to make customizable, please contact us through your 
+shared slack channel with us, and we'll see what we can do to help.
+
+export const VizzlyThemeClasses = () => {
+  const namespaceDescriptions = Object.entries({
+    // Components or division of component
+    button: "Sets the default button styles.",
+    listview: "Targe the listview component used to manage measures, dimensions, sorts, global filters etc.",
+    "listview-item": "Styles the individual rows in a listview component.",
+    "listview-new-item": "Style the button at the bottom of a listview utilized by users to add a new item.",
+    "modal-header": "Style the header of a modal.",
+    "modal-content": "Style the content of a modal.",
+    "modal-footer": "Style the footer of a modal.",
+    "modal-overlay": "Style the background of a modal, used to differentiate the content of the modal from the background.",
+    "modal-wrapper": "Target a modal.",
+    "data-set-preview": "Target the table component used to display a preview of a data set during the flow of creating a new chart.",
+    "pick-component-type": "Target the grid used to display the available component types.",
+    "modal-empty-library": "Target the modal which contains the charts in the users library, when the library is empty.",
+    "modal-library-preview": "Target the preview chart shown in the component library.",
+    "modal-library-list": "Target the list of charts shown in the component library.",
+    "dashboard": "Target the parent element of the Vizzly dashboard.",
+    "modal-close": "Style the close modal button.",
+    "modal-library": "Target the modal when the component library is shown.",
+    "modal-editor": "Target the modal when the component editor is shown.",
+    "accordion": "Style the accordions used throughout the chart editor.",
+    "accordion-content": "Style the content of an accordion.",
+    "panel-property": "Target each of the data and style properties.",
+    "tab-group": "Target the parent element of a tab.",
+    "tab-button-list": "Target the parent element of a list of tabs.",
+    "tab-panel": "Target the parent element for each panel of content in a tab group.",
+    "tab-button": "Style the buttons used in a tab group.",
+    "select": "Style a select input.",
+    "button-group": "Target a wrapper for a collection of buttons.",
+    "input": "Style HTML inputs.",
+  
+    // Shows a change of state
+    "populated-cell": "Target the cell of a dashboard when it contains a chart or table.",
+    "empty-cell": "Target the cell of a dashboard when it is empty.",
+    "selected": "Combine this with other classnames to target an active option of a select input.",
+    "loading": "Combine this with other classnames to target a component when it is in the loading state.",
+    "disabled": "Combine this with other classnames to target a component when it is in the disabled state.",
+    "error": "Combine this with other classnames to target a component when it is in the error state.",
+  
+    // Variants
+    "sm": "Used on components which by default, are smaller in size.",
+    "primary": "Combine this with the button classnames to style a primary button.",
+    "secondary": "Combine this with the button classnames to style a secondary button.",
+    "subtle": "Used on components which by default, are not as prominent on the page. This is used on buttons and other HTML inputs."
+  });
+  return (
+    <>
+    {namespaceDescriptions.map(([key, value]) => (
+        <>
+          <hr />
+          <h4>.vizzly_{key}</h4>
+          <p>{value}</p>
+        </>
+      )
+    )}
+    </>
+    )
+}
+
+<VizzlyThemeClasses />
