@@ -1,0 +1,8 @@
+{
+  "label": "Frontend ",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Setup the frontend of Vizzly."
+  }
+}
