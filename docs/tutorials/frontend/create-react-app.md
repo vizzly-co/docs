@@ -23,7 +23,6 @@ yarn add @vizzly/dashboard
 ```
 
 #### 2. Generate the test identity config
-<!-- identityConfig.json -->
 Use the `vizzly generate-identity-signature` command to generate a temporary identity signature that you can use instead of
 creating the identity config endpoint.
 
