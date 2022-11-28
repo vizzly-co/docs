@@ -4,14 +4,14 @@ sidebar_position: 35
 
 # Custom themes
 
-Vizzly ships with a `VizzlyTheme` react component which provides a sensible default theme to get you started quickly. However, when the time comes to customize the
+Vizzly ships with a Vizzly theme which provides a sensible default theme to get you started quickly. However, when the time comes to customize the
 style of the dashboard, we make this easy for you by exposing CSS classes on the HTML elements.
 
 To make the dashboard look and feel like the rest of your website, we've added CSS class names which allow you complete control over the customization of your dashboard.
 
 You can write a CSS file that uses the `vizzly_` prefixed CSS class names to override the Vizzly base styles.
 
-Before you start writing your CSS, remember to remove the `VizzlyTheme` component and then start making your CSS changes. You'll see a more un-opinionated version of
+Before you start writing your CSS, remember to add the `disableVizzlyTheme` React prop to the `Dashboard` component and then start making your CSS changes. You'll see a more un-opinionated version of
 the Vizzly dashboard, and it will be easier to add your own theme and maintain in the future.
 
 For example, if you're using a library such as [`react-helmet`](https://www.npmjs.com/package/react-helmet) that supplies the `Head` component in this example,
@@ -31,9 +31,10 @@ export default () => (
 +      </style>
 +    </Head>
 
--   <Vizzly.Theme />
-
-    <Vizzly.Dashboard {/* ... dashboard props ... */ } />
+    <Vizzly.Dashboard
++      disableVizzlyTheme
+      {/* ... rest of the dashboard props ... */ }
+      />
   </>
 )
 ````
