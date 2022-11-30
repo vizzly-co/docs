@@ -11,9 +11,8 @@ These keys are signed with your private key on your server, and validated with t
 
 The client side implementation of the identity callback can be as simple as the following;
 <RemoteCodeBlock
-  lines={[29, 60]}
   language='ts'
-  fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/main/examples/next-js/pages/api/identity.js'
+  fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/cra-example/src/App.js'
 />
 
 ## Server side token generation
@@ -25,8 +24,12 @@ Install the auth package;
 ```shell
 yarn add @vizzly/auth
 ```
+Import the auth package;
+```ts
+import * as VizzlyAuth from '@vizzly/auth';
+```
 Then to use the auth package, here's an example;
-<RemoteCodeBlock language='ts' fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/main/examples/next-js/pages/api/identity.js' />
+<RemoteCodeBlock lines={[40, 60]} language='ts' fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/next-js/pages/api/identity.js' />
 </TabItem>
 <TabItem value="request" label="Request a language">
 
@@ -44,7 +47,7 @@ from [the live dashboards page](https://app.vizzly.co/dashboards) on the Vizzly 
 You will then be able to run the command which __MUST__ only be used in development environments;
 
 ```shell
-vizzly generate-identity-signature \
+vizzly access-tokens \
   -o org_<<rest of organisation ID>> \
   -d dsh_<<rest of dashboard ID>> \
   -u "user 123456" \
@@ -70,7 +73,7 @@ in the database.
 To find your `organisationId` and `initialDashboard` values of your live dashboards, see the [parameters](/parameters) doc.
 
 ### Controlling data set access
-If you're running the Vizzly query engine, the `dataSets` value of the identity config is where you can control what data sets your
+If you're running the Vizzly query engine, the `dataSetIds` value of the data access token is where you can control what data sets your
 users have access too. For example, say you have 3 data sets defined in the configuration file of your Vizzly query engine, which have IDs
 `das_1`, `das_2` and `das_3`, then you could return an identity config which only specifies `das_1` and `das_2` in the `dataSets` parameter, and
 prevent the user from having access to the third data set.
@@ -97,5 +100,5 @@ These secure filters will be signed and sent to the Vizzly query engine by the V
 #### Reduce the impact of a compromised private key
 If your private key becomes compromised, then one way to reduce the impact of this is to also [provide secure filters on your data sets defined in the config of your Vizzly query engine.](/query-engines/self-hosted-query-engine#optional-secure-filter-guards)
 
-### Integrity signature
-For help with signing the identity config and generating the `integritySignature` value, please see the [security docs](/security) for generating the private and public keys, as well as [this nextJs example identity callback](https://github.com/vizzly-co/library-examples/blob/90026e292e021172608a7262cbf40a4f737bac7e/examples/next-js/pages/api/identity.js#L30-L58).
+### Generating private and public keys
+For help generating the public and private keys, please see the [security docs](/security).

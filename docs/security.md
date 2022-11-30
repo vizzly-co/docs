@@ -19,6 +19,5 @@ You'll see the private and public certificates written to your current working d
 
 The next step is saving the contents of your public key, (default file name is `vizzly-public.pem`) to your Vizzly account. You can do that on [the organisation key pairs page](https://app.vizzly.co/organisation/key-pairs).
 
-### Signing the identity config
-If you're utilising JavaScript on your backend servers, you can use Vizzly's library to aid the signing of the identity config.
-An example of how to achieve this [is provided in the Vizzly examples repository](https://github.com/vizzly-co/library-examples/blob/90026e292e021172608a7262cbf40a4f737bac7e/examples/next-js/pages/api/identity.js#L30-L58).
+### Generating the access tokens
+See the [identity callback documentation](/callbacks/identity) for details on how to generate access tokens to authorize data and dashboard access.

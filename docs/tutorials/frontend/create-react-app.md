@@ -23,21 +23,21 @@ yarn add @vizzly/dashboard
 ```
 
 #### 2. Generate the test identity config
-Use the `vizzly generate-identity-signature` command to generate a temporary identity signature that you can use instead of
+Use the `vizzly access-tokens` command to generate a temporary identity signature that you can use instead of
 creating the identity config endpoint.
 
 To see how to use this command, you can run;
 ```
-vizzly generate-identity-signature --help
+vizzly access-tokens --help
 ```
 
 You can find your dashboard ID and organization ID on the [live dashboards page of your account](https://app.vizzly.co/dashboards).
 
 <details>
-  <summary>Example `vizzly generate-identity-signature` command</summary>
+  <summary>Example `vizzly access-tokens` command</summary>
 
 ```sh
-vizzly generate-identity-signature \
+vizzly access-tokens \
   -o org_9817c013a80944... \
   -d dsh_42496c1c55e24b... \
   -u "user 123456" \
@@ -48,7 +48,7 @@ vizzly generate-identity-signature \
 
 
 #### 4. Copy the identity config
-Once you've ran the `generate-identity-signature` command, you'll see the identity config JSON object printed out to the console.
+Once you've ran the `access-tokens` command, you'll see the identity config JSON object printed out to the console.
 
 You will then need to copy this JSON content and paste it into following code snippet, and save it to `src/App.js`.
 
@@ -60,8 +60,8 @@ Ideally this will be generated using a development private/public key pair, and 
 import React from 'react';
 import Vizzly from '@vizzly/dashboard';
 
-// Generated using `vizzly generate-identity-signature` CLI command.
-const IDENTITY_CONFIG = {/*  Identity config. (JSON output from vizzly generate-identity-signature CLI)   */ };
+// Generated using `vizzly access-tokens` CLI command.
+const IDENTITY_CONFIG = {/*  Identity config. (JSON output from vizzly access-tokens CLI)   */ };
 
 // Change this host to point wherever the Vizzly query engine is running.
 // NOTE If you're running the query engine with a `VIZZLY_BASE_PATH` environment variable, then include that base path here too.
