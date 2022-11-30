@@ -1,4 +1,4 @@
-# Identity callback >= 0.0.40
+# Identity & run queries callback >= 0.0.40
 
 In the release `@vizzly/dashboard@0.0.40`, the return value of the identity callback has changed from
 a full identity config, to an object containing two JSON web tokens (JWTs).
@@ -10,9 +10,12 @@ type CallbackError = null;
 
 export type identityCallback = () => Promise<{
   dashboardAccessToken: string,
-  dataAccessToken: string
+  dataAccessToken?: string
 } | CallbackError>;
 ```
+
+The `dataAccessToken` is optional when you're running Vizzly with a custom query engine implementation, but the `dashboardAccessToken` is always required.
+
 <details>
   <summary>Example Dashboard React component with an identity callback</summary>
 
@@ -35,6 +38,24 @@ export type identityCallback = () => Promise<{
 ```
 
 </details>
+
+### Changes to `runQueriesCallback`
+The `runQueriesCallback` callback has also changed slightly. The only difference is as follows;
+
+```diff
+  export type runQueriesCallback = (
+    queries: VizzlyComponents.Query[],
+    params: {
+      dataSets: VizzlyComponents.DataSet[];
+      virtualFields: {
+        [dataSetId: string]: VizzlyComponents.Studio.Dashboard.VirtualField[];
+      };
+      abortSignal?: AbortSignal;
+-     identityConfigIntegritySignature?: string;
++     dataAccessToken?: string;
+    }
+  ) => Promise<VizzlyComponents.Result[] | CallbackError>;
+```
 
 
 ### @vizzly/auth changes
