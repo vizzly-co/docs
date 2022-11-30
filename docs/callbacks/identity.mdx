@@ -1,80 +1,38 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import RemoteCodeBlock from '../../src/components/RemoteCodeBlock';
+
 # Identity
 
-The purpose of the identity callback is to securely identify the current user. This information will be signed with your private key on your server, and validated with the public key you upload to Vizzly.
+The purpose of the identity callback is to generate two JSON web tokens (JWTs) that provide access to the dashboard configuration, and access to the user's data.
+These keys are signed with your private key on your server, and validated with the public key you upload to Vizzly, and provide in the Vizzly config of the Vizzly Query Engine.
 
-At it's simplest, this is a sequence diagram of how Vizzly works in a multi-tenant environment.
+## Client side
 
-<img style={{padding: "20px", background: "white", borderRadius: "20px"}} src="/img/vizzly-high-level-how-it-works.svg" />
+The client side implementation of the identity callback can be as simple as the following;
+<RemoteCodeBlock
+  lines={[29, 60]}
+  language='ts'
+  fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/main/examples/next-js/pages/api/identity.js'
+/>
 
-The Vizzly identity config contains a signature that ensure its validity when sent to the Vizzly query engine.
+## Server side token generation
 
-The API call will be made within an async function that you define, and returns an identity config.
+<Tabs>
+<TabItem value="nodejs" label="NodeJs">
 
-The typescript definition of the identity config is outlined below.
-
-```tsx
-type IdentityConfig = {
-    // IDs of data sets that this user has access too, or a '*'
-    // if it's all of them.
-    dataSets: string[] | '*';
-
-    /*
-      This is your Vizzly organisation ID, we provide this to you.
-    */
-    organisationId: string;
-
-    /*
-      A unique string which references the current user. For example
-      a unique user ID, which is under 255 characters in length.
-    */
-    userReference: string;
-
-    /*
-      This is the ID of the dashboard you want the user to be shown
-      when they first land on your page.
-    */
-    dashboardId: string;
-
-    // ISO 8601 format.
-    expires: string;
-
-    /*
-      Is the user a standard user (your customer), or are they an admin editor 
-      who can edit the default dashboard & theme?
-    */
-    userType: 'standard' | 'editor';
-
-    /*
-      A signature that ensures all other attributes
-      haven't been tampered with, and originates
-      from your servers and hasn't been spoofed.
-    */
-    integritySignature: string;
-
-    secureFilters: {
-      [dataSetId: string]: {
-        // Corresponds to the `publicField` set in the data set config.
-        field: string;
-
-        // The operation of the filter
-        op: ">"
-            | "<"
-            | "="
-            | ">="
-            | "<="
-            | "is_one_of"
-            | "is_not_one_of"
-            | "starts_with"
-            | "ends_with"
-            | "contains_substring"
-            | "does_not_contain_substring";
-
-        // The value to compare the field too.
-        value: any;
-      }[];
-    };
-  };
+Install the auth package;
+```shell
+yarn add @vizzly/auth
 ```
+Then to use the auth package, here's an example;
+<RemoteCodeBlock language='ts' fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/main/examples/next-js/pages/api/identity.js' />
+</TabItem>
+<TabItem value="request" label="Request a language">
+
+If you're using a programming language that we don't currently provide an authentication helper library for, then please request the language you desire through your Vizzly slack channel.
+</TabItem>
+</Tabs>
 
 #### Generating test identity configs
 
@@ -101,14 +59,8 @@ in the database.
 
 ```json
 {
-  "dataSets": "*",
-  "userType": "editor",
-  "organisationId": "org_9817c013a.....",
-  "dashboardId": "dsh_c630d48....",
-  "secureFilters": {},
-  "userReference": "user 123456",
-  "integritySignature": "..."
-  "expires": "2022-11-23T02:39:14.457Z"
+  "dashboardAccessToken": "...",
+  "dataAccessToken": "..."
 }
 ```
 
