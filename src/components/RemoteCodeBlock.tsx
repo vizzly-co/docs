@@ -43,7 +43,7 @@ const RemoteCodeBlock = (props: {fileUrl: string, lines?: [number, number]; titl
         showLineNumbers={props.showLineNumbers}>
         {content}
       </CodeBlock>
-      <a target="_blank" href={props.fileUrl}>See the full file</a>
+      {props.showLineNumbers && <a target="_blank" href={props.fileUrl}>See the full file</a>}
     </>
   );
 };

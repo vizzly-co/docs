@@ -2,6 +2,8 @@
 sidebar_position: 10
 ---
 
+import RemoteCodeBlock from '../../src/components/RemoteCodeBlock';
+
 # Custom
 
 Roll your own query engine layer by transforming Vizzly queries into Vizzly formatted results.
@@ -10,39 +12,10 @@ If you have complex query or authentication requirements, you may prefer to roll
 to benefit from your existing authentication or query functionality.
 
 
-## Examples
-- [Next JS project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/custom.jsx)
+### Example usage
+See the [Next JS example project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/custom.jsx)
 
-```typescript
-import Vizzly from "@vizzly/dashboard";
-
-<Vizzly.Dashboard
-  type='custom'
-  runQueriesCallback={async (queries) => {
-    const response = await fetch('/api/create-results', {
-      method: "post",
-      body: JSON.stringify({ queries })
-    });
-
-    if(response.ok) {
-      const results = await response.json();
-
-      return results;
-    } else {
-      console.error('Failed to run query.');
-
-      return null;
-    }
-  }}
-  identityCallback={async () => {
-    const response = await fetch("/api/identity");
-    if(response.ok) {
-      const identityConfig = await response.json();
-
-      return identityConfig;
-    };
-
-    return null;
-  }}
+<RemoteCodeBlock
+  language='ts'
+  fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/custom.jsx'
 />
-```
