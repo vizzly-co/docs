@@ -24,7 +24,7 @@ const identityCallback = async () => {
   return null;
 };
 
-const { dashboards, deleteEndUserDashboard, createNewEndUserDashboard } = Vizzly.useDashboardManager(identityCallback);
+const { dashboards, deleteEndUserDashboard, createNewEndUserDashboard, updateDashboardMeta } = Vizzly.useDashboardManager(identityCallback);
 ```
 
 - `dashboards` is the list of dashboards the current user has.
@@ -35,6 +35,8 @@ are sure they wish to delete the dashboard, before calling this function for a b
 - `createNewEndUserDashboard` will create a new dashboard, based from the template `dashboardId` returned in the `dashboardAccessToken`
 of the identity callback.
 
+- `updateDashboardMeta` is a function that allows you to store any key-value pairs with a dashboard. You will provide the `dashboardId` as
+the first argument, and the object as the second argument. Any subsequent updates to the metadata will merge with the previously set values.
 
 ### Example usage
 Here a complete example of how to use it, which displays a grid of dashboards, with the functionality to create more dashboards, or delete existing ones.
