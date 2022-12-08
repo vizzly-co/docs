@@ -1,3 +1,5 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
 # Load data
 
 This callback loads all the current user's data, for a data set. This data is then queried in the browser's memory, using Vizzly's in-browser query engine.
@@ -6,12 +8,8 @@ We strongly advise that this strategy is only used for small data sets, as the u
 
 The data returned from this callback, should be in the following format:
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-
-<Tabs>
-<TabItem value="type" label="Type definition">
+<Tabs items={["Type definition", "Example"]}>
+<Tab>
 
 ```typescript
 export type Result = {
@@ -19,12 +17,13 @@ export type Result = {
   fields: {
     id: string;
     publicName: string;
-    dataType: 'number' | 'boolean' | 'string' | 'date_time';
+    dataType: "number" | "boolean" | "string" | "date_time";
   }[];
 };
 ```
-</TabItem>
-<TabItem value="example" label="Example">
+
+</Tab>
+<Tab>
 
 ```json
 {
@@ -43,22 +42,22 @@ export type Result = {
       "id": "fie_3",
       "publicName": "Status",
       "dataType": "string"
-    },
+    }
     // ...
   ],
-  content: [
+  "content": [
     [100354678, "2020-10-01", "received"],
     [100354679, "2020-10-02", "completed"],
-    [100354680, "2020-10-03", "refunded"],
+    [100354680, "2020-10-03", "refunded"]
     // ...
   ]
 }
 ```
-</TabItem>
+
+</Tab>
 </Tabs>
 
 An implementation of this can be seen in [the nextJS example repo](https://github.com/vizzly-co/library-examples/blob/b962329aa4e0d8ba3c49595e69120e1be8cdcfbb/examples/next-js/pages/in-browser.jsx#L14-L26).
-
 
 ### Multi-tenancy
 

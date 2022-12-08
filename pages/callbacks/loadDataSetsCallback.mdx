@@ -1,5 +1,4 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import { Tab, Tabs } from "nextra-theme-docs";
 
 # Load data sets
 
@@ -7,8 +6,8 @@ A function that returns a list of data sets that describe the available tables a
 
 ### Return value
 
-<Tabs>
-<TabItem value="type" label="Type definition">
+<Tabs items={["Type definition", "Example"]}>
+<Tab>
 
 ```typescript
 {
@@ -27,13 +26,16 @@ A function that returns a list of data sets that describe the available tables a
     publicName: string;
 
     // Data type of the field
-    dataType: 'number' | 'boolean' | 'string' | 'date_time';
-  }[]
-}[];
+    dataType: "number" | "boolean" | "string" | "date_time";
+  }
+  [];
+}
+[];
 ```
-</TabItem>
 
-<TabItem value="example" label="Example">
+</Tab>
+
+<Tab>
 
 ```json
 [
@@ -62,9 +64,10 @@ A function that returns a list of data sets that describe the available tables a
         "id": "fie_4"
       }
     ]
-  },
+  }
   // ...
 ]
 ```
-</TabItem>
+
+</Tab>
 </Tabs>

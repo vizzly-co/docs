@@ -1,0 +1,104 @@
+# Managing dashboards
+
+To create, delete and list your user's dashboards, you can use our `Vizzly.useDashboardManager` react hook.
+
+All that is required, is the same [identity callback as used in the Dashboard component](/callbacks/identity). For example, your implementation might look like this;
+
+```ts
+import Vizzly from "@vizzly/dashboard";
+
+const identityCallback = async () => {
+  const response = await fetch("/api/identity?type=custom");
+  if (response.ok) {
+    const tokens = await response.json();
+
+    return tokens;
+  }
+
+  return null;
+};
+
+const {
+  dashboards,
+  deleteEndUserDashboard,
+  createNewEndUserDashboard,
+  updateDashboardMeta,
+} = Vizzly.useDashboardManager(identityCallback);
+```
+
+- `dashboards` is the list of dashboards the current user has.
+
+- `deleteEndUserDashboard` is a function that will instantly remove the dashboard. You may want to first prompt the user if they
+  are sure they wish to delete the dashboard, before calling this function for a better user experience.
+
+- `createNewEndUserDashboard` will create a new dashboard, based from the template `dashboardId` returned in the `dashboardAccessToken`
+  of the identity callback.
+
+- `updateDashboardMeta` is a function that allows you to store any key-value pairs with a dashboard. You will provide the `dashboardId` as
+  the first argument, and the object as the second argument. Any subsequent updates to the metadata will merge with the previously set values.
+
+### Example usage
+
+Here a complete example of how to use it, which displays a grid of dashboards, with the functionality to create more dashboards, or delete existing ones.
+
+```tsx
+import Vizzly from "@vizzly/dashboard";
+
+// The same identityCallback as required by the Vizzly.Dashboard component.
+const identityCallback = async () => {
+  const response = await fetch("/api/identity?type=custom");
+  if (response.ok) {
+    const tokens = await response.json();
+
+    return tokens;
+  }
+
+  return null;
+};
+
+const ManageDashboards = () => {
+  // The Vizzly react hook to provide the end-user's dashboards, and functions to create and delete dashboards
+  const { dashboards, deleteEndUserDashboard, createNewEndUserDashboard } =
+    Vizzly.useDashboardManager(identityCallback);
+
+  return (
+    <div className="p-6">
+      <div className="grid grid-cols-3 gap-4">
+        {dashboards.map((dashboard) => (
+          <div className="bg-gray-100 p-3 rounded-md relative">
+            {dashboard.id}
+            <button
+              className="text-xs absolute top-4 right-3"
+              onClick={() => {
+                const deleted = deleteEndUserDashboard(dashboard.id);
+                if (deleted) {
+                  console.log("Deleted dashboard", dashboard.id);
+                } else {
+                  console.log("Failed to delete dashboard", dashboard.id);
+                }
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+      </div>
+      <button
+        className="py-1 px-2 shadow-sm bg-blue-500 text-white rounded-sm mt-3"
+        onClick={() => {
+          const created = createNewEndUserDashboard();
+          if (created) {
+            console.log("Created a new dashboard");
+          } else {
+            console.log("Failed to create a new dashboard");
+          }
+        }}
+      >
+        Create New
+      </button>
+    </div>
+  );
+};
+
+export default ManageDashboards;
+```

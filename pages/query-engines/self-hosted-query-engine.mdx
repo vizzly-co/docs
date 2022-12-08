@@ -2,8 +2,7 @@
 sidebar_position: 1
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import { Tab, Tabs } from "nextra-theme-docs";
 
 # Self-hosted
 
@@ -18,16 +17,21 @@ npm i @vizzly/cli -g
 To see all available commands, run `vizzly -h`.
 
 #### Creating a key-pair
+
 To create a private and public certificate key-pair to use with Vizzly, you can run the following command
+
 ```shell
 vizzly create-key-pair
 ```
 
 #### Creating a Vizzly config template
+
 After creating your key-pair, you can run the following command to create a template of the Vizzly config:
+
 ```shell
 vizzly init -i <<integration>>
 ```
+
 Remember, you can run `vizzly init --help` to see how to use this command, and see a list of all available integrations.
 
 ### Config file
@@ -39,17 +43,19 @@ In [our examples repo](https://github.com/vizzly-co/library-examples), we have V
 We're using our CLI tool to validate these example configs, which [you can read more about here](/vizzly-config-ci) should you wish to add this to your setup too.
 
 #### File location
+
 The Vizzly config file will need to be mounted into the Vizzly docker image, in the default location of `/etc/vizzly/vizzly.config.json`.
 
 If you wish to customize the location of your Vizzly config file, you can do so using the `VIZZLY_CONFIG_FILE` runtime environment variable.
 
 #### Connection credentials
+
 The Vizzly docker image will need read-only access to your database. These credentials are specified in the Vizzly config file, and therefore the entire config file should be treated as a secret.
 
 The typescript definition of the credentials is as follows:
 
-<Tabs groupId="integration-type">
-<TabItem value="postgres" label="Postgres">
+<Tabs items={["Postgres", "BigQuery", "ElasticSearch"]}>
+<Tab>
 
 ```ts
 {
@@ -63,8 +69,9 @@ The typescript definition of the credentials is as follows:
   }
 }
 ```
-</TabItem>
-<TabItem value="bigquery" label="BigQuery">
+
+</Tab>
+<Tab>
 
 ```ts
 {
@@ -76,9 +83,10 @@ The typescript definition of the credentials is as follows:
   }
 }
 ```
-</TabItem>
 
-<TabItem value="elasticsearch" label="ElasticSearch">
+</Tab>
+
+<Tab>
 
 ```ts
 {
@@ -86,23 +94,25 @@ The typescript definition of the credentials is as follows:
   cloud?: {
     id: string;
   },
-  auth: 
+  auth:
     | { username: string; password: string; }
     | { apiKey: string; }
     | { id: string; api_key: string; }
     | { bearer: string; }
 }
 ```
-</TabItem>
+
+</Tab>
 </Tabs>
 
 #### Data sets
+
 You'll need to define the available data sets for your users. You'll be able to define which data sets the user has access to in the [identity callback](/callbacks/identity).
 
 The typescript definition of a data set is as follows:
 
-<Tabs groupId="integration-type">
-<TabItem value="postgres" label="Postgres">
+<Tabs items={["Postgres", "BigQuery", "ElasticSearch"]}>
+<Tab>
 
 ```ts
 {
@@ -166,8 +176,9 @@ The typescript definition of a data set is as follows:
     }[];
 }
 ```
-</TabItem>
-<TabItem value="bigquery" label="BigQuery">
+
+</Tab>
+<Tab>
 
 ```ts
 {
@@ -241,8 +252,9 @@ The typescript definition of a data set is as follows:
     }[];
 }
 ```
-</TabItem>
-<TabItem value="elasticsearch" label="ElasticSearch">
+
+</Tab>
+<Tab>
 
 ```ts
 {
@@ -274,7 +286,7 @@ The typescript definition of a data set is as follows:
     /*
       What type of data does this field contain?
     */
-    dataType: 'number' | 'boolean' | 'string' | 'date_time';
+    dataType: "number" | "boolean" | "string" | "date_time";
 
     /*
       The name of this field that your users will see.
@@ -285,21 +297,22 @@ The typescript definition of a data set is as follows:
       The name of the table in the database
     */
     table: string;
-  }[];
+  }
+  [];
 }
 ```
-</TabItem>
+
+</Tab>
 </Tabs>
 
 #### Joins
+
 If you're using an integration with a SQL database, then in the Vizzly config file, it is possible to join fields that reside across multiple tables.
 
 <details>
   <summary>Expand to see an example of how you would join two tables on a foreign key `city_id`.</summary>
-  
 
-  ```json
-
+```json
 {
   "connection": {
     // ...
@@ -359,7 +372,7 @@ If you're using an integration with a SQL database, then in the Vizzly config fi
         }
       ],
       "secureFilterGuards": []
-    },
+    }
     // ...
   ],
   "publicKeyCertificates": [
@@ -367,10 +380,11 @@ If you're using an integration with a SQL database, then in the Vizzly config fi
   ]
 }
 ```
+
 </details>
 
-
 #### Optional secure filter guards
+
 Secure filters are used to provide Vizzly's multi-tenancy feature, and they are defined in the [identity config](/callbacks/identity). However if you want to reduce the impact of your private key being compromised, you can also
 define "secure filter guards" for each of the data sets. The purpose of a filter guard to limit the amount of data an attacker has
 access too if they manage to steal your private key used for Vizzly.
@@ -379,28 +393,28 @@ The typescript definition of a secure filter guard is as follows:
 
 ```ts
 type Operator =
-    | ">"
-    | "<"
-    | "="
-    | ">="
-    | "<="
-    | "is_one_of"
-    | "is_not_one_of"
-    | "starts_with"
-    | "ends_with"      
-    | "contains_substring"
-    | "does_not_contain_substring";
+  | ">"
+  | "<"
+  | "="
+  | ">="
+  | "<="
+  | "is_one_of"
+  | "is_not_one_of"
+  | "starts_with"
+  | "ends_with"
+  | "contains_substring"
+  | "does_not_contain_substring";
 
 {
   fieldId: string; // The `id` of the field
   op: Operator;
-};
+}
 ```
 
 ### Cloud deployment
 
-<Tabs>
-<TabItem value="aws" label="Amazon Web Services (AWS)">
+<Tabs items={["Amazon Web Services (AWS)", "Google Gloud Platform (GCP)"]}>
+<Tab>
 
 After uploading the `vizzly.config.json` file securely to an S3 bucket, specify the `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables.
 
@@ -411,8 +425,8 @@ naming the config file `vizzly.config.json` will download the config to the corr
 
 As this config file will contain read-only database credentials, be sure to store this securely in S3.
 
-</TabItem>
-<TabItem value="gcp" label="Google Cloud Platform (GCP)">
+</Tab>
+<Tab>
 
 To run the Vizzly query engine on GCP, we recommend using [Google's Cloud Run product](https://cloud.google.com/run).
 
@@ -431,7 +445,7 @@ to the docker container whilst provisioning the Google Cloud Run service to run 
   <summary>Mounting the Vizzly config</summary>
   <img src="/img/google-cloud-run-setting-vizzly-config.png" />
 </details>
-</TabItem>
+</Tab>
 </Tabs>
 
 Remember to set the `keyFilename` value in the BigQuery connection to the same location as where you've mounted the service account config JSON file.
@@ -439,23 +453,27 @@ Remember to set the `keyFilename` value in the BigQuery connection to the same l
 ### Environment variables
 
 #### `VIZZLY_QUERY_ENGINE_HOST`
+
 The protocol and host domain of the query engine. This excludes the base path which can be configured using the `VIZZLY_BASE_PATH` variable.
 For example `https://query.example.co` would be a valid query engine host value.
 
 This environment variable is required.
 
 #### `VIZZLY_BASE_PATH`
-This changes the base path of the Vizzly query engine. For example you might have a routing layer that matches requests for `/vizzly-query-engine/*`, and forwards them too the 
+
+This changes the base path of the Vizzly query engine. For example you might have a routing layer that matches requests for `/vizzly-query-engine/*`, and forwards them too the
 query engine. In which case, you'd set this value too `/vizzly-query-engine` so the requests match the path matchers in the query engine.
 
 This environment variable is not required, and defaults too `''`.
 
 #### `VIZZLY_RESPONSE_LIMIT`
+
 This sets the maximum size of query result responses. We only recommended changing this value if you're lowering it.
 
 This environment variable is not required, and defaults to `5mb`.
 
 #### `VIZZLY_CONFIG_FILE`
+
 Changes the path at which the config file resides inside the running container.
 
 This environment variable is not required, and defaults to `/etc/vizzly/vizzly.config.json`.
@@ -463,10 +481,13 @@ This environment variable is not required, and defaults to `/etc/vizzly/vizzly.c
 ### Performance and resiliency
 
 #### Workload
+
 The docker image we provide does not do computationally heavy lifting. The noteworthy operations include validating JWTs and transforming Vizzly queries into the language your underlying database requires.
 
 #### Hardware considerations
+
 The recommended hardware requirements will depend on a number of different factors, including:
+
 - The number of concurrent users you expect to be viewing the dashboard.
 - How many charts a typical user has on their dashboard.
 - How many additional data controls exist on each chart.
@@ -474,9 +495,11 @@ The recommended hardware requirements will depend on a number of different facto
 To increase performance, consider scaling horizontally by adding more containers running the Vizzly docker image, or vertically by provisioning larger compute resource.
 
 #### Resiliency
+
 The query engine in the docker image is stateless and so it can be easily scaled horizontally to reduce performance or resiliency concerns and easily auto-scaled on all major cloud providers if your traffic pattern is spiky.
 
 ### Limitations
 
 #### Large numbers
+
 Currently, the self-hosted docker image supports a precision of up to `9007199254740991`. The accuracy of operations performed on numbers greater than this number may be incorrect.
