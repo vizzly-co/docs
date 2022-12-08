@@ -105,9 +105,9 @@ export const VizzlyThemeClasses = () => {
     <>
     {namespaceDescriptions.map(([key, value]) => (
         <>
-          <hr />
           <h4>.vizzly_{key}</h4>
           <p>{value}</p>
+          <hr />
         </>
       )
     )}
@@ -115,4 +115,43 @@ export const VizzlyThemeClasses = () => {
     )
 }
 
+<details>
+  <summary>View all CSS classes</summary>
+
 <VizzlyThemeClasses />
+</details>
+
+
+### Troubleshooting
+
+<details>
+  <summary>"My custom styles are having no effect"</summary>
+
+There's a few simple things that might be causing the issue;
+
+1. Be sure that you have set the `disableVizzlyTheme={true}` property on the `Vizzly.Dashboard` React component.
+2. Be sure that you are targeting an HTML element [with valid CSS](https://jigsaw.w3.org/css-validator/).
+3. Be sure that the CSS selector is finding the element on the page. You can use the chrome developer tools in the "style" section to do this. You'll see the styles you want to be applied are crossed out.
+
+After checking the above and the problem continues, then it is time to increase the specificity of the CSS references.
+You can do this by targeting the HTML element multiple times with the same selector. For example, instead of just specifying the selector like so;
+```css
+button.vizzly_primary {
+  background: red;
+}
+```
+
+you can utilize the `v` class which will also exist on the HTML element which has `vizzly_` classnames on, and reference the element like so;
+```css
+.v.button.vizzly_primary {
+  background: red;
+}
+```
+
+If it is still being overridden, you can keep adding the `v` class until your styles take effect. For example;
+```css
+.v.v.v.v.button.vizzly_primary {
+  background: red;
+}
+```
+</details>
