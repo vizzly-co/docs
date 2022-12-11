@@ -1,5 +1,28 @@
 import { Tab, Tabs } from "nextra-theme-docs";
 import RemoteCodeBlock from "../../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../../src/remoteCode";
+
+export const getStaticProps = async () => {
+  const [appjs, identity] = await Promise.all([
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/cra-example/src/App.js",
+      lang: "jsx",
+    }),
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/next-js/pages/api/identity.js",
+      lang: "js",
+      lines: [40, 60],
+    }),
+  ]);
+  return {
+    props: {
+      ssg: {
+        appjs,
+        identity,
+      },
+    },
+  };
+};
 
 # Identity
 
@@ -10,10 +33,7 @@ These keys are signed with your private key on your server, and validated with t
 
 The client side implementation of the identity callback can be as simple as the following;
 
-<RemoteCodeBlock
-  language="jsx"
-  fileUrl="https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/cra-example/src/App.js"
-/>
+<RemoteCodeBlock name="appjs" />
 
 ## Server side token generation
 
@@ -34,7 +54,7 @@ import * as VizzlyAuth from "@vizzly/auth";
 
 Then to use the auth package, here's an example;
 
-  <RemoteCodeBlock lines={[40, 60]} language='ts' fileUrl='https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/next-js/pages/api/identity.js' />
+  <RemoteCodeBlock name="identity" />
   </Tab>
   <Tab>
 

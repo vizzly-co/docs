@@ -1,4 +1,21 @@
 import RemoteCodeBlock from "../../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../../src/remoteCode";
+
+export const getStaticProps = async () => {
+  const [code] = await Promise.all([
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/in-browser.jsx",
+      lang: "jsx",
+    }),
+  ]);
+  return {
+    props: {
+      ssg: {
+        code,
+      },
+    },
+  };
+};
 
 # In-browser
 
@@ -10,10 +27,7 @@ In some cases, the data set you'll want to make available to each of your custom
 
 - [Next JS project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/in-browser.jsx)
 
-<RemoteCodeBlock
-  language="jsx"
-  fileUrl="https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/in-browser.jsx"
-/>
+<RemoteCodeBlock />
 
 ## Callbacks
 

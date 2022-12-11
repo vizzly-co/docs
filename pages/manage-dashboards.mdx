@@ -1,4 +1,21 @@
 import RemoteCodeBlock from "../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../src/remoteCode";
+
+export const getStaticProps = async () => {
+  const [code] = await Promise.all([
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/manage-dashboards.jsx",
+      lang: "jsx",
+    }),
+  ]);
+  return {
+    props: {
+      ssg: {
+        code,
+      },
+    },
+  };
+};
 
 # Managing dashboards
 
@@ -43,7 +60,4 @@ const {
 
 Here a complete example of how to use it, which displays a grid of dashboards, with the functionality to create more dashboards, or delete existing ones.
 
-<RemoteCodeBlock
-  language="jsx"
-  fileUrl="https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/manage-dashboards.jsx"
-/>
+<RemoteCodeBlock />
