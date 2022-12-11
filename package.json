@@ -1,7 +1,7 @@
 {
-  "name": "nextra-docs-template",
+  "name": "@vizzly/docs",
   "version": "0.0.1",
-  "description": "Nextra docs template",
+  "description": "Vizzly documentation",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,14 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+    "url": "git+https://github.com/vizzly-co/docs.git"
   },
-  "author": "Shu Ding <g@shud.in>",
-  "license": "MIT",
+  "author": "Vizzly <developers@vizzly.co>",
   "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
+    "url": "https://github.com/vizzly-co/docs/issues"
   },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://github.com/vizzly-co/docs#readme",
   "dependencies": {
     "next": "^13.0.6",
     "nextra": "2.0.1",
