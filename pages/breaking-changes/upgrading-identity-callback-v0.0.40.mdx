@@ -8,10 +8,13 @@ The new type definition of the callback is as follows, where both `dashboardAcce
 ```ts
 type CallbackError = null;
 
-export type identityCallback = () => Promise<{
-  dashboardAccessToken: string,
-  dataAccessToken?: string
-} | CallbackError>;
+export type identityCallback = () => Promise<
+  | {
+      dashboardAccessToken: string;
+      dataAccessToken?: string;
+    }
+  | CallbackError
+>;
 ```
 
 The `dataAccessToken` is optional when you're running Vizzly with a custom query engine implementation, but the `dashboardAccessToken` is always required.
@@ -21,16 +24,16 @@ The `dataAccessToken` is optional when you're running Vizzly with a custom query
 
 ```tsx
 <Vizzly.Dashboard
-  type='self-hosted'
-  vizzlyDockerImageEndpoint='/query-engine'
+  type="self-hosted"
+  vizzlyDockerImageEndpoint="/query-engine"
   identityCallback={async () => {
-    const response = await fetch('/api/identity');
+    const response = await fetch("/api/identity");
 
-    if(response.ok) {
+    if (response.ok) {
       const tokens = await response.json();
 
       return tokens;
-    };
+    }
 
     return null;
   }}
@@ -40,6 +43,7 @@ The `dataAccessToken` is optional when you're running Vizzly with a custom query
 </details>
 
 ### Changes to `runQueriesCallback`
+
 The `runQueriesCallback` callback has also changed slightly. The only difference is as follows;
 
 ```diff
@@ -57,14 +61,14 @@ The `runQueriesCallback` callback has also changed slightly. The only difference
   ) => Promise<VizzlyComponents.Result[] | CallbackError>;
 ```
 
-
 ### @vizzly/auth changes
+
 To make this transition easier, we've also updated the `@vizzly/auth` package to generate the tokens and return an object in the same format as the identity callback requires.
 
 <details>
   <summary>@vizzly/auth usage diff to upgrade from versions lower than 0.0.4 of the auth package.</summary>
 
-If you are currently using a version of the Vizzly auth package <= 0.0.4, the following diff will help you upgrade;
+If you are currently using a version of the Vizzly auth package {"<="} 0.0.4, the following diff will help you upgrade;
 
 ```diff
   const vizzAuth = createSigner({

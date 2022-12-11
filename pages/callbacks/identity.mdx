@@ -1,5 +1,5 @@
 import { Tab, Tabs } from "nextra-theme-docs";
-import RemoteCodeBlock from "../../src/components/RemoteCodeBlock";
+import RemoteCodeBlock from "../../components/RemoteCodeBlock";
 
 # Identity
 
@@ -11,13 +11,13 @@ These keys are signed with your private key on your server, and validated with t
 The client side implementation of the identity callback can be as simple as the following;
 
 <RemoteCodeBlock
-  language="ts"
+  language="jsx"
   fileUrl="https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/cra-example/src/App.js"
 />
 
 ## Server side token generation
 
-<Tabs items={["NodeJs"], "Request a language"}>
+<Tabs items={["NodeJs", "Request a language"]}>
   <Tab>
 
 Install the auth package;

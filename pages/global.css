@@ -1,0 +1,4 @@
+.shiki .line {
+    /* we need this hack here to also show empty lines in code  */
+    min-height: 20px;
+}
