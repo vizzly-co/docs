@@ -1,0 +1,19 @@
+{
+  "index": "Docs",
+  "react-component": "React Component",
+  "theme": "Custom Themes",
+  "query-engines": "Query Engines",
+  "callbacks": "React Component Callbacks",
+  "tutorials": "Tutorials",
+  "feature-toggles": "Feature Toggles",
+  "manage-dashboards": "Managing Dashboards",
+  "implement-vizzly": "Implementing Vizzly",
+  "security": "Security",
+  "parameters": "Parameters",
+  "performance": "Performance",
+  "vizzly-config-ci": "CI with Vizzly",
+  "breaking-changes": "Breaking Changes",
+  "_install": {
+    "display": "hidden"
+  }
+}

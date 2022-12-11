@@ -1,0 +1,6 @@
+{
+  "identity": "Identity",
+  "loadDataCallback": "Load data",
+  "loadDataSetsCallback": "Load data sets",
+  "runQueriesCallback": "Run queries"
+}

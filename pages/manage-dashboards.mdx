@@ -1,0 +1,63 @@
+import RemoteCodeBlock from "../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../src/remoteCode";
+
+export const getStaticProps = async () => {
+  const [code] = await Promise.all([
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3279d2f0af06745f8d2213cbf7b86e0026a7ddb6/examples/next-js/pages/manage-dashboards.jsx",
+      lang: "jsx",
+    }),
+  ]);
+  return {
+    props: {
+      ssg: {
+        code,
+      },
+    },
+  };
+};
+
+# Managing dashboards
+
+To create, delete and list your user's dashboards, you can use our `Vizzly.useDashboardManager` react hook.
+
+All that is required, is the same [identity callback as used in the Dashboard component](/callbacks/identity). For example, your implementation might look like this;
+
+```ts
+import Vizzly from "@vizzly/dashboard";
+
+const identityCallback = async () => {
+  const response = await fetch("/api/identity?type=custom");
+  if (response.ok) {
+    const tokens = await response.json();
+
+    return tokens;
+  }
+
+  return null;
+};
+
+const {
+  dashboards,
+  deleteEndUserDashboard,
+  createNewEndUserDashboard,
+  updateDashboardMeta,
+} = Vizzly.useDashboardManager(identityCallback);
+```
+
+- `dashboards` is the list of dashboards the current user has.
+
+- `deleteEndUserDashboard` is a function that will instantly remove the dashboard. You may want to first prompt the user if they
+  are sure they wish to delete the dashboard, before calling this function for a better user experience.
+
+- `createNewEndUserDashboard` will create a new dashboard, based from the template `dashboardId` returned in the `dashboardAccessToken`
+  of the identity callback.
+
+- `updateDashboardMeta` is a function that allows you to store any key-value pairs with a dashboard. You will provide the `dashboardId` as
+  the first argument, and the object as the second argument. Any subsequent updates to the metadata will merge with the previously set values.
+
+### Example usage
+
+Here a complete example of how to use it, which displays a grid of dashboards, with the functionality to create more dashboards, or delete existing ones.
+
+<RemoteCodeBlock />
