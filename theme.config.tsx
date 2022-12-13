@@ -25,7 +25,7 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/vizzly-co/docs",
   },
-  docsRepositoryBase: "https://github.com/vizzly-co/docs",
+  docsRepositoryBase: "https://github.com/vizzly-co/docs/tree/main",
   footer: {
     component: null,
   },
