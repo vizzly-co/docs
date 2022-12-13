@@ -4,9 +4,73 @@ sidebar_position: 3
 
 # Custom themes
 
-Vizzly ships with a Vizzly theme which provides a sensible default theme to get you started quickly. However, when the time comes to customize the
-style of the dashboard, we make this easy for you by exposing CSS classes on the HTML elements.
+Vizzly ships with a default theme to get you started quickly. However, when the time comes to customize the
+style of the dashboard, we make this easy for you by exposing CSS classes on the HTML elements, and making certain components replaceable.
 
+## Components
+Currently, the Vizzly dashboard exposes one component that can be replaced, which is the loading component.
+You can provide a custom loading component using the `renderLoadingComponent` React prop.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomLoadingComponent = () => <p>Loading...</p>
+
+<Vizzly.Dashboard
+  renderLoadingComponent={CustomLoadingComponent}
+
+  // Rest of the dashboard props ...
+/>
+```
+
+It's in our roadmap to make many more components replaceable.
+
+## Icons
+To replace the icons, you can provide render callbacks to the `Vizzly.Dashboard` through React props.
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomComponent = () => <p>Your react component</p>
+
+<Vizzly.Dashboard
+  renderUndoIcon={CustomComponent}
+  renderCompletedIcon={CustomComponent}
+  renderInProgressIcon={CustomComponent}
+  renderDeleteIcon={CustomComponent}
+  renderPlusIcon={CustomComponent}
+  renderCloseIcon={CustomComponent}
+  renderFilterIcon={CustomComponent}
+  renderEditIcon={CustomComponent}
+  renderComponentOptionsMenuIcon={CustomComponent}
+  renderMergeCellIcon={CustomComponent}
+  renderSplitCellIcon={CustomComponent}
+  renderDownloadIcon={CustomComponent}
+  renderInsertRowBelowIcon={CustomComponent}
+  renderInsertRowAboveIcon={CustomComponent}
+  renderAppendCellIcon={CustomComponent}
+  renderLibraryIcon={CustomComponent}
+  renderCreateComponentIcon={CustomComponent}
+  renderAccordionIcon={CustomComponent}
+
+  // Rest of the dashboard props ...
+/>
+```
+To make improve the discoverability of replaceable icons, when you're in editor mode, you'll
+be able to highlight the icons which can be replaced, by toggling the 'Highlight replaceable components' button in the
+top menu of the editor.
+
+<img style={{marginTop: '10px'}} src="/img/toggle-replaceable-components.png" />
+
+This will then highlight the icons which can be replaced with a red border.
+
+<img style={{marginTop: '10px'}} src="/img/highlight-replaceable-icon.png" />
+
+You can then hold the "Shift" key on your keyboard, and click within the red outlined component to
+open the developer instructions in a modal.
+
+<img style={{marginTop: '10px'}} src="/img/example-description-to-replace-component.png" />
+
+## CSS
 To make the dashboard look and feel like the rest of your website, we've added CSS class names which allow you complete control over the customization of your dashboard.
 
 You can write a CSS file that uses the `vizzly_` prefixed CSS class names to override the Vizzly base styles.
@@ -39,15 +103,7 @@ export default () => (
 )
 ```
 
-## Importing the CSS
-
-As you customize the Vizzly dashboard using CSS classes, you can import these styles in the idiomatic ways;
-
-- You can set the styles in the `head` tag of the HTML document.
-- As a separate CSS file referenced in the `head` tag of the HTML document.
-- Using a CSS in JS approach such as [styled-components](https://styled-components.com) to create global styles.
-
-## Available CSS classes
+### Available CSS classes
 
 This is an exhaustive list of CSS classes which can be used to customize the Vizzly dashboard. We recommend combining this list
 with [searching through the elements using the inspector developer tool](https://developer.chrome.com/docs/devtools/dom/) to target
@@ -138,6 +194,15 @@ return (
 
 <VizzlyThemeClasses />
 </details>
+
+### Importing the CSS
+
+As you customize the Vizzly dashboard using CSS classes, you can import these styles in the idiomatic ways;
+
+- You can set the styles in the `head` tag of the HTML document.
+- As a separate CSS file referenced in the `head` tag of the HTML document.
+- Using a CSS in JS approach such as [styled-components](https://styled-components.com) to create global styles.
+
 
 ### Troubleshooting
 
