@@ -1,14 +1,12 @@
-import { useSSG } from 'nextra/ssg'
+import { useSSG } from "nextra/ssg";
 import { Code, Pre } from "nextra/components";
-
-
 
 const RemoteCodeBlock = (props: {
   name?: string;
   showLineNumbers?: boolean;
   fileUrl?: string;
 }) => {
-  const ssg = useSSG()
+  const ssg = useSSG();
 
   return (
     <>
