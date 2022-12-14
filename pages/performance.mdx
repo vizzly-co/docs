@@ -69,3 +69,23 @@ Therefore, if we were to mark the "Category" field with `"canBeUsedInSharedResul
 to optimize the performance of queries used to offer the global or local filter based on the "Category" field.
 
 </details>
+
+### Query engine
+
+#### Workload
+
+The docker image we provide does not do computationally heavy lifting. The noteworthy operations include validating JWTs and transforming Vizzly queries into the language your underlying database requires.
+
+#### Hardware considerations
+
+The recommended hardware requirements will depend on a number of different factors, including:
+
+- The number of concurrent users you expect to be viewing the dashboard.
+- How many charts a typical user has on their dashboard.
+- How many additional data controls exist on each chart.
+
+To increase performance, consider scaling horizontally by adding more containers running the Vizzly docker image, or vertically by provisioning larger compute resource.
+
+#### Resiliency
+
+The query engine in the docker image is stateless and so it can be easily scaled horizontally to reduce performance or resiliency concerns and easily auto-scaled on all major cloud providers if your traffic pattern is spiky.
