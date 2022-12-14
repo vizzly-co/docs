@@ -1,0 +1,23 @@
+**`PORT`**
+
+The default port the query engine runs on is port `8000`. You can change this using the `PORT` environment variable.
+
+**`VIZZLY_QUERY_ENGINE_HOST`**
+
+The protocol and host domain of the query engine. This excludes the base path which can be configured using the `VIZZLY_BASE_PATH` variable.
+For example `https://query.example.co` would be a valid query engine host value.
+
+This environment variable is required.
+
+**`VIZZLY_BASE_PATH`**
+
+This changes the base path of the Vizzly query engine. For example you might have a routing layer that matches requests for `/vizzly-query-engine/*`, and forwards them too the
+query engine. In which case, you'd set this value too `/vizzly-query-engine` so the requests match the path matchers in the query engine.
+
+This environment variable is not required, and defaults too `''`.
+
+**`VIZZLY_CONFIG_FILE`**
+
+Changes the path at which the config file resides inside the running container.
+
+This environment variable is not required, and defaults to `/etc/vizzly/vizzly.config.json`.

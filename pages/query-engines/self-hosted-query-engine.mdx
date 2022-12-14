@@ -451,66 +451,47 @@ to the docker container whilst provisioning the Google Cloud Run service to run 
 </Tab>
 </Tabs>
 
+import SharedEnvironmentVariables from "../../src/SharedEnvironmentVariables.mdx";
+
 ### Environment variables
 
-##### `PORT`
-
-The default port the query engine runs on is port `8000`. You can change this using the `PORT` environment variable.
-
-##### `VIZZLY_QUERY_ENGINE_HOST`
-
-The protocol and host domain of the query engine. This excludes the base path which can be configured using the `VIZZLY_BASE_PATH` variable.
-For example `https://query.example.co` would be a valid query engine host value.
-
-This environment variable is required.
-
-##### `VIZZLY_BASE_PATH`
-
-This changes the base path of the Vizzly query engine. For example you might have a routing layer that matches requests for `/vizzly-query-engine/*`, and forwards them too the
-query engine. In which case, you'd set this value too `/vizzly-query-engine` so the requests match the path matchers in the query engine.
-
-This environment variable is not required, and defaults too `''`.
-
-##### `VIZZLY_CONFIG_FILE`
-
-Changes the path at which the config file resides inside the running container.
-
-This environment variable is not required, and defaults to `/etc/vizzly/vizzly.config.json`.
+Some environment variables can be interpolated into the Vizzly config file. To see some examples of how this is done, [please check out our config examples](https://github.com/vizzly-co/examples/tree/main/config-examples).
 
 <Tabs items={["Postgres", "MariaDB", "ElasticSearch", "BigQuery"]}>
 <Tab>
+<SharedEnvironmentVariables />
 
-##### `VIZZLY_POSTGRES_PASSWORD`
+**`VIZZLY_POSTGRES_PASSWORD`**
 
 Set the password to use in the connection to your postgres database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_POSTGRES_PASSWORD}}"`.
 
-##### `VIZZLY_POSTGRES_DATABASE`
+**`VIZZLY_POSTGRES_DATABASE`**
 
 Set the name of the database to use in the connection to your postgres database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_POSTGRES_DATABASE}}"`.
 
-##### `VIZZLY_POSTGRES_USER`
+**`VIZZLY_POSTGRES_USER`**
 
 Set the username to use in the connection to your postgres database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_POSTGRES_USER}}"`.
 
-##### `VIZZLY_POSTGRES_HOST`
+**`VIZZLY_POSTGRES_HOST`**
 
 Set the host to use in the connection to your postgres database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_POSTGRES_HOST}}"`.
 
-##### `VIZZLY_POSTGRES_PORT`
+**`VIZZLY_POSTGRES_PORT`**
 
 Set the port to use in the connection to your postgres database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_POSTGRES_PORT}}"`.
 
-##### `PG_CONNECTION_STRING`
+**`PG_CONNECTION_STRING`**
 
 Set the connection credentials using a single connection string.
 
@@ -518,32 +499,33 @@ To use this value in your Vizzly config file, set the value of the field to be `
 
 </Tab>
 <Tab>
+<SharedEnvironmentVariables />
 
-##### `VIZZLY_MARIADB_PASSWORD`
+**`VIZZLY_MARIADB_PASSWORD`**
 
 Set the password to use in the connection to your mariadb database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_MARIADB_PASSWORD}}"`.
 
-##### `VIZZLY_MARIADB_DATABASE`
+**`VIZZLY_MARIADB_DATABASE`**
 
 Set the name of the database to use in the connection to your mariadb database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_MARIADB_DATABASE}}"`.
 
-##### `VIZZLY_MARIADB_USER`
+**`VIZZLY_MARIADB_USER`**
 
 Set the username to use in the connection to your mariadb database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_MARIADB_USER}}"`.
 
-##### `VIZZLY_MARIADB_HOST`
+**`VIZZLY_MARIADB_HOST`**
 
 Set the host to use in the connection to your mariadb database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_MARIADB_HOST}}"`.
 
-##### `VIZZLY_MARIADB_PORT`
+**`VIZZLY_MARIADB_PORT`**
 
 Set the port to use in the connection to your mariadb database.
 
@@ -551,37 +533,39 @@ To use this value in your Vizzly config file, set the value of the field to be `
 
 </Tab>
 <Tab>
-##### `VIZZLY_ELASTICSEARCH_CLOUD_ID`
+<SharedEnvironmentVariables />
+
+**`VIZZLY_ELASTICSEARCH_CLOUD_ID`**
 
 Set the cloud ID to use in the connection to your elasticsearch database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_ELASTICSEARCH_CLOUD_ID}}"`.
 
-##### `VIZZLY_ELASTICSEARCH_API_KEY`
+**`VIZZLY_ELASTICSEARCH_API_KEY`**
 
 Set the API key to use in the connection to your elasticsearch database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_ELASTICSEARCH_API_KEY}}"`.
 
-##### `VIZZLY_ELASTICSEARCH_NODE`
+**`VIZZLY_ELASTICSEARCH_NODE`**
 
 Set the node value to use in the connection to your elasticsearch database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_ELASTICSEARCH_NODE}}"`.
 
-##### `VIZZLY_ELASTICSEARCH_USERNAME`
+**`VIZZLY_ELASTICSEARCH_USERNAME`**
 
 Set the elasticsearch username to use in the connection to your elasticsearch database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_ELASTICSEARCH_USERNAME}}"`.
 
-##### `VIZZLY_ELASTICSEARCH_PASSWORD`
+**`VIZZLY_ELASTICSEARCH_PASSWORD`**
 
 Set the elasticsearch password to use in the connection to your elasticsearch database.
 
 To use this value in your Vizzly config file, set the value of the field to be `"{{VIZZLY_ELASTICSEARCH_PASSWORD}}"`.
 
-##### `VIZZLY_ELASTICSEARCH_API_KEY_ID`
+**`VIZZLY_ELASTICSEARCH_API_KEY_ID`**
 
 Set the elasticsearch API key ID to use in the connection to your elasticsearch database.
 
@@ -589,7 +573,8 @@ To use this value in your Vizzly config file, set the value of the field to be `
 
 </Tab>
 <Tab>
-##### `VIZZLY_BIGQUERY_PROJECT_ID`
+<SharedEnvironmentVariables />
+**`VIZZLY_BIGQUERY_PROJECT_ID`**
 
 Set the Big Query project ID to use in the connection to your bigquery database.
 
@@ -597,7 +582,7 @@ To use this value in your Vizzly config file, set the value of the field to be `
 
 </Tab>
 <Tab>
-##### `VIZZLY_BIGQUERY_REGION`
+**`VIZZLY_BIGQUERY_REGION`**
 
 Set the Big Query region to use in the connection to your bigquery database.
 
