@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Vizzly documentation",
   "scripts": {
-    "dev": "next dev",
+    "dev": "PORT=3007 next dev",
     "build": "next build",
     "start": "next start",
     "format": "prettier pages/**/* components/**/* -w"
