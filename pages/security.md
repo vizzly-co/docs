@@ -21,3 +21,12 @@ The next step is saving the contents of your public key, (default file name is `
 
 ### Generating the access tokens
 See the [identity callback documentation](/callbacks/identity) for details on how to generate access tokens to authorize data and dashboard access.
+
+
+### SSL termination
+
+The query engine runs by default without SSL enabled. Therefore to deploy this securely, you will need to terminate SSL at a layer in-front of
+the query engine, and then only allow traffic from this layer to reach the query engine. For example, on cloud providers you can terminate the SSL on the
+load balancer and then setup security groups to only allow traffic from that load balancer to reach the query engine.
+
+If you require terminating SSL on the query engine itself, please get in-touch.
