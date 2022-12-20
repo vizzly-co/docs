@@ -3,13 +3,22 @@ You can set environment variables to install the Vizzly config from public or pr
 **VIZZLY_CONFIG_GITHUB_REPO**
 
 The `VIZZLY_CONFIG_GITHUB_REPO` environment variable is required, and specifies the organisation and name of the repository to search
-in for the Vizzly config in the format `<<organisation/user name>>/<<repository name>>`.
-For example, you might set `VIZZLY_CONFIG_GITHUB_REPO=vizzly-co/examples`
+in for the Vizzly config in the format
+```
+<<organisation>>/<<repository name>>
+```
+For example, you might set
+```
+VIZZLY_CONFIG_GITHUB_REPO=vizzly-co/examples
+```
 
 **VIZZLY_CONFIG_GITHUB_PATH**
 
 The `VIZZLY_CONFIG_GITHUB_PATH` environment variable is required and specifies the path from the base directory of the repository, to the vizzly config file.
-For example, you might set `VIZZLY_CONFIG_GITHUB_PATH=/some-directory/sub-directory/vizzly.config.json`
+For example, you might set
+```
+VIZZLY_CONFIG_GITHUB_PATH=/some-directory/sub-directory/vizzly.config.json
+```
 
 **VIZZLY_CONFIG_GITHUB_TOKEN**
 
