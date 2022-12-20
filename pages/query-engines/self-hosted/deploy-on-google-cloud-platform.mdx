@@ -1,3 +1,34 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+import InstallConfigFromGitHub from "../../../src/InstallConfigFromGitHub.mdx";
+
 # Deploy Vizzly on Google Cloud Platform (GCP)
 
-...
+To run the Vizzly query engine on GCP, we recommend using [Google's Cloud Run product](https://cloud.google.com/run). You'll need to set the number of minimum instances to at least `1`.
+
+### GCP Query Engine URI
+```
+eu.gcr.io/vizzly/query-engine
+```
+
+### Installing the Vizzly config
+
+<Tabs items={["GitHub", "Google Secret Manager"]}>
+<Tab>
+
+<InstallConfigFromGitHub />
+</Tab>
+<Tab>
+To add the config and GCP service account credentials to the docker image, we suggest uploading these files to the Google Secret Manager. You can then mount these files
+to the docker container whilst provisioning the Google Cloud Run service to run Vizzly, as shown in the screenshots below;
+
+<details>
+  <summary>Mounting the service account config</summary>
+  <img src="/img/google-cloud-run-setting-service-account.png" />
+</details>
+
+<details>
+  <summary>Mounting the Vizzly config</summary>
+  <img src="/img/google-cloud-run-setting-vizzly-config.png" />
+</details>
+</Tab>
+</Tabs>

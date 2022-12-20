@@ -1,4 +1,5 @@
 import { Tab, Tabs } from "nextra-theme-docs";
+import InstallConfigFromGitHub from "../../../src/InstallConfigFromGitHub.mdx";
 
 # Deploy Vizzly on Amazon Web Services (AWS)
 
@@ -18,22 +19,7 @@ Upon startup, the Vizzly query engine can be configured to install the config fr
 
 <Tabs items={["GitHub", "S3"]}>
 <Tab>
-You can set environment variables to install the Vizzly config from public or private github repositories.
-
-**VIZZLY_CONFIG_GITHUB_REPO**
-
-The `VIZZLY_CONFIG_GITHUB_REPO` environment variable is required, and specifies the organisation and name of the repository to search
-in for the Vizzly config in the format `<<organisation/user name>>/<<repository name>>`.
-For example, you might set `VIZZLY_CONFIG_GITHUB_REPO=vizzly-co/examples`
-
-**VIZZLY_CONFIG_GITHUB_PATH**
-
-The `VIZZLY_CONFIG_GITHUB_PATH` environment variable is required and specifies the path from the base directory of the repository, to the vizzly config file.
-For example, you might set `VIZZLY_CONFIG_GITHUB_PATH=/some-directory/sub-directory/vizzly.config.json`
-
-**VIZZLY_CONFIG_GITHUB_TOKEN**
-
-The `VIZZLY_CONFIG_GITHUB_TOKEN` variable is an optional GitHub access token, but it is required if your repository is private.
+<InstallConfigFromGitHub />
 </Tab>
 <Tab>
 You can also download the Vizzly config file from S3 by setting both `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment
