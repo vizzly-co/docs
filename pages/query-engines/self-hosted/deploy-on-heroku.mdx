@@ -1,3 +1,23 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+import InstallConfigFromGitHub from "../../../src/InstallConfigFromGitHub.mdx";
+
 # Deploy Vizzly on Heroku
 
-...
+Vizzly makes heroku deployments easy by supporting the `DATABASE_URL` environment variable which you can
+interpolate into your Vizzly config by using the string `"{{DATABASE_URL}}"`.
+
+### Heroku Query Engine URI
+
+```
+ghcr.io/vizzly-co/query-engine:latest
+```
+
+### Installing the Vizzly config
+
+Upon startup, the Vizzly query engine can be configured to install the config from various sources.
+
+<Tabs items={["GitHub"]}>
+  <Tab>
+    <InstallConfigFromGitHub />
+  </Tab>
+</Tabs>
