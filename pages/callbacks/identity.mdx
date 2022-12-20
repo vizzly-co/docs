@@ -29,12 +29,6 @@ export const getStaticProps = async () => {
 The purpose of the identity callback is to generate two JSON web tokens (JWTs) that provide access to the dashboard configuration, and access to the user's data.
 These keys are signed with your private key on your server, and validated with the public key you upload to Vizzly, and provide in the Vizzly config of the Vizzly Query Engine.
 
-## Client side
-
-The client side implementation of the identity callback can be as simple as the following;
-
-<RemoteCodeBlock name="appjs" />
-
 ## Server side token generation
 
 <Tabs items={["NodeJs", "Python3", "Request a language"]}>
@@ -172,3 +166,9 @@ If your private key becomes compromised, then one way to reduce the impact of th
 ### Generating private and public keys
 
 For help generating the public and private keys, please see the [security docs](/security).
+
+## Client side
+
+The client side implementation of the identity callback can be as simple as the following;
+
+<RemoteCodeBlock name="appjs" />
