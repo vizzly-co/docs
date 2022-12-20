@@ -411,46 +411,6 @@ type Operator =
 }
 ```
 
-### Cloud deployment
-
-<Tabs items={["Amazon Web Services (AWS)", "Google Gloud Platform (GCP)"]}>
-<Tab>
-The [latest version of the Vizzly query engine can be found here](https://github.com/vizzly-co/ts/pkgs/container/query-engine).
-
-The Vizzly query engine runs on AWS by downloading the `vizzly.config.json` file securely from an AWS S3 bucket upon startup. For this to work, you will specify the
-`VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment variables at runtime, and ensure the docker image runs with the necessary permissions
-required to download objects from the S3 bucket with the config file in.
-
-For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=secure-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=eu-west-2`.
-
-This will download all the files in the bucket `secure-vizzly-config` in the region `VIZZLY_CONFIG_S3_BUCKET_REGION`, and save them to `/etc/vizzly`, so
-naming the config file `vizzly.config.json` will download the config to the correct place by default.
-
-Please contact us if you'd like read-only access to our AWS example account to see a working example!
-
-</Tab>
-<Tab>
-
-To run the Vizzly query engine on GCP, we recommend using [Google's Cloud Run product](https://cloud.google.com/run).
-
-The Vizzly container image URL is `eu.gcr.io/vizzly/query-engine`, and it runs on port `8000`. You'll also need to set the number of minimum instances to at least `1`
-to avoid the "cold start time".
-
-To add the config and GCP service account credentials to the docker image, we suggest uploading these files to the Google Secret Manager. You can then mount these files
-to the docker container whilst provisioning the Google Cloud Run service to run Vizzly, as shown in the screenshots below;
-
-<details>
-  <summary>Mounting the service account config</summary>
-  <img src="/img/google-cloud-run-setting-service-account.png" />
-</details>
-
-<details>
-  <summary>Mounting the Vizzly config</summary>
-  <img src="/img/google-cloud-run-setting-vizzly-config.png" />
-</details>
-</Tab>
-</Tabs>
-
 import SharedEnvironmentVariables from "../../src/SharedEnvironmentVariables.mdx";
 
 ### Environment variables

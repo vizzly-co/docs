@@ -1,3 +1,17 @@
 # Deploy Vizzly on localhost (Docker compose)
 
-...
+To run Vizzly locally in a docker-compose setup, add the following to your `docker-compose.yml` file;
+
+```
+version: '3.1'
+
+services:
+  vizzly:
+    image: ghcr.io/vizzly-co/query-engine:latest
+    ports:
+      - 8000:8000
+    volumes:
+      - ./datadir:/etc/vizzly
+```
+
+where you have the `vizzly.config.json` file in the `datadir` directory.

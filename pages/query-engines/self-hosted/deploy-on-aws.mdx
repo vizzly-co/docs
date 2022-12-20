@@ -10,11 +10,13 @@ AWS offers multiple products to run containers in the cloud, which are all suppo
 - [AWS Elastic Container Service](https://aws.amazon.com/ecs/)
 
 ### AWS Query Engine URI
+
 ```
 public.ecr.aws/w4r1h9k0/vizzly-query-engine
 ```
 
 ### Installing the Vizzly config
+
 Upon startup, the Vizzly query engine can be configured to install the config from various sources.
 
 <Tabs items={["GitHub", "S3"]}>
@@ -29,5 +31,6 @@ For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=my-app-vizzly-config` and `VIZZLY_CON
 
 This will download all the files in the bucket `my-app-vizzly-config` in the region `us-east-1` to `/etc/vizzly`.
 Therefore, naming the config file `vizzly.config.json` will download the config to the correct place by default.
+
 </Tab>
 </Tabs>
