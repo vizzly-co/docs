@@ -1,0 +1,6 @@
+{
+  "deploy-on-aws": "Deploy to AWS",
+  "deploy-on-google-cloud-platform": "Deploy to Google Cloud Platform",
+  "deploy-on-docker-compose": "Deploy on localhost",
+  "deploy-on-heroku": "Deploy to Heroku"
+}

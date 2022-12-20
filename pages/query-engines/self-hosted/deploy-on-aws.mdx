@@ -1,0 +1,47 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Deploy Vizzly on Amazon Web Services (AWS)
+
+AWS offers multiple products to run containers in the cloud, which are all supported by Vizzly. Some examples include;
+
+- [AWS App Runner](https://aws.amazon.com/apprunner/)
+- [AWS Fargate](https://aws.amazon.com/fargate/)
+- [AWS Elastic Container Service](https://aws.amazon.com/ecs/)
+
+### AWS Query Engine URI
+```
+public.ecr.aws/w4r1h9k0/vizzly-query-engine
+```
+
+### Installing the Vizzly config
+Upon startup, the Vizzly query engine can be configured to install the config from various sources.
+
+<Tabs items={["GitHub", "S3"]}>
+<Tab>
+You can set environment variables to install the Vizzly config from public or private github repositories.
+
+**VIZZLY_CONFIG_GITHUB_REPO**
+
+The `VIZZLY_CONFIG_GITHUB_REPO` environment variable is required, and specifies the organisation and name of the repository to search
+in for the Vizzly config in the format `<<organisation/user name>>/<<repository name>>`.
+For example, you might set `VIZZLY_CONFIG_GITHUB_REPO=vizzly-co/examples`
+
+**VIZZLY_CONFIG_GITHUB_PATH**
+
+The `VIZZLY_CONFIG_GITHUB_PATH` environment variable is required and specifies the path from the base directory of the repository, to the vizzly config file.
+For example, you might set `VIZZLY_CONFIG_GITHUB_PATH=/some-directory/sub-directory/vizzly.config.json`
+
+**VIZZLY_CONFIG_GITHUB_TOKEN**
+
+The `VIZZLY_CONFIG_GITHUB_TOKEN` variable is an optional GitHub access token, but it is required if your repository is private.
+</Tab>
+<Tab>
+You can also download the Vizzly config file from S3 by setting both `VIZZLY_CONFIG_S3_BUCKET_NAME` and `VIZZLY_CONFIG_S3_BUCKET_REGION` environment
+variables at runtime, and ensure the docker image runs with the necessary permissions required to download objects from the S3 bucket with the config file in.
+
+For example, `VIZZLY_CONFIG_S3_BUCKET_NAME=my-app-vizzly-config` and `VIZZLY_CONFIG_S3_BUCKET_REGION=us-east-1`.
+
+This will download all the files in the bucket `my-app-vizzly-config` in the region `us-east-1` to `/etc/vizzly`.
+Therefore, naming the config file `vizzly.config.json` will download the config to the correct place by default.
+</Tab>
+</Tabs>
