@@ -6,8 +6,6 @@ const withNextra = require("nextra")({
 
 const nextJsConfig = {
   async redirects () {
-    console.log("redirects");
-
     return [
       {
         source: '/implement-vizzly',
