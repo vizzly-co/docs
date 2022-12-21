@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Create React App
 
 To get started with the [Vizzly Dashboard](https://www.npmjs.com/package/@vizzly/dashboard) component, this tutorial will take you through using [Create React App (CRA)](https://github.com/facebook/create-react-app),

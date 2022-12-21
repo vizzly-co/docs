@@ -1,7 +1,3 @@
----
-sidebar_position: 11
----
-
 # Security
 
 Keeping your data, and your customer's data secure is our highest priority. With this in-mind, we require that the identity config is signed using a private key, so that we can verify the integrity and origin of the config.

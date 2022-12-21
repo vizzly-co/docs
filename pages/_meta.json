@@ -1,5 +1,6 @@
 {
   "index": "Docs",
+  "get-started": "Get started",
   "react-component": "React Component",
   "theme": "Custom Themes",
   "query-engines": "Query Engines",
@@ -7,7 +8,6 @@
   "tutorials": "Tutorials",
   "feature-toggles": "Feature Toggles",
   "manage-dashboards": "Managing Dashboards",
-  "implement-vizzly": "Implementing Vizzly",
   "security": "Security",
   "parameters": "Parameters",
   "performance": "Performance",

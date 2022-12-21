@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # React Component
 
 There is a single react component that renders the dashboard. The method parameter required depends on the value of the `type` property you provide it.
@@ -9,7 +5,8 @@ There is a single react component that renders the dashboard. The method paramet
 The available types include are `in-browser`, `self-hosted` and `custom`.
 
 ### Self-hosted
-Fetches the query results from a provisioned Vizzly query engined docker image.
+Results are fetched from the Vizzly query engine deployed to your cloud environment.
+The code snippet below is ready to be copied & pasted into your project!
 
 ```jsx
 import Vizzly from '@vizzly/dashboard';
@@ -18,48 +15,55 @@ import Vizzly from '@vizzly/dashboard';
   type='self-hosted'
 
   // e.g 'https://analytics.example.com'
-  vizzlyDockerImageEndpoint: string;
+  vizzlyDockerImageEndpoint='<< The endpoint of your Vizzly query engine >>'
 
   // https://docs.vizzly.co/callbacks/identity
-  identityCallback: VizzlyComponents.identityCallback;
+  identityCallback={async () => {
+
+    // Opens a guide... replace this when you're ready!
+    throw new Vizzly.NewVizzlyImplementation();
+
+  }}
 />
 ```
-
-### In-browser
-Loads all data into the browser, and runs the queries in the browser.
-
-```jsx
-import Vizzly from '@vizzly/dashboard';
-
-<Vizzly.Dashboard
-  type='in-browser'
-
-  // https://docs.vizzly.co/callbacks/identity
-  identityCallback: VizzlyComponents.identityCallback;
-
-  // https://docs.vizzly.co/callbacks/loadDataCallback
-  loadDataCallback: VizzlyComponents.loadDataCallback;
-
-  // https://docs.vizzly.co/callbacks/loadDataSetsCallback
-  loadDataSetsCallback: VizzlyComponents.loadDataSetsCallback;
-/>
-```
-
 
 ### Custom
-Runs a custom `runQueriesCallback` which translates the queries into results.
+If you have complex query or authentication requirements, then this option is for you.
+The following React code is mixed with some typescript type definitions to get you started.
 
 ```jsx
 import Vizzly from '@vizzly/dashboard';
 
 <Vizzly.Dashboard
-  type='custom'
+  type: 'custom'
 
   // https://docs.vizzly.co/callbacks/identity
   identityCallback: VizzlyComponents.identityCallback;
 
   // https://docs.vizzly.co/callbacks/runQueriesCallback
   runQueriesCallback: VizzlyComponents.runQueriesCallback;
+
+  // https://docs.vizzly.co/callbacks/loadDataSetsCallback
+  loadDataSetsCallback: VizzlyComponents.loadDataSetsCallback;
+/>
+```
+
+### In-browser
+
+If each of your users have very small amounts of data `< 3mb` in total, then this option is for you.
+The following React code is mixed with some typescript type definitions to get you started.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+<Vizzly.Dashboard
+  type: 'in-browser'
+
+  // https://docs.vizzly.co/callbacks/identity
+  identityCallback: VizzlyComponents.identityCallback;
+
+  // https://docs.vizzly.co/callbacks/loadDataCallback
+  loadDataCallback: VizzlyComponents.loadDataCallback;
 
   // https://docs.vizzly.co/callbacks/loadDataSetsCallback
   loadDataSetsCallback: VizzlyComponents.loadDataSetsCallback;
