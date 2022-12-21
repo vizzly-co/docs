@@ -4,4 +4,16 @@ const withNextra = require("nextra")({
   defaultShowCopyCode: true,
 });
 
-module.exports = withNextra();
+const nextJsConfig = {
+  async redirects () {
+    return [
+      {
+        source: '/implement-vizzly',
+        destination: '/get-started',
+        permanent: false
+      }
+    ]
+  }
+};
+
+module.exports = withNextra(nextJsConfig);
