@@ -1,3 +1,4 @@
 {
-  "frontend": "Frontend"
+  "frontend": "Frontend",
+  "query-engine": "Query Engine"
 }
