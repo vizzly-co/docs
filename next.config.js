@@ -11,6 +11,11 @@ const nextJsConfig = {
         source: '/implement-vizzly',
         destination: '/get-started',
         permanent: false
+      },
+      {
+        source: '/query-engines/self-hosted-query-engine',
+        destination: '/query-engines/self-hosted',
+        permanent: false
       }
     ]
   }

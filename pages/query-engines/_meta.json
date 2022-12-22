@@ -1,5 +1,5 @@
 {
-  "self-hosted-query-engine": "Self-hosted",
-  "in-browser": "In-browser",
-  "custom": "Custom"
+  "self-hosted": "Self-hosted",
+  "custom": "Custom",
+  "in-browser": "In-browser"
 }
