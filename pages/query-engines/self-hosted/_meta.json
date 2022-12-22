@@ -1,6 +1,8 @@
 {
-  "deploy-on-aws": "Deploy to AWS",
-  "deploy-on-google-cloud-platform": "Deploy to Google Cloud Platform",
+  "deploy-on-aws": "Deploy to Amazon Web Services (AWS)",
+  "deploy-on-google-cloud-platform": "Deploy to Google Cloud Platform (GCP)",
   "deploy-on-docker-compose": "Deploy on localhost",
-  "deploy-on-heroku": "Deploy to Heroku"
+  "deploy-on-heroku": "Deploy to Heroku",
+  "github-actions-ci": "GitHub Actions CI",
+  "performance": "Performance"
 }

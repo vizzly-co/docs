@@ -7,7 +7,7 @@ you could provide a completely static dashboard, or one without the component li
 
 ### Usage
 
-Feature toggles are provided through the `featureToggles` property in the React component. Below is a list of 
+Feature toggles are provided through the `featureToggles` property in the React component. Below is a list of
 values which you have control over.
 
 ```tsx
@@ -24,35 +24,44 @@ values which you have control over.
     canConfigureLocalFilters: boolean;
   }}
 
-  // ... other props - see https://docs.vizzly.co/react-component
+  // ... other props - see https://docs.vizzly.co/dashboard
 />
 ```
 
 ### Property explanations
 
 #### `showGlobalFilters`
+
 Do you want your users to see the global filters?
 
 #### `canEditComponentLibrary`
+
 Can your users edit components in the component library?
 
 #### `canUseCalculatedFields`
+
 Can your users configure calculated fields based off the data you make available to them?
 
 #### `canUseComponentLibrary`
+
 Do you want to enable the component library feature of Vizzly?
 
 #### `canCreateStandaloneComponents`
+
 Can your users create standalone components, which are independent from the component library?
 
 #### `canDownloadComponentData`
+
 Can your users download the data that powers each of the components on the dashboard?
 
 #### `canEditComponentsOnDashboard`
+
 Can your users edit components which have been added to the dashboard? This is useful if you want to provide a static dashboard.
 
 #### `canRemoveComponentsFromDashboard`
+
 Can your users remove components from the dashboard? This is useful if you want to provide a static dashboard.
 
 #### `canConfigureLocalFilters`
+
 Can your users modify the local filter set on each of the components?

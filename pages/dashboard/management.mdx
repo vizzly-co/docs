@@ -1,5 +1,5 @@
-import RemoteCodeBlock from "../components/RemoteCodeBlock";
-import { getRemoteCodeSnippet } from "../src/remoteCode";
+import RemoteCodeBlock from "../../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../../src/remoteCode";
 
 export const getStaticProps = async () => {
   const [code] = await Promise.all([

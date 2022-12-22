@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "nextra-theme-docs";
-import RemoteCodeBlock from "../../components/RemoteCodeBlock";
-import { getRemoteCodeSnippet } from "../../src/remoteCode";
+import RemoteCodeBlock from "../../../components/RemoteCodeBlock";
+import { getRemoteCodeSnippet } from "../../../src/remoteCode";
 
 export const getStaticProps = async () => {
   const [appjs, identity] = await Promise.all([
