@@ -22,7 +22,7 @@ export const Commands = () => (
   <>
     {cliCommands.map(command => (
       <div>
-        <h5>vizzly {command.name}</h5>
+        <h5 id={command.name}>vizzly {command.name}</h5>
         <p>{command.description}</p>
         {command.options.length > 0 && (<pre>
           {command.options.map((option, optionIndex) => (
