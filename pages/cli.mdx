@@ -1,0 +1,58 @@
+import cliCommands from "../src/cliCommands";
+
+# Vizzly CLI
+
+The Vizzly CLI speeds up integrating with Vizzly. Here's how to install it, and the commands that are available for use;
+
+### Install
+
+```
+npm i @vizzly/cli -g
+```
+
+### Commands
+
+export const Commands = () => (
+  <>
+    {cliCommands.map(command => (
+      <div>
+        <h5>vizzly {command.name}</h5>
+        <p>{command.description}</p>
+        {command.options.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Flags</th>
+                <th>Description</th>
+                <th>Required</th>
+                <th>Default</th>
+                <th>Choices</th>
+              </tr>
+            </thead>
+            <tbody>
+            {command.options.map(option => (
+              <tr>
+                <td><code>{option.flags}</code></td>
+                <td>{option.description}</td>
+                <td>{option.mandatory ? 'Required' : 'Optional'}</td>
+                <td>{option.defaultValue}</td>
+                <td>
+                  {(option.argChoices || []).map(choice => (
+                    <>
+                      <code>{choice}</code>
+                      <br />
+                    </>
+                  ))}
+                </td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+          )}
+        <hr />
+      </div>
+    ))}
+  </>
+);
+
+<Commands />
