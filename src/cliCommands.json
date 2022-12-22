@@ -1,1 +1,395 @@
-[{"name":"generate-identity-signature","description":"Deprecated. Please use `access-tokens` instead.","options":[{"flags":"-o, --organisation-id <type>","description":"ID of your organisation","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-o","long":"--organisation-id","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-d, --dashboard-id <type>","description":"Live dashboard ID","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-d","long":"--dashboard-id","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-u, --user-reference <type>","description":"An ID to identify the current user","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-u","long":"--user-reference","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-t, --type <type>","description":"Either 'editor' or 'standard'","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-t","long":"--type","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-pk, --private-key <type>","description":"Path to your private key.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-pk","long":"--private-key","negate":false,"defaultValue":"vizzly-private.pem","hidden":false,"conflictsWith":[]}]},{"name":"access-tokens","description":"Generate a test identity signature.","options":[{"flags":"-o, --organisation-id <type>","description":"ID of your organisation","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-o","long":"--organisation-id","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-d, --dashboard-id <type>","description":"Live dashboard ID","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-d","long":"--dashboard-id","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-u, --user-reference <type>","description":"An ID to identify the current user","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-u","long":"--user-reference","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-t, --type <type>","description":"Either 'editor' or 'standard'","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-t","long":"--type","negate":false,"hidden":false,"conflictsWith":[]},{"flags":"-pk, --private-key <type>","description":"Path to your private key.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-pk","long":"--private-key","negate":false,"defaultValue":"vizzly-private.pem","hidden":false,"conflictsWith":[]}]},{"name":"sign-in","description":"Sign into Vizzly.","options":[{"flags":"-t, --token <type>","description":"Single-use auth token found at app.vizzly.co","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-t","long":"--token","negate":false,"hidden":false,"conflictsWith":[]}]},{"name":"create-live-dashboard","description":"Create a new live dashboard.","options":[]},{"name":"upload-public-key","description":"Upload your public key to your Vizzly account.","options":[{"flags":"-pub, --public-key <type>","description":"Path to your public key.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-pub","long":"--public-key","negate":false,"defaultValue":"vizzly-public.pem","hidden":false,"conflictsWith":[]}]},{"name":"validate","description":"Validates a Vizzly config","options":[{"flags":"-c, --config <type>","description":"Path to your Vizzly config.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-c","long":"--config","negate":false,"hidden":false,"conflictsWith":[]}]},{"name":"create-key-pair","description":"Create public and private key pairs","options":[{"flags":"-p, --prefix <type>","description":"Prefix of the generated public and private keys.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-p","long":"--prefix","negate":false,"hidden":false,"conflictsWith":[]}]},{"name":"config-from-sql","description":"Pass in a SQL statement to generate the fields and joins for your config","options":[{"flags":"-s, --sql <type>","description":"SQL to be used to build the fields.","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-s","long":"--sql","negate":false,"hidden":false,"conflictsWith":[]}]},{"name":"list-dashboards","description":"List dashboards in your account.","options":[]},{"name":"init-config","description":"Create skeleton of the Vizzly config file.","options":[{"flags":"-i, --integration <integration>","description":"Integration type","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-i","long":"--integration","negate":false,"hidden":false,"argChoices":["mariadb","postgres","bigquery","elasticsearch"],"conflictsWith":[]},{"flags":"-pub, --public-key <type>","description":"Path to your public key.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-pub","long":"--public-key","negate":false,"defaultValue":"vizzly-public.pem","hidden":false,"conflictsWith":[]}]},{"name":"setup","description":"Create a Vizzly project.","options":[{"flags":"-i, --integration <integration>","description":"Integration type","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-i","long":"--integration","negate":false,"hidden":false,"argChoices":["mariadb","postgres","bigquery","elasticsearch"],"conflictsWith":[]},{"flags":"-pub, --public-key <type>","description":"Path to your public key.","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-pub","long":"--public-key","negate":false,"defaultValue":"vizzly-public.pem","hidden":false,"conflictsWith":[]}]},{"name":"docs","description":"Open the Vizzly docs.","options":[]},{"name":"init-frontend","description":"Create a templated frontend Vizzly app.","options":[{"flags":"-n, --name <name>","description":"Name of the frontend project","required":true,"optional":false,"variadic":false,"mandatory":false,"short":"-n","long":"--name","negate":false,"defaultValue":"vizzly-frontend","hidden":false,"conflictsWith":[]},{"flags":"-t, --type <type>","description":"Type","required":true,"optional":false,"variadic":false,"mandatory":true,"short":"-t","long":"--type","negate":false,"hidden":false,"argChoices":["react"],"conflictsWith":[]}]},{"name":"commands-as-json","description":"Prints the available commands in JSON format","options":[]}]
+[
+  {
+    "name": "generate-identity-signature",
+    "description": "Deprecated. Please use `access-tokens` instead.",
+    "options": [
+      {
+        "flags": "-o, --organisation-id <type>",
+        "description": "ID of your organisation",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-o",
+        "long": "--organisation-id",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-d, --dashboard-id <type>",
+        "description": "Live dashboard ID",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-d",
+        "long": "--dashboard-id",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-u, --user-reference <type>",
+        "description": "An ID to identify the current user",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-u",
+        "long": "--user-reference",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-t, --type <type>",
+        "description": "Either 'editor' or 'standard'",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-t",
+        "long": "--type",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-pk, --private-key <type>",
+        "description": "Path to your private key.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-pk",
+        "long": "--private-key",
+        "negate": false,
+        "defaultValue": "vizzly-private.pem",
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "access-tokens",
+    "description": "Generate a test identity signature.",
+    "options": [
+      {
+        "flags": "-o, --organisation-id <type>",
+        "description": "ID of your organisation",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-o",
+        "long": "--organisation-id",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-d, --dashboard-id <type>",
+        "description": "Live dashboard ID",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-d",
+        "long": "--dashboard-id",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-u, --user-reference <type>",
+        "description": "An ID to identify the current user",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-u",
+        "long": "--user-reference",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-t, --type <type>",
+        "description": "Either 'editor' or 'standard'",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-t",
+        "long": "--type",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-pk, --private-key <type>",
+        "description": "Path to your private key.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-pk",
+        "long": "--private-key",
+        "negate": false,
+        "defaultValue": "vizzly-private.pem",
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "sign-in",
+    "description": "Sign into Vizzly.",
+    "options": [
+      {
+        "flags": "-t, --token <type>",
+        "description": "Single-use auth token found at app.vizzly.co",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-t",
+        "long": "--token",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "create-live-dashboard",
+    "description": "Create a new live dashboard.",
+    "options": []
+  },
+  {
+    "name": "upload-public-key",
+    "description": "Upload your public key to your Vizzly account.",
+    "options": [
+      {
+        "flags": "-pub, --public-key <type>",
+        "description": "Path to your public key.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-pub",
+        "long": "--public-key",
+        "negate": false,
+        "defaultValue": "vizzly-public.pem",
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "validate",
+    "description": "Validates a Vizzly config",
+    "options": [
+      {
+        "flags": "-c, --config <type>",
+        "description": "Path to your Vizzly config.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-c",
+        "long": "--config",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "create-key-pair",
+    "description": "Create public and private key pairs",
+    "options": [
+      {
+        "flags": "-p, --prefix <type>",
+        "description": "Prefix of the generated public and private keys.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-p",
+        "long": "--prefix",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "data-set-from-sql",
+    "description": "Pass in a SQL statement to generate a data set for your config",
+    "options": [
+      {
+        "flags": "-i, --integration <integration>",
+        "description": "Integration type",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-i",
+        "long": "--integration",
+        "negate": false,
+        "hidden": false,
+        "argChoices": [
+          "mariadb",
+          "postgres",
+          "bigquery",
+          "elasticsearch"
+        ],
+        "conflictsWith": []
+      },
+      {
+        "flags": "-s, --sql <type>",
+        "description": "SQL to be used to build the fields.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-s",
+        "long": "--sql",
+        "negate": false,
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "list-dashboards",
+    "description": "List dashboards in your account.",
+    "options": []
+  },
+  {
+    "name": "init-config",
+    "description": "Create skeleton of the Vizzly config file.",
+    "options": [
+      {
+        "flags": "-i, --integration <integration>",
+        "description": "Integration type",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-i",
+        "long": "--integration",
+        "negate": false,
+        "hidden": false,
+        "argChoices": [
+          "mariadb",
+          "postgres",
+          "bigquery",
+          "elasticsearch"
+        ],
+        "conflictsWith": []
+      },
+      {
+        "flags": "-pub, --public-key <type>",
+        "description": "Path to your public key.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-pub",
+        "long": "--public-key",
+        "negate": false,
+        "defaultValue": "vizzly-public.pem",
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "setup",
+    "description": "Create a Vizzly project.",
+    "options": [
+      {
+        "flags": "-i, --integration <integration>",
+        "description": "Integration type",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-i",
+        "long": "--integration",
+        "negate": false,
+        "hidden": false,
+        "argChoices": [
+          "mariadb",
+          "postgres",
+          "bigquery",
+          "elasticsearch"
+        ],
+        "conflictsWith": []
+      },
+      {
+        "flags": "-pub, --public-key <type>",
+        "description": "Path to your public key.",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-pub",
+        "long": "--public-key",
+        "negate": false,
+        "defaultValue": "vizzly-public.pem",
+        "hidden": false,
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "docs",
+    "description": "Open the Vizzly docs.",
+    "options": []
+  },
+  {
+    "name": "init-frontend",
+    "description": "Create a templated frontend Vizzly app.",
+    "options": [
+      {
+        "flags": "-n, --name <name>",
+        "description": "Name of the frontend project",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": false,
+        "short": "-n",
+        "long": "--name",
+        "negate": false,
+        "defaultValue": "vizzly-frontend",
+        "hidden": false,
+        "conflictsWith": []
+      },
+      {
+        "flags": "-t, --type <type>",
+        "description": "Type",
+        "required": true,
+        "optional": false,
+        "variadic": false,
+        "mandatory": true,
+        "short": "-t",
+        "long": "--type",
+        "negate": false,
+        "hidden": false,
+        "argChoices": [
+          "react"
+        ],
+        "conflictsWith": []
+      }
+    ]
+  },
+  {
+    "name": "commands-as-json",
+    "description": "Prints the available commands in JSON format",
+    "options": []
+  }
+]
