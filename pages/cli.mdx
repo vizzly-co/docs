@@ -18,37 +18,18 @@ export const Commands = () => (
       <div>
         <h5>vizzly {command.name}</h5>
         <p>{command.description}</p>
-        {command.options.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>Flags</th>
-                <th>Description</th>
-                <th>Required</th>
-                <th>Default</th>
-                <th>Choices</th>
-              </tr>
-            </thead>
-            <tbody>
-            {command.options.map(option => (
-              <tr>
-                <td><code>{option.flags}</code></td>
-                <td>{option.description}</td>
-                <td>{option.mandatory ? 'Required' : 'Optional'}</td>
-                <td>{option.defaultValue}</td>
-                <td>
-                  {(option.argChoices || []).map(choice => (
-                    <>
-                      <code>{choice}</code>
-                      <br />
-                    </>
-                  ))}
-                </td>
-              </tr>
+        {command.options.length > 0 && (<pre>
+          {command.options.map((option, optionIndex) => (
+            <>
+              {'\t'} {option.flags}<br />
+              {'\t'} {option.mandatory ? 'Required' : 'Optional'}.{' '}{option.description}
+              {option.defaultValue ? `\n\t Default: ${option.defaultValue}` : ''}
+              {option.argChoices ? `\n\t Choices: ${option.argChoices.join(', ')}` : ''}
+
+              {command.options[optionIndex + 1] && '\n\n'}
+              </>
             ))}
-            </tbody>
-          </table>
-          )}
+        </pre>)}
         <hr />
       </div>
     ))}
