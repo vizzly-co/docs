@@ -8,6 +8,11 @@ const nextJsConfig = {
   async redirects () {
     return [
       {
+        source: '/tutorials/frontend/create-react-app',
+        destination: '/get-started/frontend/create-react-app',
+        permanent: false
+      },
+      {
         source: '/implement-vizzly',
         destination: '/get-started',
         permanent: false
