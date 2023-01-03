@@ -3,7 +3,7 @@ import * as shiki from "shiki";
 export async function getRemoteCodeSnippet({
   lang,
   url,
-  lines
+  lines,
 }: {
   url: string;
   lang: string;
@@ -15,7 +15,7 @@ export async function getRemoteCodeSnippet({
 
   let code = await fetch(url).then((res) => res.text());
 
-  if(lines){
+  if (lines) {
     const [start, end] = lines;
     const explodedContent = code.split("\n");
 

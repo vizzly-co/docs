@@ -733,6 +733,11 @@ jsonc-parser@^3.0.0:
   resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
   integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
 
+jtd@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/jtd/-/jtd-0.1.1.tgz#ee8449f464bb096a90f34afabec3c0b8c33fa976"
+  integrity sha512-D1unKfAE0A/sVLqJZs8mCSW812w651GJuV94WcXRAbx0Xv2j2yjW8qeO5pugXbTMX4k2/ojIH8kQ06LGj9QcaA==
+
 kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"

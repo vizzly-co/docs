@@ -2,5 +2,6 @@
   "callbacks": "Callbacks",
   "feature-toggles": "Feature Toggles",
   "theme": "Custom Theme",
-  "management": "Management"
+  "management": "Management",
+  "overrides": "Component Overrides"
 }

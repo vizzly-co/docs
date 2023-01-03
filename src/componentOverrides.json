@@ -1,0 +1,187 @@
+[
+  {
+    "name": "renderLoadingComponent",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderLoadingComponent",
+    "propSchema": {},
+    "description": "Provide your own component to show loading progress."
+  },
+  {
+    "name": "renderPickComponentTypeComponent",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderPickComponentTypeComponent",
+    "propSchema": {
+      "onSelectType": {
+        "type": "object",
+        "propertyOrder": []
+      },
+      "components": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "type": {
+              "type": "array",
+              "items": [
+                {
+                  "enum": [
+                    "areaChart",
+                    "barChart",
+                    "comboChart",
+                    "custom",
+                    "dataTable",
+                    "horizontalBarChart",
+                    "lineChart",
+                    "pieChart",
+                    "scatterChart",
+                    "singleStat"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "Icon": {
+              "type": "object",
+              "propertyOrder": []
+            }
+          },
+          "propertyOrder": ["title", "type", "Icon"],
+          "required": ["Icon", "title", "type"]
+        }
+      }
+    },
+    "description": "Customize the display of component types on the editor modal, that your users\ncan pick from to add to their dashboards."
+  },
+  {
+    "name": "renderUndoIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderUndoIcon",
+    "propSchema": {},
+    "description": "Customize the 'undo' icon used on the dashboard."
+  },
+  {
+    "name": "renderCompletedIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderCompletedIcon",
+    "propSchema": {},
+    "description": "Customize the 'completed' icon used on the dashboard."
+  },
+  {
+    "name": "renderInProgressIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderInProgressIcon",
+    "propSchema": {},
+    "description": "Customize the 'in-progress' icon used on the dashboard."
+  },
+  {
+    "name": "renderDeleteIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderDeleteIcon",
+    "propSchema": {
+      "purpose": {
+        "enum": [
+          "removeCellFromDashboard",
+          "removeComponentFromDashboard",
+          "removeFilter",
+          "removeRow"
+        ],
+        "type": "string"
+      }
+    },
+    "description": "Customize the 'delete' icon used for multiple purposes on the dashboard."
+  },
+  {
+    "name": "renderPlusIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderPlusIcon",
+    "propSchema": {},
+    "description": "Override the 'plus' icon where it's used on the dashboard."
+  },
+  {
+    "name": "renderCloseIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderCloseIcon",
+    "propSchema": {},
+    "description": "Override the 'close' icon where it's used on the dashboard."
+  },
+  {
+    "name": "renderFilterIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderFilterIcon",
+    "propSchema": {
+      "active": {
+        "type": "boolean"
+      }
+    },
+    "description": "Override the icon used to represent filters on a component."
+  },
+  {
+    "name": "renderEditIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderEditIcon",
+    "propSchema": {},
+    "description": "Override the 'edit' icon where it's used on the dashboard."
+  },
+  {
+    "name": "renderComponentOptionsMenuIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderComponentOptionsMenuIcon",
+    "propSchema": {},
+    "description": "Override the icon used to the right of a component on the dashboard."
+  },
+  {
+    "name": "renderMergeCellIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderMergeCellIcon",
+    "propSchema": {},
+    "description": "Override the icon used to the right of a component on the dashboard."
+  },
+  {
+    "name": "renderSplitCellIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderSplitCellIcon",
+    "propSchema": {},
+    "description": "Provide a custom icon representing the ability to split tiles."
+  },
+  {
+    "name": "renderDownloadIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderDownloadIcon",
+    "propSchema": {},
+    "description": "Override the 'download' icon where it's used on the dashboard."
+  },
+  {
+    "name": "renderInsertRowBelowIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderInsertRowBelowIcon",
+    "propSchema": {},
+    "description": "Customize the icon that represents inserting a new row below\nthe current row on the dashboard."
+  },
+  {
+    "name": "renderInsertRowAboveIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderInsertRowAboveIcon",
+    "propSchema": {},
+    "description": "Customize the icon that represents inserting a new row above\nthe current row on the dashboard."
+  },
+  {
+    "name": "renderAppendCellIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderAppendCellIcon",
+    "propSchema": {},
+    "description": "Customize the icon that adds a new tile to the row."
+  },
+  {
+    "name": "renderLibraryIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderLibraryIcon",
+    "propSchema": {},
+    "description": "Customize the icon that represents managing the dashboard's library."
+  },
+  {
+    "name": "renderCreateComponentIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderCreateComponentIcon",
+    "propSchema": {},
+    "description": "Replace the icon that describes adding a new component directly to the \ndashboard."
+  },
+  {
+    "name": "renderAccordionIcon",
+    "type": "VizzlyComponents.ComponentOverrides.Props.renderAccordionIcon",
+    "propSchema": {
+      "isOpen": {
+        "type": "boolean"
+      }
+    },
+    "description": "Replace the icon used on accordions to show their open or closed state."
+  }
+]

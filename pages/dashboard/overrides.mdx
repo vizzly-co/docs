@@ -1,0 +1,6 @@
+import componentOverrides from "../../src/componentOverrides";
+import { RenderOverrideProps } from "../../src/RenderOverrideProps";
+
+# Component Overrides
+
+{componentOverrides.map((override, index) => <RenderOverrideProps key={`override_${index}`} override={override} />)}

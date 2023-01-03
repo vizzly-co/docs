@@ -240,12 +240,7 @@
         "long": "--integration",
         "negate": false,
         "hidden": false,
-        "argChoices": [
-          "mariadb",
-          "postgres",
-          "bigquery",
-          "elasticsearch"
-        ],
+        "argChoices": ["mariadb", "postgres", "bigquery", "elasticsearch"],
         "conflictsWith": []
       },
       {
@@ -283,12 +278,7 @@
         "long": "--integration",
         "negate": false,
         "hidden": false,
-        "argChoices": [
-          "mariadb",
-          "postgres",
-          "bigquery",
-          "elasticsearch"
-        ],
+        "argChoices": ["mariadb", "postgres", "bigquery", "elasticsearch"],
         "conflictsWith": []
       },
       {
@@ -322,12 +312,7 @@
         "long": "--integration",
         "negate": false,
         "hidden": false,
-        "argChoices": [
-          "mariadb",
-          "postgres",
-          "bigquery",
-          "elasticsearch"
-        ],
+        "argChoices": ["mariadb", "postgres", "bigquery", "elasticsearch"],
         "conflictsWith": []
       },
       {
@@ -380,9 +365,7 @@
         "long": "--type",
         "negate": false,
         "hidden": false,
-        "argChoices": [
-          "react"
-        ],
+        "argChoices": ["react"],
         "conflictsWith": []
       }
     ]
