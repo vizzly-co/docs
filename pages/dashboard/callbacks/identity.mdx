@@ -95,6 +95,19 @@ If you're using a programming language that we don't currently provide an authen
   </Tab>
 </Tabs>
 
+**What is `accessType`?**
+
+The accessType value can either be `editor` or `standard` and controls who gets to modify the initial dashboard new users will see.
+
+Set this value to `editor` if the current user should be allowed to manage the dashboard that every user will initially see. Most commonly, this value will be set to `editor` only for certain staff from your company.
+
+If you're an `editor` - you'll see a banner at the top of the dashboard with a "configure" button which will allow you to make changes to the default dashboard.
+If you are a `standard` user, then you will not be able to see the banner.
+
+The editor banner looks like this;
+
+<img src="/img/editor-banner.png" style={{ width: "100%" }} />
+
 #### Generating test identity configs
 
 A test identity config can be generated using our CLI tool. To do this you will need to collect your organisation ID and template dashboard ID
