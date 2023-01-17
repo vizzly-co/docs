@@ -24,8 +24,21 @@ Roll your own query engine layer by transforming Vizzly queries into Vizzly form
 If you have complex query or authentication requirements, you may prefer to roll your own API endpoint
 to benefit from your existing authentication or query functionality.
 
-### Example usage
+### Vizzly queries and results
 
-See the [Next JS example project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/custom.jsx)
+To integrate your custom query engine with Vizzly, we require you to accept [Vizzly formatted queries](./custom/query),
+and return [Vizzly formatted results](./custom/result) from the async `runQueriesCallback` function.
+
+We will call the `runQueriesCallback` with an array of Vizzly formatted queries and an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), and expect either a valid
+array of successful Vizzly formatted responses, or `null` indicating something went wrong.
+
+Learn more about [Vizzly results here](./custom/result), and more about [Vizzly queries here](./custom/query).
+
+### Frontend implementation
+
+The frontend implementation differs slightly from the self-hosted implementation, as it requires you
+to provide an async `runQueriesCallback` function.
 
 <RemoteCodeBlock />
+
+See the [Next JS example project](https://github.com/vizzly-co/library-examples/blob/e6a7ee3bd167cadec5bbab65fa6d7639d5025c7a/examples/next-js/pages/custom.jsx)

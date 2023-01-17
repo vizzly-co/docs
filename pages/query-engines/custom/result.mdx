@@ -1,0 +1,89 @@
+# Result
+
+The Vizzly Dashboard expects results to be returned in a certain format, so that the data
+can be plotted on the components placed on the dashboard.
+
+The result object has a `fields` key describing each the fields
+that correspond to the array of values in the `content` key.
+
+### Format
+
+```typescript
+export namespace Result {
+  export type RowOfValues = Array<string | number | Date | null>;
+  export type Field = {
+    // ID of the field, matching the ID of the field in the data set.
+    id: string;
+
+    // Name of the field your users will see
+    publicName: string;
+
+    // What data type is the field before the aggregation?
+    // For example, if the field holds a `count` aggregation off
+    // `string` fields, then the dataType here would be `string`.
+    dataType: "number" | "boolean" | "string" | "date_time";
+  };
+}
+
+export type Result = {
+  fields: Result.Field[];
+  content: Array<Result.RowOfValues>;
+};
+```
+
+### Example result
+
+This is an example of a result from a query for a single stat component. It contains one string field where the
+`count` aggregate has been applied to it, and because it's a single stat there is only one row of results.
+
+```jsonc
+{
+  "fields": [
+    {
+      // Note the `_count` appended to the ID of the field.
+      // If the aggregate is `none`, then nothing should be appended to the field.
+      "id": "name_count",
+      "publicName": "Name",
+
+      // Note that even when a number is returned, the `dataType` is still
+      // that of the original type of the field.
+      "dataType": "string"
+    }
+  ],
+  "content": [
+    // Note only one row of results because this is a result for a single stat component.
+    // Results for other components such as timeseries charts will commonly have many more
+    // results in here.
+    [619040]
+  ]
+}
+```
+
+#### Result field IDs
+
+Appended to all fields which contains an aggregated result, you'll find a string representing
+that aggregate. This enables the same field to be used with multiple aggregates.
+
+The exact string denoting the aggregate function used in the query, should be appended to the field
+ID with an `_` separator. The only exception to this rule is the `none` aggregate, which should not
+have any value appended to the field ID.
+
+For example, a `countDistinct` aggregate on a field with ID of `name` would have the result field ID of
+`name_countDistinct`.
+
+### Mapping a query to the result
+
+A [Vizzly query](./query) defines a list of measures, dimensions and a time dimension. All fields included
+in these properties should be included in the response. Dimension fields should be treated as having no aggregate,
+and should therefore not have any value appended to their ID.
+
+### Error handling
+
+Currently, errors are handled by simply returning `null` instead of the array of results.
+
+### Validation
+
+The Vizzly frontend performs some basic validations upon the results generated based on the query that
+was sent. If things aren't working as expected, it is always worth checking the console output in the browser
+to see if there's a friendly validation error message waiting for you. If not, please get in-touch and
+we can work with you on debugging it!
