@@ -19,18 +19,16 @@ export const getStaticProps = async () => {
 
 # Custom
 
-Roll your own query engine layer by transforming Vizzly queries into Vizzly formatted results.
-
-If you have complex query or authentication requirements, you may prefer to roll your own API endpoint
-to benefit from your existing authentication or query functionality.
+If you have complex query or authentication requirements, you may prefer to deploy your own query engine
+to benefit from your existing authentication or custom query functionality. To achieve this, you'll need
+to transform Vizzly formatted queries, into Vizzly formatted results.
 
 ### Vizzly queries and results
 
-To integrate your custom query engine with Vizzly, we require you to accept [Vizzly formatted queries](./custom/query),
-and return [Vizzly formatted results](./custom/result) from the async `runQueriesCallback` function.
+To integrate your custom query engine with Vizzly, we require you to implement the async `runQueriesCallback` function.
 
-We will call the `runQueriesCallback` with an array of Vizzly formatted queries and an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), and expect either a valid
-array of successful Vizzly formatted responses, or `null` indicating something went wrong.
+We will call the `runQueriesCallback` with an array of Vizzly formatted queries and an [abort signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal), and expect either an
+array of Vizzly formatted results, or `null` indicating something went wrong.
 
 Learn more about [Vizzly results here](./custom/result), and more about [Vizzly queries here](./custom/query).
 
@@ -38,6 +36,8 @@ Learn more about [Vizzly results here](./custom/result), and more about [Vizzly 
 
 The frontend implementation differs slightly from the self-hosted implementation, as it requires you
 to provide an async `runQueriesCallback` function.
+
+Here is an example of how to do that;
 
 <RemoteCodeBlock />
 
