@@ -1,16 +1,71 @@
-import { Tab, Tabs } from "nextra-theme-docs";
+import { Tab, Tabs, Callout } from "nextra-theme-docs";
 
 # Load data sets
 
-A function that returns a list of data sets that describe the available tables and fields available to the user.
+An async function that returns a list of data sets to make available to the user.
+
+### Parameters
+
+We will call this function with a single argument containing the following information;
+
+```typescript
+type IdentityConfig = {
+  dashboardAccess: {
+    accessType: "standard" | "editor";
+
+    organisationId: string;
+
+    // Template dashboard ID
+    dashboardId: string;
+
+    // Unique identifier for the user
+    userReference: string;
+
+    // ISO 8601 format.
+    expires: string;
+
+    // Signature to verify this object hasn't been tampered with.
+    // Use your Vizzly public key to verify this.
+    signature: string;
+  };
+  dataAccess?: {
+    dataSetIds: string[] | "*";
+
+    // Secure filters which are sent with every query for
+    // a given data set.
+    secureFilters: {
+      [dataSetId: string]: Query.Filter[];
+    };
+
+    // ISO 8601 format.
+    expires: string;
+
+    // Signature to verify this object hasn't been tampered with.
+    // Use your Vizzly public key to verify this.
+    signature: string;
+  };
+};
+```
+
+<Callout emoji="🔒">
+Please note, that most of the values here are unverified and "peeked" from the JWT which is stored under the `signature` key.
+Therefore best security practice would be to pass only the signature back to your server, verify the JWT using your public key
+and then use the verified data to return the definitions of the data sets.
+
+In this way, you can keep the definitions of the data sets secure.
+
+</Callout>
 
 ### Return value
+
+From the `loadDataSetsCallback` function, you should return an array of data sets. If there is an error, you
+should return `null`.
 
 <Tabs items={["Type definition", "Example"]}>
 <Tab>
 
 ```typescript
-{
+Array<{
   // ID of the data set.
   id: string;
 
@@ -27,10 +82,21 @@ A function that returns a list of data sets that describe the available tables a
 
     // Data type of the field
     dataType: "number" | "boolean" | "string" | "date_time";
-  }
+
+    // Can this field be used as a dimension? Default: true
+    canBeDimension?: boolean;
+
+    // Can this field be used as a measure? Default: true
+    canBeMeasure?: boolean;
+
+    // What date/time granularities can be used on this field
+    // Note; only valid for fields with a dataType of `date_time`.
+    allowedGranularities?: Array<
+      "second" | "minute" | "hour" | "day" | "month" | "year"
+    >;
+  };
   [];
-}
-[];
+}>;
 ```
 
 </Tab>
