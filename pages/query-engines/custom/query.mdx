@@ -82,6 +82,16 @@ export type Query = {
   measure: Query.Measure[];
   dimension: Query.Dimension[];
   timeDimension: Query.TimeDimension | null;
+
+  /*
+    The following filter structure
+    [
+      [<< filter 1>>, << filter 2 >>],
+      [<< filter 3>>, << filter 4 >>],
+    ]
+    would be read as;
+    accept data records where (filter 1 and filter 2 are truthy), or (filter 3 and filter 4 are truthy)
+  */
   filter: Query.Filter[][];
   order: Query.Order[];
   limit?: Query.Limit;
