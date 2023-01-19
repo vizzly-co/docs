@@ -73,7 +73,7 @@ Array<{
   name: string;
 
   // Fields that make up the data set.
-  fields: {
+  fields: Array<{
     // Unique constant that identifies this field.
     id: string;
 
@@ -94,8 +94,7 @@ Array<{
     allowedGranularities?: Array<
       "second" | "minute" | "hour" | "day" | "month" | "year"
     >;
-  };
-  [];
+  }>;
 }>;
 ```
 
