@@ -1,0 +1,22 @@
+```typescript
+export namespace Result {
+  export type RowOfValues = Array<string | number | Date | null>;
+  export type Field = {
+    // ID of the field, matching the ID of the field in the data set.
+    id: string;
+
+    // Name of the field your users will see
+    publicName: string;
+
+    // What data type is the field before the aggregation?
+    // For example, if the field holds a `count` aggregation of
+    // `string` fields, then the dataType here would be `string`.
+    dataType: "number" | "boolean" | "string" | "date_time";
+  };
+}
+
+export type Result = {
+  fields: Result.Field[];
+  content: Array<Result.RowOfValues>;
+};
+```

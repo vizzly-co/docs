@@ -1,0 +1,89 @@
+```typescript
+export namespace Query {
+  // A dimension can be thought of as a
+  // field to "group by" in a SQL statement.
+  export type Dimension = Field;
+
+  // Field ID provided in your data set.
+  export type Field = string;
+
+  export type Limit = number;
+
+  export type Offset = number;
+
+  export type Aggregate =
+    | "countDistinct"
+    | "count"
+    | "mean"
+    | "sum"
+    | "min"
+    | "max"
+    | "none";
+
+  export type Measure = {
+    field: Field;
+    aggregate: Aggregate;
+  };
+
+  export type Order = {
+    field: Field;
+    direction: "asc" | "desc";
+    aggregate: Aggregate;
+  };
+
+  export type Operator =
+    | ">"
+    | "<"
+    | "="
+    | ">="
+    | "<="
+    | "is_one_of"
+    | "is_not_one_of"
+    | "starts_with"
+    | "ends_with"
+    | "contains_substring"
+    | "does_not_contain_substring";
+
+  export type Filter = {
+    field: Field;
+    op: Operator;
+    value: any;
+  };
+
+  export namespace TimeDimension {
+    export type Truncate =
+      | "second"
+      | "minute"
+      | "hour"
+      | "day"
+      | "month"
+      | "year";
+  }
+
+  export type TimeDimension = {
+    field: Field;
+    truncate: TimeDimension.Truncate;
+  };
+}
+
+export type Query = {
+  dataSetId: string;
+  measure: Query.Measure[];
+  dimension: Query.Dimension[];
+  timeDimension: Query.TimeDimension | null;
+
+  /*
+    The following filter structure
+    [
+      [<< filter 1>>, << filter 2 >>],
+      [<< filter 3>>, << filter 4 >>],
+    ]
+    would be read as;
+    accept data records where (filter 1 and filter 2 are truthy), or (filter 3 and filter 4 are truthy)
+  */
+  filter: Query.Filter[][];
+  order: Query.Order[];
+  limit?: Query.Limit;
+  offset?: Query.Offset;
+};
+```

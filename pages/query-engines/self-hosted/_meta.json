@@ -4,5 +4,6 @@
   "deploy-on-docker-compose": "Deploy on localhost",
   "deploy-on-heroku": "Deploy to Heroku",
   "github-actions-ci": "GitHub Actions CI",
-  "performance": "Performance"
+  "performance": "Performance",
+  "api": "API"
 }
