@@ -26,17 +26,21 @@ The request body should match the following type definition;
 }
 ```
 
-#### Identity config  integrity signature
+#### Identity config integrity signature
+
 This is a data access token, that is one of the tokens returned by your [identity callback](/dashboard/callbacks/identity).
 
 #### Query
+
 <QueryFormat />
 
 #### Virtual Fields
+
 The structure of virtual fields is complex and in a state of flux. Therefore we will send the exact value to be used here in webhook events,
 which you can pass through un-touched to the query engine.
 
 ### Response
+
 The response, if successful, will contain a list of results, which you can use to build CSVs, PDFs, `.xlsx` files, or send [to
 Google Sheets using their API](https://developers.google.com/sheets/api/guides/concepts).
 
