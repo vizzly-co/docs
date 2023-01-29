@@ -9,9 +9,9 @@ export const getStaticProps = async () => {
       lang: "jsx",
     }),
     getRemoteCodeSnippet({
-      url: "https://raw.githubusercontent.com/vizzly-co/examples/3edd3c7b86c4a6e49c3e3c934cb457aaf60ef662/examples/next-js/pages/api/identity.js",
-      lang: "js",
-      lines: [40, 60],
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/171e8bcde9c3d5ff81b0cc3be72657d39c040f9a/examples/next-js/pages/api/identity.ts",
+      lang: "ts",
+      lines: [34, 65],
     }),
   ]);
   return {
@@ -76,6 +76,7 @@ dashboard_access_token = vizzly.sign_dashboard_access_token(
   organisation_id='org_123',
   dashboard_id='dsh_123',
   user_reference='usr-1',
+  scope='read_write',
   private_key=private_key
 )
 
@@ -107,6 +108,14 @@ If you are a `standard` user, then you will not be able to see the banner.
 The editor banner looks like this;
 
 <img src="/img/editor-banner.png" style={{ width: "100%" }} />
+
+### Scope and read-only access
+
+By default, Vizzly will allow users to make changes to their dashboards. However, if you want to provide a read-only view to your users, you
+can set scope to be `'read'`. This is also useful if you want to build a dashboard sharing feature, where you can provide one user with read-only access
+to another user's dashboard.
+
+The allowed scope values are `'read_write'` and `'read'`.
 
 #### Generating test identity configs
 
