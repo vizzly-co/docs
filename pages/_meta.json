@@ -3,6 +3,8 @@
   "get-started": "Get started",
   "dashboard": "Dashboard",
   "query-engines": "Query Engines",
+  "webhooks": "Webhooks",
+  "concepts": "Concepts",
   "cli": "Vizzly CLI",
   "security": "Security",
   "parameters": "Parameters",

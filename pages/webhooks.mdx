@@ -1,0 +1,28 @@
+# Webhooks
+
+A webhook is a message that Vizzly will send your servers, when something happens.
+
+Webhooks are a powerful developer feature for reacting to certain events that occur on your
+user's dashboards in real-time, or handling scheduled events.
+
+Learn how to [get started with webhooks in our guide!](./webhooks/get-started)
+
+#### Supported events
+- [Scheduled reports](./webhooks/scheduled-reports)
+
+### Acknowledging events
+
+When you successfully handle a webhook, it is important to respond with a `200` status code.
+Otherwise, Vizzly will keep retrying until a `200` is received.
+
+We also guarantee at least 1 delivery attempt, even if your server does respond with a `200` status
+code, so you should design your system to be idempotent. This means being able to handle the exact same
+event multiple times, but keeping your system in the correct state.
+
+#### Retries
+When your webhook endpoint does not respond with a `200` status code, we will retry
+with the following behaviour;
+
+- We will back-off our attempts exponentially with a minimum of a 15 second gap between each attempt.
+- Upon each attempt, we will add a small amount of jitter so failed requests aren't sent in waves.
+- We will retry until approximately 12 days later, or the equivalent of the 20th attempt.
