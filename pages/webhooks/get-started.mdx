@@ -1,0 +1,16 @@
+# Get started with webhooks
+
+To manage your webhooks, visit [the webhooks page](https://app.vizzly.co/webhooks), and click the button to create your first webhook.
+
+You'll be asked to enter a name and HTTPS endpoint of the webhook you want to create. The endpoint is where Vizzly will send a
+`POST` request with the event payload which will be different for each webhook event type.
+
+<img style={{marginTop: '20px'}} src="/img/new-webhook-modal.png" />
+
+#### Reading and verifying webhook events
+
+To be certain that a webhook has originated from Vizzly servers, the POST request body will be a [Json Web Token (JWT)](https://jwt.io)
+signed with a private key owned by Vizzly.
+
+To securely access the information sent in the webhook event, you should verify the request body using the Vizzly webhook
+public key. You can do this using [our NPM auth package `@vizzly/auth`](https://www.npmjs.com/package/@vizzly/auth).
