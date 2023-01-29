@@ -76,6 +76,7 @@ dashboard_access_token = vizzly.sign_dashboard_access_token(
   organisation_id='org_123',
   dashboard_id='dsh_123',
   user_reference='usr-1',
+  scope='read_write',
   private_key=private_key
 )
 
@@ -107,6 +108,14 @@ If you are a `standard` user, then you will not be able to see the banner.
 The editor banner looks like this;
 
 <img src="/img/editor-banner.png" style={{ width: "100%" }} />
+
+### Scope and read-only access
+
+By default, Vizzly will allow users to make changes to their dashboards. However, if you want to provide a read-only view to your users, you
+can set scope to be `'read'`. This is also useful if you want to build a dashboard sharing feature, where you can provide one user with read-only access
+to another user's dashboard.
+
+The allowed scope values are `'read_write'` and `'read'`.
 
 #### Generating test identity configs
 
