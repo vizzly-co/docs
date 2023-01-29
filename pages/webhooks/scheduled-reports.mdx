@@ -1,2 +1,26 @@
 # Scheduled reports 
 
+Scheduled reports are available for the "basic table" component, and allows 
+your users to setup a report on any given cadence.
+
+Vizzly manages the time-keeping of such reports, and sends a webhook
+containing the query to generate results for the report, at the time the user wants it.
+
+Once you have [set up the webhook](./get-started), you can add the property
+`reportScheduleOptions` to the Vizzly Dashboard component, and set the frequency values
+that you want to be made available to your users to choose from. For example,
+you might set;
+
+```jsx
+<Vizzly.Dashboard
+  // ... the other props
+  reportScheduleOptions={[
+    {cron: '* * * * *', description: 'Every minute'},
+    {cron: '0 * * * *', description: 'Every hour'}
+  ]}
+/>
+```
+
+which would allow your users to pick from an "every minute", or an "every hour" schedule.
+
+### The webhook event

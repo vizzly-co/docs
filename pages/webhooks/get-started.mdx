@@ -7,6 +7,9 @@ You'll be asked to enter a name and HTTPS endpoint of the webhook you want to cr
 
 <img style={{marginTop: '20px'}} src="/img/new-webhook-modal.png" />
 
+Once have created your first webhook, you'll then link it to [your dashboard templates](https://app.vizzly.co/dashboards), by
+using the select input field under the "webhook" column on that page.
+
 #### Reading and verifying webhook events
 
 To be certain that a webhook has originated from Vizzly servers, the POST request body will be a [Json Web Token (JWT)](https://jwt.io)
@@ -14,3 +17,6 @@ signed with a private key owned by Vizzly.
 
 To securely access the information sent in the webhook event, you should verify the request body using the Vizzly webhook
 public key. You can do this using [our NPM auth package `@vizzly/auth`](https://www.npmjs.com/package/@vizzly/auth).
+
+The content of each webhook message will vary depending on the type of webhook we send to you. Every webhook
+will contain a `type` value, which you can use to understand what the event is that we've sent.
