@@ -4,7 +4,7 @@ import { Tab, Tabs } from "nextra-theme-docs";
 
 This callback loads all the current user's data, for a data set. This data is then queried in the browser's memory, using Vizzly's in-browser query engine.
 
-We strongly advise that this strategy is only used for small data sets, as the user will see a loading screen whilst this data is loaded.
+We strongly advise that this strategy is only used for small data sets, to avoid long wait times whilst the data is initially loaded.
 
 The data returned from this callback, should be in the following format:
 
@@ -12,52 +12,66 @@ The data returned from this callback, should be in the following format:
 <Tab>
 
 ```typescript
-export type Result = {
-  content: any[][];
-  fields: {
-    id: string;
-    publicName: string;
-    dataType: "number" | "boolean" | "string" | "date_time";
-  }[];
-};
+Array<{
+  [key: string]: string | number | null | boolean
+}>
 ```
 
 </Tab>
 <Tab>
 
-```json
-{
-  "fields": [
-    {
-      "id": "fie_1",
-      "publicName": "Order ID",
-      "dataType": "number"
-    },
-    {
-      "id": "fie_2",
-      "publicName": "Order Date",
-      "dataType": "date_time"
-    },
-    {
-      "id": "fie_3",
-      "publicName": "Status",
-      "dataType": "string"
-    }
-    // ...
-  ],
-  "content": [
-    [100354678, "2020-10-01", "received"],
-    [100354679, "2020-10-02", "completed"],
-    [100354680, "2020-10-03", "refunded"]
-    // ...
-  ]
-}
+```jsonc
+[
+  {
+    "order_id": 100354678,
+    "order_date": "2020-10-01",
+    "status": "received",
+    "item_id": 574772,
+    "sku": "oasis_Oasis-064-36",
+    "qty_ordered": 21,
+    "price": 89.9,
+    "value": 1798,
+    "discount_amount": 0,
+    "total": 1798,
+    "category": "Men's Fashion",
+    "payment_method": "cod",
+    "bi_st": "Valid",
+    "cust_id": 60124,
+    "year": 2020,
+    "month": "Oct-2020",
+    "ref_num": 987867,
+    "Name Prefix": "Drs.",
+    "First Name": "Jani",
+    "Middle Initial": "W",
+    "Last Name": "Titus",
+    "Gender": "F",
+    "age": 43,
+    "full_name": "Titus, Jani",
+    "E Mail": "jani.titus@gmail.com",
+    "Customer Since": "8/22/2006",
+    "SSN": "627-31-5251",
+    "Phone No. ": "405-959-1129",
+    "Place Name": "Vinson",
+    "County": "Harmon",
+    "City": "Vinson",
+    "State": "OK",
+    "Zip": 73571,
+    "Region": "South",
+    "User Name": "jwtitus",
+    "Discount_Percent": 0
+  },
+  // ... more results ...
+]
 ```
 
 </Tab>
 </Tabs>
 
 An implementation of this can be seen in [the nextJS example repo](https://github.com/vizzly-co/library-examples/blob/b962329aa4e0d8ba3c49595e69120e1be8cdcfbb/examples/next-js/pages/in-browser.jsx#L14-L26).
+
+#### Date format
+Ideally dates will be provided as ISO8601 formatted strings (such as <code>{new Date().toISOString()}</code>). However, any format
+that can be parsed by `new Date(arg1)` is supported.
 
 ### Multi-tenancy
 
