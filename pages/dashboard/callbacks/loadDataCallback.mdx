@@ -13,8 +13,8 @@ The data returned from this callback, should be in the following format:
 
 ```typescript
 Array<{
-  [key: string]: string | number | null | boolean
-}>
+  [key: string]: string | number | null | boolean;
+}>;
 ```
 
 </Tab>
@@ -59,7 +59,7 @@ Array<{
     "Region": "South",
     "User Name": "jwtitus",
     "Discount_Percent": 0
-  },
+  }
   // ... more results ...
 ]
 ```
@@ -70,6 +70,7 @@ Array<{
 An implementation of this can be seen in [the nextJS example repo](https://github.com/vizzly-co/library-examples/blob/b962329aa4e0d8ba3c49595e69120e1be8cdcfbb/examples/next-js/pages/in-browser.jsx#L14-L26).
 
 #### Date format
+
 Ideally dates will be provided as ISO8601 formatted strings (such as <code>{new Date().toISOString()}</code>). However, any format
 that can be parsed by `new Date(arg1)` is supported.
 

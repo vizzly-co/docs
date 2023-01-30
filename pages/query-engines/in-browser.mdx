@@ -1,17 +1,23 @@
 import RemoteCodeBlock from "../../components/RemoteCodeBlock";
 import { getRemoteCodeSnippet } from "../../src/remoteCode";
+import { Tab, Tabs } from "nextra-theme-docs";
 
 export const getStaticProps = async () => {
-  const [code] = await Promise.all([
+  const [codeExample1, codeExample2] = await Promise.all([
     getRemoteCodeSnippet({
       url: "https://raw.githubusercontent.com/vizzly-co/examples/01edf8b7e6129cb092edd026bda25cb71b67aa19/examples/next-js/pages/in-browser.tsx",
+      lang: "tsx",
+    }),
+    getRemoteCodeSnippet({
+      url: "https://raw.githubusercontent.com/vizzly-co/examples/3837dbf783392553819c79ae0ed34477c16f30e0/examples/next-js/pages/in-browser-basic.tsx",
       lang: "tsx",
     }),
   ]);
   return {
     props: {
       ssg: {
-        code,
+        codeExample1,
+        codeExample2,
       },
     },
   };
@@ -27,7 +33,14 @@ In some cases, the data set you'll want to make available to each of your custom
 
 - [Next JS project](https://github.com/vizzly-co/examples/blob/01edf8b7e6129cb092edd026bda25cb71b67aa19/examples/next-js/pages/in-browser.tsx)
 
-<RemoteCodeBlock />
+<Tabs items={["Basic", "With network requests"]}>
+  <Tab>
+    <RemoteCodeBlock name="codeExample2" />
+  </Tab>
+  <Tab>
+    <RemoteCodeBlock name="codeExample1" />
+  </Tab>
+</Tabs>
 
 ## Callbacks
 
