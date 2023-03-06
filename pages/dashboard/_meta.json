@@ -1,6 +1,7 @@
 {
   "callbacks": "Callbacks",
   "feature-toggles": "Feature Toggles",
+  "themeAPI": "Theme API",
   "theme": "Custom Theme",
   "management": "Management"
 }

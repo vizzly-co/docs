@@ -1,0 +1,245 @@
+# Theme API
+
+You can change the look and feel of the dashboard by applying the `theme` properties to your Dashboard component.
+
+The styling is processed at runtime, so you can optionally define customer branding based on a call to your API.
+
+## How to enable the API
+
+It's as simple as using the `theme` prop on the Component and defining the styles for your components.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomLoadingComponent = () =>
+  <Vizzly.Dashboard
+    theme={{
+      ...
+    }}
+  />
+
+
+```
+
+## Properties
+
+The apart from the `detail` and `rowLimit` props, the `theme` properties aren't mandatory.
+If you don't specify a value, default values are used.
+
+`CSSProperties` allows typing for styles using CSSType.
+You're able to use type assertion or module augmentation to add properties or an index signature of your own.
+
+For examples and more information, visit:
+https://github.com/frenic/csstype
+
+### Interface
+
+```typescript
+export namespace VizzlyTheming {
+  export type Base = {
+    detail: "minimal" | "verbose";
+    rowLimit: number;
+    baseFont?: FontStyle;
+    colors?: CSSProperties["color"][];
+    buttons?: Buttons;
+    panels?: Panel;
+    forms?: Form;
+    modals?: Modal;
+  };
+
+  export interface Buttons {
+    primary?: ButtonType;
+    secondary?: ButtonType;
+  }
+
+  export interface ButtonType extends ButtonState {
+    padding?: CSSProperties["padding"];
+    fontWeight?: CSSProperties["fontWeight"];
+    boxShadow?: CSSProperties["boxShadow"];
+    borderRadius?: CSSProperties["borderRadius"];
+    fontSize?: CSSProperties["fontSize"];
+    height?: CSSProperties["height"];
+    "&:hover"?: ButtonState;
+  }
+
+  export type ButtonSize = {
+    padding?: CSSProperties["padding"];
+    fontSize?: CSSProperties["fontSize"];
+    height?: CSSProperties["height"];
+  };
+
+  export type ButtonState = {
+    background?: CSSProperties["background"];
+    color?: CSSProperties["color"];
+    border?: CSSProperties["border"];
+  };
+
+  export type Panel = {
+    border?: CSSProperties["border"];
+    background?: CSSProperties["background"];
+    boxShadow?: CSSProperties["boxShadow"];
+    borderRadius?: CSSProperties["borderRadius"];
+    padding?: CSSProperties["padding"];
+  };
+
+  export type Form = {
+    label?: Label;
+    input?: Input;
+  };
+
+  export interface Label extends FontStyle {}
+
+  export interface Input extends InputStyle, InputState {
+    sm?: InputStyle;
+    "&:focus"?: InputState;
+    "&:hover"?: InputState;
+  }
+  export type InputStyle = {
+    padding?: CSSProperties["padding"];
+    fontSize?: CSSProperties["fontSize"];
+    borderRadius?: CSSProperties["borderRadius"];
+    fontWeight?: CSSProperties["fontWeight"];
+    color?: CSSProperties["color"];
+  };
+
+  export type InputState = {
+    border?: CSSProperties["border"];
+    boxShadow?: CSSProperties["boxShadow"];
+    background?: CSSProperties["background"];
+  };
+
+  export type Modal = {
+    overlay?: Overlay;
+    base?: ModalBase;
+    content?: ModalContent;
+    header?: ModalHeader;
+    footer?: ModalFooter;
+  };
+
+  export type ModalBase = {
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+    boxShadow?: CSSProperties["boxShadow"];
+    borderRadius?: CSSProperties["borderRadius"];
+  };
+
+  export type ModalContent = {
+    padding?: CSSProperties["padding"];
+  };
+
+  export type ModalHeader = {
+    padding?: CSSProperties["padding"];
+    borderBottom?: CSSProperties["borderTop"];
+    fontSize?: CSSProperties["fontSize"];
+    fontWeight?: CSSProperties["fontWeight"];
+  };
+
+  export type ModalFooter = {
+    borderTop?: CSSProperties["borderTop"];
+    padding?: CSSProperties["padding"];
+  };
+
+  export type Overlay = {
+    background?: CSSProperties["background"];
+    opacity?: CSSProperties["opacity"];
+  };
+
+  export type FontStyle = {
+    color?: CSSProperties["color"];
+    fontFamily?: CSSProperties["fontFamily"];
+    fontSize?: CSSProperties["fontSize"];
+    fontWeight?: CSSProperties["fontWeight"];
+    margin?: CSSProperties["margin"];
+  };
+}
+```
+
+### Roadmap
+
+It's in our roadmap to allow for futher customisation of the Dashboard component. These include:
+
+- Tabs
+- Select input
+- Dropdown Options
+
+## Examples
+
+### Button properties
+
+`theme.buttons.primary`
+
+This property changes everthing you need to make the buttons appear like your own application.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomLoadingComponent = () => <p>Loading...</p>
+
+<Vizzly.Dashboard
+  theme={{
+    detail: "minimal",
+    rowLimit: 5,
+    buttons: {
+      primary: {
+        borderRadius: '15px',
+        border: '1px solid rgb(17, 109, 255)',
+        background: 'rgb(17, 109, 255)',
+        padding: '3px 17px 4.5px',
+        boxShadow: "none",
+        color: '#fff',
+        fontSize: '14px',
+        fontWeight: 530,
+        height: 30,
+        '&:hover': {
+          border: '1px solid #0f62e6',
+          background: '#0f62e6',
+        },
+      }
+    }
+  }}
+/>
+```
+
+### Input properties
+
+`theme.forms.label`<br />
+`theme.forms.input`
+
+This property changes everthing you need to make a `type="text"` or `type=number` input appear like your own application.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomLoadingComponent = () => <p>Loading...</p>
+
+<Vizzly.Dashboard
+  theme={{
+    detail: "minimal",
+    rowLimit: 5,
+    forms: {
+      label: {
+        fontSize: 14,
+        fontWeight: 400,
+        color: '#32536A',
+        margin: "0 0 6px 0"
+      },
+      input: {
+        border: '1px #a8caff solid',
+        background: 'rgb(255, 255, 255)',
+        borderRadius: '0.375rem',
+        padding: '5px 9px 5px 12px',
+        color: 'rgb(0, 6, 36)',
+        fontSize: 16,
+        fontWeight: 400,
+        '&:focus': {
+          border: '1px #3899EC solid',
+          boxShadow: '0 0 0 3px #AADBFC',
+        },
+        '&:hover': {
+          background: '#e7f0ff',
+        },
+      }
+    }
+  }}
+/>
+```
