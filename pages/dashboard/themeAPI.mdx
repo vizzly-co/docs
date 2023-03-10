@@ -45,6 +45,7 @@ export namespace VizzlyTheming {
     panels?: Panel;
     forms?: Form;
     modals?: Modal;
+    charts?: Charts;
   };
 
   export interface Buttons {
@@ -151,6 +152,25 @@ export namespace VizzlyTheming {
     fontWeight?: CSSProperties["fontWeight"];
     margin?: CSSProperties["margin"];
   };
+
+  export type Charts = {
+    labels?: ChartLabels;
+    grid?: ChartGrid;
+    axis?: ChartAxis;
+  };
+
+  export type ChartLabels = {
+    color?: CSSProperties["color"];
+    fontWeight?: CSSProperties["fontWeight"];
+  };
+
+  export type ChartGrid = {
+    stroke: CSSProperties["stroke"];
+  };
+
+  export type ChartAxis = {
+    stroke: CSSProperties["stroke"];
+  };
 }
 ```
 
@@ -239,6 +259,39 @@ const CustomLoadingComponent = () => <p>Loading...</p>
           background: '#e7f0ff',
         },
       }
+    }
+  }}
+/>
+```
+
+### Chart properties
+
+`theme.charts.labels`<br />
+`theme.charts.grid`<br />
+`theme.charts.axis`
+
+The properties allow you to customise the base styles of the charts.
+
+```jsx
+import Vizzly from '@vizzly/dashboard';
+
+const CustomLoadingComponent = () => <p>Loading...</p>
+
+<Vizzly.Dashboard
+  theme={{
+    detail: "minimal",
+    rowLimit: 5,
+    charts: {
+      labels: {
+        color: '#000',
+        fontWeight: 300,
+      },
+      grid: {
+        stroke: 'rgba(25,144,206, 0.7)',
+      },
+      axis: {
+        stroke: 'rgba(25,144,206, 0.9)',
+      },
     }
   }}
 />
