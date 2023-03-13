@@ -1,4 +1,6 @@
 {
   "query": "Query",
-  "result": "Result"
+  "result": "Result",
+  "timeFormat": "Time format",
+  "dataType": "Data type"
 }
