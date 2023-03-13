@@ -11,6 +11,7 @@ The callback is an `async` function, that returns a query engine config.
 
 <Tabs items={["Type definition", "Example"]}>
   <Tab>
+
 ```typescript
 type SupportedTimeTruncFunctions = {
   [key: string]: {
@@ -21,19 +22,19 @@ type SupportedTimeTruncFunctions = {
 };
 
 type SupportedAggregates = {
-[id: string]: {
-publicName: string;
-// https://docs.vizzly.co/concepts/dataType
-validDataTypes: DataType;
-}
-}
-
-type QueryEngineConfig = {
-supportedAggregates: SupportedAggregates;
-supportedTimeTruncFunctions: SupportedTimeTruncFunctions;
+  [id: string]: {
+    publicName: string;
+    // https://docs.vizzly.co/concepts/dataType
+    validDataTypes: DataType;
+  };
 };
 
-````
+type QueryEngineConfig = {
+  supportedAggregates: SupportedAggregates;
+  supportedTimeTruncFunctions: SupportedTimeTruncFunctions;
+};
+```
+
   </Tab>
   <Tab>
 ```json
@@ -122,6 +123,8 @@ supportedTimeTruncFunctions: SupportedTimeTruncFunctions;
 </Tabs>
 
 <Callout emoji="❗">
-Please note, there are a few basic requirements for your query engine. It must support `max` and `count` aggregates, as well as `year` and `month` time trunc functions.
+  Please note, there are a few basic requirements for your query engine. It must
+  support `max` and `count` aggregates, as well as `year` and `month` time trunc
+  functions.
 </Callout>
 ````
