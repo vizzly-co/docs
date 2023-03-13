@@ -125,7 +125,7 @@ The typescript definition of a data set is as follows:
   /*
     Fields that define the flat schema of the data set.
   */
-  fields: {
+  fields: Array<{
     /*
       A unique reference to this field, and should remain constant.
     */
@@ -140,7 +140,7 @@ The typescript definition of a data set is as follows:
     /*
       What type of data does this field contain?
     */
-    dataType: 'number' | 'boolean' | 'string' | 'date_time';
+    dataType: "number" | "boolean" | "string" | "date_time";
 
     /*
       The name of this field that your users will see.
@@ -151,25 +151,25 @@ The typescript definition of a data set is as follows:
       The name of the table in the database
     */
     table: string;
-  }[];
+  }>;
 
-  joins: {
-      type:
-        | "rightJoin"
-        | "leftJoin"
-        | "innerJoin"
-        | "outerJoin"
-        | "leftOuterJoin"
-        | "rightOuterJoin";
-      left: {
-        field: string;
-        table: string;
-      };
-      right: {
-        field: string;
-        table: string;
-      };
-    }[];
+  joins: Array<{
+    type:
+      | "rightJoin"
+      | "leftJoin"
+      | "innerJoin"
+      | "outerJoin"
+      | "leftOuterJoin"
+      | "rightOuterJoin";
+    left: {
+      field: string;
+      table: string;
+    };
+    right: {
+      field: string;
+      table: string;
+    };
+  }>;
 }
 ```
 
@@ -201,73 +201,7 @@ The typescript definition of a data set is as follows:
   /*
     Fields that define the flat schema of the data set.
   */
-  fields: {
-    /*
-      A unique reference to this field, and should remain constant.
-    */
-    id: string;
-
-    /*
-      The name of the field. For example, this would be the column
-      name if you're running a postgres database.
-    */
-    name: string;
-
-    /*
-      What type of data does this field contain?
-    */
-    dataType: 'number' | 'boolean' | 'string' | 'date_time';
-
-    /*
-      The name of this field that your users will see.
-    */
-    publicName: string;
-
-    /*
-      The name of the table in the database
-    */
-    table: string;
-  }[];
-
-  joins: {
-      type:
-        | "rightJoin"
-        | "leftJoin"
-        | "innerJoin"
-        | "outerJoin"
-        | "leftOuterJoin"
-        | "rightOuterJoin";
-      left: {
-        field: string;
-        table: string;
-      };
-      right: {
-        field: string;
-        table: string;
-      };
-    }[];
-}
-```
-
-</Tab>
-<Tab>
-
-```ts
-{
-  /*
-    ID of the data set that remains constant.
-  */
-  id: string;
-
-  /*
-    A public name that describes this data set to your users.
-  */
-  name: string;
-
-  /*
-    Fields that define the flat schema of the data set.
-  */
-  fields: {
+  fields: Array<{
     /*
       A unique reference to this field, and should remain constant.
     */
@@ -293,8 +227,73 @@ The typescript definition of a data set is as follows:
       The name of the table in the database
     */
     table: string;
-  }
-  [];
+  }>;
+
+  joins: Array<{
+    type:
+      | "rightJoin"
+      | "leftJoin"
+      | "innerJoin"
+      | "outerJoin"
+      | "leftOuterJoin"
+      | "rightOuterJoin";
+    left: {
+      field: string;
+      table: string;
+    };
+    right: {
+      field: string;
+      table: string;
+    };
+  }>;
+}
+```
+
+</Tab>
+<Tab>
+
+```ts
+{
+  /*
+    ID of the data set that remains constant.
+  */
+  id: string;
+
+  /*
+    A public name that describes this data set to your users.
+  */
+  name: string;
+
+  /*
+    Fields that define the flat schema of the data set.
+  */
+  fields: Array<{
+    /*
+      A unique reference to this field, and should remain constant.
+    */
+    id: string;
+
+    /*
+      The name of the field. For example, this would be the column
+      name if you're running a postgres database.
+    */
+    name: string;
+
+    /*
+      What type of data does this field contain?
+    */
+    dataType: "number" | "boolean" | "string" | "date_time";
+
+    /*
+      The name of this field that your users will see.
+    */
+    publicName: string;
+
+    /*
+      The name of the table in the database
+    */
+    table: string;
+  }>;
 }
 ```
 
@@ -392,6 +391,7 @@ type Operator =
   | ">"
   | "<"
   | "="
+  | "!="
   | ">="
   | "<="
   | "is_one_of"

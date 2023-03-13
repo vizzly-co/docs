@@ -1,0 +1,26 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Virtual field
+
+Virtual fields are a way of building fields in your data set from the fields which already exist.
+
+You can use mathematical operators and conditions to define these fields.
+
+<Tabs items={["Type definition", "Example"]}>
+  <Tab>
+
+```typescript
+type VirtualField = {
+  // https://docs.vizzly.co/concepts/field
+  field: Field;
+
+  // Describes how the value of the field is calculated.
+  definition: Definition;
+};
+```
+
+  </Tab>
+  <Tab>
+
+  </Tab>
+</Tabs>

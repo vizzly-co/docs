@@ -1,0 +1,81 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+
+# Field
+
+Fields are used in data sets and virtual fields. They define various properties which are used to describe data.
+
+### Number, string and boolean fields
+
+<Tabs items={["Type definition", "Example"]}>
+  <Tab>
+
+```typescript
+type Field = {
+  id: string;
+  publicName: string;
+  dataType: "number" | "string" | "boolean";
+  canBeDimension: boolean;
+  canBeMeasure: boolean;
+  allowedOperators: Array<Query.Operator>;
+};
+```
+
+  </Tab>
+  <Tab>
+
+```json
+{
+  "id": "fie_1",
+  "publicName": "Player age",
+  "dataType": "number",
+  "canBeDimension": false,
+  "canBeMeasure": true,
+  "allowedOperators": [">", ">=", "<", "<="]
+}
+```
+
+  </Tab>
+</Tabs>
+
+### Date time fields
+
+<Tabs items={["Type definition", "Example"]}>
+  <Tab>
+
+```typescript
+type DateTimeField = {
+  id: string;
+  publicName: string;
+  dataType: "date_time";
+
+  // Can this field be used in dimensions?
+  canBeDimension: boolean;
+
+  // Can this field be used in aggregates?
+  canBeMeasure: boolean;
+
+  // https://docs.vizzly.co/concepts/query
+  allowedOperators: Array<Query.Operator>;
+
+  // https://docs.vizzly.co/concepts/query
+  allowedGranularities: Array<Query.TimeDimension.Truncate>;
+};
+```
+
+  </Tab>
+  <Tab>
+
+```json
+{
+  "id": "fie_4",
+  "publicName": "Recorded at",
+  "dataType": "date_time",
+  "canBeDimension": true,
+  "canBeMeasure": false,
+  "allowedOperators": [">", ">=", "<", "<="],
+  "allowedGranularities": ["month", "year"]
+}
+```
+
+  </Tab>
+</Tabs>

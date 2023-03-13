@@ -34,7 +34,7 @@ type IdentityConfig = {
     // Secure filters which are sent with every query for
     // a given data set.
     secureFilters: {
-      [dataSetId: string]: Query.Filter[];
+      [dataSetId: string]: Array<Query.Filter>;
     };
 
     // ISO 8601 format.

@@ -1,0 +1,44 @@
+import { Tab, Tabs } from "nextra-theme-docs";
+import Link from "next/link";
+
+# Subquery
+
+Sometimes, multiple queries are required to transform the data in your data set, to find the answer you are looking for.
+
+For example, you might want to calculate the percentage of your employees who are female. You will need to;
+
+1. Count total number of staff, and count the total number of those which are female.
+2. Divide the number of female staff, with the total number of employees and multiply this by 100.
+
+You can see here that there are two stages to finding out the result, and each stage requires a query.
+
+### In Vizzly
+
+The current way Vizzly supports this, is to return a subquery data set from the <Link style={{textDecoration: "underline"}} href="/dashboard/callbacks/loadDataSetsCallback">loadDataSetsCallback</Link>. This is a data set which is built by referencing
+a normal data set and providing a query.
+
+<Tabs items={["Type definition", "Example"]}>
+  <Tab>
+
+```typescript
+{
+  id: string;
+  name: string;
+  subquery?: {
+    // https://docs.vizzly.co/concepts/query
+    query: Query;
+    // Virtual fields only used to run the subquery against the base data set.
+    // https://docs.vizzly.co/concepts/virtualField
+    virtualFields: Array<VirtualField>;
+  };
+  // Virtual fields only to use on the data set.
+  // https://docs.vizzly.co/concepts/virtualField
+  virtualFields?: Array<VirtualField>;
+};
+```
+
+  </Tab>
+  <Tab>
+
+  </Tab>
+</Tabs>
