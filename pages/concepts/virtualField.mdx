@@ -10,6 +10,29 @@ You can use mathematical operators and conditions to define these fields.
   <Tab>
 
 ```typescript
+type Condition = {
+  // https://docs.vizzly.co/concepts/query
+  // Currently only 1 "and" condition is allowed.
+  if: [Array<Query.Filter>];
+
+  // If the condition is met,
+  // what should the definition look like?
+  then: Definition;
+
+  // If the condition is not met, what
+  // should the definition look like?
+  else: Definition;
+};
+
+// https://docs.vizzly.co/concepts/query
+type Calculation = number | Query.Measure | Condition;
+
+type Definition = [
+  Definition | Calculation,
+  "*" | "-" | "/" | "+",
+  Definition | Calculation
+];
+
 type VirtualField = {
   // https://docs.vizzly.co/concepts/field
   field: Field;
@@ -21,6 +44,36 @@ type VirtualField = {
 
   </Tab>
   <Tab>
+
+```typescript
+{
+  field: {
+    id: 'virtual_field_1',
+    publicName: 'My first virtual field',
+    allowedOperators: ['>', '<', '=', '!='],
+    canBeDimension: false,
+    canBeMeasure: true,
+    dataType: 'number',
+  },
+  definition: [
+    {
+      if: [[{ field: 'fie_1', op: '=', value: 'female' }]],
+      then: [1, '+', 0],
+      else: [0, '+', 0],
+    },
+    '+',
+    [
+      [
+        { field: 'fie_2', aggregate: 'none' },
+        '-',
+        { field: 'fie_8', aggregate: 'none' },
+      ],
+      '*',
+      100,
+    ],
+  ],
+}
+```
 
   </Tab>
 </Tabs>
