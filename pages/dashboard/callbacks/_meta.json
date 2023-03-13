@@ -2,5 +2,6 @@
   "identity": "Identity",
   "loadDataCallback": "Load data",
   "loadDataSetsCallback": "Load data sets",
-  "runQueriesCallback": "Run queries"
+  "runQueriesCallback": "Run queries",
+  "loadQueryEngineConfigCallback": "Load query engine config"
 }

@@ -1,0 +1,123 @@
+import { Tab, Tabs, Callout } from "nextra-theme-docs";
+
+# Load query engine config
+
+This callback is used for the `custom` implementations of the Vizzly query engine. It allows you to define the
+aggregate and supported time trunc functions that your query engine supports.
+
+The callback is an `async` function, that returns a query engine config.
+
+### Query Engine Config
+
+<Tabs items={["Type definition", "Example"]}>
+  <Tab>
+```typescript
+type SupportedTimeTruncFunctions = {
+  [key: string]: {
+    publicName: string;
+    // https://docs.vizzly.co/concepts/timeFormat
+    dateFormat: DateTimeFormat;
+  };
+};
+
+type SupportedAggregates = {
+[id: string]: {
+publicName: string;
+// https://docs.vizzly.co/concepts/dataType
+validDataTypes: DataType;
+}
+}
+
+type QueryEngineConfig = {
+supportedAggregates: SupportedAggregates;
+supportedTimeTruncFunctions: SupportedTimeTruncFunctions;
+};
+
+````
+  </Tab>
+  <Tab>
+```json
+{
+  "supportedTimeTruncFunctions":{
+    "month":{
+        "publicName":"Monthly",
+        "dateFormat":"MMMM YYYY"
+    },
+    "year":{
+        "publicName":"Yearly",
+        "dateFormat":"YYYY"
+    },
+    "quarter":{
+        "publicName":"Per quarter",
+        "dateFormat":"quarter"
+    },
+    "week":{
+        "publicName":"Weekly",
+        "dateFormat":"week"
+    },
+    "day":{
+        "publicName":"Daily",
+        "dateFormat":"DD-MM-YYYY"
+    },
+    "hour":{
+        "publicName":"Hourly",
+        "dateFormat":"hh:mm"
+    },
+    "minute":{
+        "publicName":"Per minute",
+        "dateFormat":"hh:mm"
+    },
+    "second":{
+        "publicName":"Per second",
+        "dateFormat":"hh:mm:ss"
+    }
+  },
+  "supportedAggregates":{
+    "mean":{
+        "publicName":"Mean",
+        "validDataTypes":[
+          "number"
+        ]
+    },
+    "sum":{
+        "publicName":"Sum",
+        "validDataTypes":[
+          "number"
+        ]
+    },
+    "min":{
+        "publicName":"Min",
+        "validDataTypes":[
+          "number"
+        ]
+    },
+    "max":{
+        "publicName":"Max",
+        "validDataTypes":[
+          "number"
+        ]
+    },
+    "count":{
+        "publicName":"Count",
+        "validDataTypes":[
+          "string",
+          "number",
+          "boolean",
+          "date_time"
+        ]
+    },
+    "countDistinct":{
+        "publicName":"Unique",
+        "validDataTypes":[
+          "string",
+          "number",
+          "boolean",
+          "date_time"
+        ]
+    }
+  }
+}
+    ```
+  </Tab>
+</Tabs>
+````
