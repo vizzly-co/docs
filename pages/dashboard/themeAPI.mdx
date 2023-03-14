@@ -11,13 +11,12 @@ It's as simple as using the `theme` prop on the Component and defining the style
 ```jsx
 import Vizzly from '@vizzly/dashboard';
 
-const CustomLoadingComponent = () =>
+const MyAppDashboard = () =>
   <Vizzly.Dashboard
     theme={{
       ...
     }}
   />
-
 
 ```
 
@@ -86,6 +85,7 @@ export namespace VizzlyTheming {
   export type Form = {
     label?: Label;
     input?: Input;
+    select?: Select;
   };
 
   export interface Label extends FontStyle {}
@@ -94,6 +94,7 @@ export namespace VizzlyTheming {
     sm?: InputStyle;
     "&:focus"?: InputState;
     "&:hover"?: InputState;
+    "&:focus:hover"?: InputState;
   }
   export type InputStyle = {
     padding?: CSSProperties["padding"];
@@ -108,6 +109,11 @@ export namespace VizzlyTheming {
     boxShadow?: CSSProperties["boxShadow"];
     background?: CSSProperties["background"];
   };
+
+  export interface Select extends Input {
+    indicatorColor?: CSSProperties["color"];
+    dropdown?: Dropdown;
+  }
 
   export type Modal = {
     overlay?: Overlay;
@@ -145,6 +151,22 @@ export namespace VizzlyTheming {
     opacity?: CSSProperties["opacity"];
   };
 
+  export interface Dropdown {
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+    boxShadow?: CSSProperties["boxShadow"];
+    fontSize?: CSSProperties["fontSize"];
+    separatorBorder?: CSSProperties["borderBottom"];
+    selected?: Option;
+    "&:hover"?: Option;
+  }
+
+  export type Option = {
+    background?: CSSProperties["background"];
+    fontWeight?: CSSProperties["fontWeight"];
+    color?: CSSProperties["color"];
+  };
+
   export type FontStyle = {
     color?: CSSProperties["color"];
     fontFamily?: CSSProperties["fontFamily"];
@@ -179,8 +201,6 @@ export namespace VizzlyTheming {
 It's in our roadmap to allow for further customisation of the Dashboard component. These include:
 
 - Tabs
-- Select input
-- Dropdown Options
 
 ## Examples
 
@@ -191,33 +211,33 @@ It's in our roadmap to allow for further customisation of the Dashboard componen
 This property changes everthing you need to make the buttons appear like your own application.
 
 ```jsx
-import Vizzly from '@vizzly/dashboard';
+import Vizzly from "@vizzly/dashboard";
 
-const CustomLoadingComponent = () => <p>Loading...</p>
-
-<Vizzly.Dashboard
-  theme={{
-    detail: "minimal",
-    rowLimit: 5,
-    buttons: {
-      primary: {
-        borderRadius: '15px',
-        border: '1px solid rgb(17, 109, 255)',
-        background: 'rgb(17, 109, 255)',
-        padding: '3px 17px 4.5px',
-        boxShadow: "none",
-        color: '#fff',
-        fontSize: '14px',
-        fontWeight: 530,
-        height: 30,
-        '&:hover': {
-          border: '1px solid #0f62e6',
-          background: '#0f62e6',
+const MyAppDashboard = () => (
+  <Vizzly.Dashboard
+    theme={{
+      detail: "minimal",
+      rowLimit: 5,
+      buttons: {
+        primary: {
+          borderRadius: "15px",
+          border: "1px solid rgb(17, 109, 255)",
+          background: "rgb(17, 109, 255)",
+          padding: "3px 17px 4.5px",
+          boxShadow: "none",
+          color: "#fff",
+          fontSize: "14px",
+          fontWeight: 530,
+          height: 30,
+          "&:hover": {
+            border: "1px solid #0f62e6",
+            background: "#0f62e6",
+          },
         },
-      }
-    }
-  }}
-/>
+      },
+    }}
+  />
+);
 ```
 
 ### Input properties
@@ -228,40 +248,40 @@ const CustomLoadingComponent = () => <p>Loading...</p>
 This property changes everthing you need to make a `type="text"` or `type=number` input appear like your own application.
 
 ```jsx
-import Vizzly from '@vizzly/dashboard';
+import Vizzly from "@vizzly/dashboard";
 
-const CustomLoadingComponent = () => <p>Loading...</p>
-
-<Vizzly.Dashboard
-  theme={{
-    detail: "minimal",
-    rowLimit: 5,
-    forms: {
-      label: {
-        fontSize: 14,
-        fontWeight: 400,
-        color: '#32536A',
-        margin: "0 0 6px 0"
+const MyAppDashboard = () => (
+  <Vizzly.Dashboard
+    theme={{
+      detail: "minimal",
+      rowLimit: 5,
+      forms: {
+        label: {
+          fontSize: 14,
+          fontWeight: 400,
+          color: "#32536A",
+          margin: "0 0 6px 0",
+        },
+        input: {
+          border: "1px #a8caff solid",
+          background: "rgb(255, 255, 255)",
+          borderRadius: "0.375rem",
+          padding: "5px 9px 5px 12px",
+          color: "rgb(0, 6, 36)",
+          fontSize: 16,
+          fontWeight: 400,
+          "&:focus": {
+            border: "1px #3899EC solid",
+            boxShadow: "0 0 0 3px #AADBFC",
+          },
+          "&:hover": {
+            background: "#e7f0ff",
+          },
+        },
       },
-      input: {
-        border: '1px #a8caff solid',
-        background: 'rgb(255, 255, 255)',
-        borderRadius: '0.375rem',
-        padding: '5px 9px 5px 12px',
-        color: 'rgb(0, 6, 36)',
-        fontSize: 16,
-        fontWeight: 400,
-        '&:focus': {
-          border: '1px #3899EC solid',
-          boxShadow: '0 0 0 3px #AADBFC',
-        },
-        '&:hover': {
-          background: '#e7f0ff',
-        },
-      }
-    }
-  }}
-/>
+    }}
+  />
+);
 ```
 
 ### Chart properties
@@ -275,22 +295,24 @@ The properties allow you to customise the base styles of the charts.
 ```jsx
 import Vizzly from "@vizzly/dashboard";
 
-<Vizzly.Dashboard
-  theme={{
-    detail: "minimal",
-    rowLimit: 5,
-    charts: {
-      labels: {
-        color: "#000",
-        fontWeight: 300,
+const MyAppDashboard = () => (
+  <Vizzly.Dashboard
+    theme={{
+      detail: "minimal",
+      rowLimit: 5,
+      charts: {
+        labels: {
+          color: "#000",
+          fontWeight: 300,
+        },
+        grid: {
+          stroke: "rgba(25,144,206, 0.7)",
+        },
+        axis: {
+          stroke: "rgba(25,144,206, 0.9)",
+        },
       },
-      grid: {
-        stroke: "rgba(25,144,206, 0.7)",
-      },
-      axis: {
-        stroke: "rgba(25,144,206, 0.9)",
-      },
-    },
-  }}
-/>;
+    }}
+  />
+);
 ```
