@@ -49,12 +49,14 @@ export namespace VizzlyTheming {
     alerts?: Alerts;
     charts?: Charts;
     dropdowns?: Dropdown;
+    popoverMenu?: PopoverMenu;
   };
 
   export interface Buttons {
     primary?: ButtonType;
     secondary?: ButtonType;
     area?: AreaButton;
+    grid?: GridButtons;
   }
 
   export interface ButtonType extends ButtonState {
@@ -66,6 +68,7 @@ export namespace VizzlyTheming {
     height?: CSSProperties["height"];
     "&:hover"?: ButtonState;
   }
+
   export type ButtonSize = {
     fontWeight?: CSSProperties["fontWeight"];
     padding?: CSSProperties["padding"];
@@ -99,6 +102,27 @@ export namespace VizzlyTheming {
   export type AreaButtonTypes = {
     fontWeight?: CSSProperties["fontWeight"];
     fontSize?: CSSProperties["fontSize"];
+  };
+
+  export type GridButtons = {
+    selected?: GridButton;
+    unselected?: GridButton;
+  };
+
+  export type GridButton = {
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+    boxShadow?: CSSProperties["boxShadow"];
+    borderRadius?: CSSProperties["borderRadius"];
+    fontWeight?: CSSProperties["fontWeight"];
+    fontSize?: CSSProperties["fontSize"];
+    color?: CSSProperties["color"];
+    "&:hover"?: {
+      background?: CSSProperties["background"];
+      border?: CSSProperties["border"];
+      boxShadow?: CSSProperties["boxShadow"];
+      color?: CSSProperties["color"];
+    };
   };
 
   export type Panel = {
@@ -190,6 +214,8 @@ export namespace VizzlyTheming {
     border?: CSSProperties["border"];
   };
 
+  export interface ListAdd extends Omit<Panel, "subtitle"> {}
+
   export interface Dropdown {
     background?: CSSProperties["background"];
     color?: CSSProperties["color"];
@@ -216,6 +242,10 @@ export namespace VizzlyTheming {
     fontWeight?: CSSProperties["fontWeight"];
     margin?: CSSProperties["margin"];
   };
+
+  export interface PopoverMenu extends Omit<Dropdown, "selected"> {
+    noClose?: boolean;
+  }
 
   export type Tabs = {
     selected?: TabButton;
@@ -267,12 +297,6 @@ export namespace VizzlyTheming {
   };
 }
 ```
-
-### Roadmap
-
-It's in our roadmap to allow for further customisation of the Dashboard component. These include:
-
-- Tabs
 
 ## Examples
 
