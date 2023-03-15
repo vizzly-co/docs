@@ -39,17 +39,22 @@ export namespace VizzlyTheming {
     detail: "minimal" | "verbose";
     rowLimit: number;
     baseFont?: FontStyle;
-    colors?: Array<CSSProperties["color"]>;
+    colors?: CSSProperties["color"][];
     buttons?: Buttons;
     panels?: Panel;
     forms?: Form;
     modals?: Modal;
+    lists?: List;
+    tabs?: Tabs;
+    alerts?: Alerts;
     charts?: Charts;
+    dropdowns?: Dropdown;
   };
 
   export interface Buttons {
     primary?: ButtonType;
     secondary?: ButtonType;
+    area?: AreaButton;
   }
 
   export interface ButtonType extends ButtonState {
@@ -61,8 +66,8 @@ export namespace VizzlyTheming {
     height?: CSSProperties["height"];
     "&:hover"?: ButtonState;
   }
-
   export type ButtonSize = {
+    fontWeight?: CSSProperties["fontWeight"];
     padding?: CSSProperties["padding"];
     fontSize?: CSSProperties["fontSize"];
     height?: CSSProperties["height"];
@@ -72,6 +77,28 @@ export namespace VizzlyTheming {
     background?: CSSProperties["background"];
     color?: CSSProperties["color"];
     border?: CSSProperties["border"];
+    borderRadius?: CSSProperties["borderRadius"];
+  };
+
+  export type AreaButton = {
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+    boxShadow?: CSSProperties["boxShadow"];
+    borderRadius?: CSSProperties["borderRadius"];
+    color?: CSSProperties["color"];
+    "&:hover"?: {
+      background?: CSSProperties["background"];
+      border?: CSSProperties["border"];
+      boxShadow?: CSSProperties["boxShadow"];
+      color?: CSSProperties["color"];
+    };
+    medium?: AreaButtonTypes;
+    large?: AreaButtonTypes;
+  };
+
+  export type AreaButtonTypes = {
+    fontWeight?: CSSProperties["fontWeight"];
+    fontSize?: CSSProperties["fontSize"];
   };
 
   export type Panel = {
@@ -96,6 +123,7 @@ export namespace VizzlyTheming {
     "&:hover"?: InputState;
     "&:focus:hover"?: InputState;
   }
+
   export type InputStyle = {
     padding?: CSSProperties["padding"];
     fontSize?: CSSProperties["fontSize"];
@@ -104,16 +132,15 @@ export namespace VizzlyTheming {
     color?: CSSProperties["color"];
   };
 
+  export interface Select extends Input {
+    indicatorColor?: CSSProperties["color"];
+  }
+
   export type InputState = {
     border?: CSSProperties["border"];
     boxShadow?: CSSProperties["boxShadow"];
     background?: CSSProperties["background"];
   };
-
-  export interface Select extends Input {
-    indicatorColor?: CSSProperties["color"];
-    dropdown?: Dropdown;
-  }
 
   export type Modal = {
     overlay?: Overlay;
@@ -124,6 +151,7 @@ export namespace VizzlyTheming {
   };
 
   export type ModalBase = {
+    color?: CSSProperties["color"];
     background?: CSSProperties["background"];
     border?: CSSProperties["border"];
     boxShadow?: CSSProperties["boxShadow"];
@@ -151,13 +179,27 @@ export namespace VizzlyTheming {
     opacity?: CSSProperties["opacity"];
   };
 
+  export interface List extends Panel {
+    color?: CSSProperties["color"];
+    icon?: ListIcon;
+  }
+
+  export type ListIcon = {
+    color?: CSSProperties["color"];
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+  };
+
   export interface Dropdown {
     background?: CSSProperties["background"];
+    color?: CSSProperties["color"];
     border?: CSSProperties["border"];
     boxShadow?: CSSProperties["boxShadow"];
     fontSize?: CSSProperties["fontSize"];
     separatorBorder?: CSSProperties["borderBottom"];
     selected?: Option;
+    borderRadius?: CSSProperties["borderRadius"];
+    padding?: CSSProperties["padding"];
     "&:hover"?: Option;
   }
 
@@ -173,6 +215,36 @@ export namespace VizzlyTheming {
     fontSize?: CSSProperties["fontSize"];
     fontWeight?: CSSProperties["fontWeight"];
     margin?: CSSProperties["margin"];
+  };
+
+  export type Tabs = {
+    selected?: TabButton;
+    unselected?: TabButton;
+  };
+
+  export interface TabButton extends ButtonType {
+    borderBottom?: CSSProperties["borderBottom"];
+    borderTop?: CSSProperties["borderTop"];
+    borderRight?: CSSProperties["borderRight"];
+    borderLeft?: CSSProperties["borderLeft"];
+  }
+
+  export type Alerts = {
+    padding?: CSSProperties["padding"];
+    borderRadius?: CSSProperties["borderRadius"];
+    title?: FontStyle;
+    content?: FontStyle;
+    info?: AlertType;
+    warning?: AlertType;
+    critical?: AlertType;
+  };
+
+  export type AlertType = {
+    background?: CSSProperties["background"];
+    border?: CSSProperties["border"];
+    color?: CSSProperties["color"];
+    iconColor?: CSSProperties["fill"];
+    borderRadius?: CSSProperties["borderRadius"];
   };
 
   export type Charts = {
@@ -313,6 +385,79 @@ const MyAppDashboard = () => (
         },
       },
     }}
+  />
+);
+```
+
+## Design Tokens with CSS Custom properties
+
+The Theme API accepts Custom properties, also known as CSS variables.
+If you have defined your Design Tokens in a CSS file or in the `head`
+tag of your application, these can be used in the Vizzly Theme API.
+
+To find out more about Custom properties visit https://developer.mozilla.org/en-US/docs/Web/CSS/--*/
+
+### Example
+
+```jsx
+<Head>
+  <title>Vizzly in-browser example</title>
+  <style>
+    :root {
+      --dk-mode-color-1:         #010409;
+      --dk-mode-color-2:         #30363d;
+      --dk-mode-color-3:         #c9d1d9;
+      --dk-mode-highlight-color: #3899EC;
+
+      --font-size-standard:      14px;
+      --font-size-small:         12px;
+      --font-weight:             400;
+
+      --border-radius:           6px;
+      --border-color:            var(--dk-mode-color-2);
+    }
+  </style>
+</Head>
+
+const MyAppDashboard = () => (
+  <Vizzly.Dashboard
+    theme={{
+      rowLimit: 6,
+      detail: "minimal",
+        forms: {
+          select: {
+            background: "var(--dk-mode-color-1)",
+            borderRadius: "var(--border-radius)",
+            border: "1px solid var(--border-color)",
+            fontSize: "var(--font-size-standard)",
+            padding: "6.25px 0.5rem",
+            boxShadow: "inset 0 0 0 1px  transparent",
+            color: "var(--dk-mode-color-3)",
+            "&:hover": {
+              border: "1px solid var(--dk-mode-highlight-color)",
+              boxShadow: "inset 0 0 0 1px transparent",
+            },
+            "&:focus": {
+              border: "1px solid var(--dk-mode-highlight-color)",
+            },
+            indicatorColor: "var(--dk-mode-highlight-color)",
+          },
+        },
+        dropdowns: {
+          fontSize: "var(--font-size-small)",
+          background: "var(--dk-mode-color-2)",
+          color: "var(--dk-mode-color-3)",
+          boxShadow: "0 8px 24px var(--dk-mode-color-1)",
+          borderRadius: "var(--border-radius)",
+          border: "1px solid var(--border-color)",
+          separatorBorder: "1px solid var(--border-color)",
+          "&:hover": {
+            background: "#6e76811a",
+          },
+          padding: "7px 18px",
+        },
+    }}
+    ...
   />
 );
 ```
