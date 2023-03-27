@@ -44,7 +44,7 @@
       },
       {
         "flags": "-t, --type <type>",
-        "description": "Either 'editor' or 'standard'",
+        "description": "Either 'admin' or 'standard'",
         "required": true,
         "optional": false,
         "variadic": false,
@@ -116,7 +116,7 @@
       },
       {
         "flags": "-t, --type <type>",
-        "description": "Either 'editor' or 'standard'",
+        "description": "Either 'admin' or 'standard'",
         "required": true,
         "optional": false,
         "variadic": false,

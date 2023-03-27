@@ -72,7 +72,7 @@ c8XAMURwSA7iAY2QzmzJ4RQ6ZKp1UVkpLA==
 
 dashboard_access_token = vizzly.sign_dashboard_access_token(
   expiry_ttl_in_minutes=60,
-  access_type='editor',
+  access_type='admin',
   organisation_id='org_123',
   dashboard_id='dsh_123',
   user_reference='usr-1',
@@ -98,14 +98,14 @@ If you're using a programming language that we don't currently provide an authen
 
 **What is access type?**
 
-The accessType value can either be `editor` or `standard` and controls who gets to modify the initial dashboard new users will see.
+The accessType value can either be `admin` or `standard` and controls who gets to modify the initial dashboard new users will see.
 
-Set this value to `editor` if the current user should be allowed to manage the dashboard that every user will initially see. Most commonly, this value will be set to `editor` only for certain staff from your company.
+Set this value to `admin` if the current user should be allowed to manage the dashboard that every user will initially see. Most commonly, this value will be set to `admin` only for certain staff from your company.
 
-If you're an `editor` - you'll see a banner at the top of the dashboard with a "configure" button which will allow you to make changes to the default dashboard.
+If you're an `admin` - you'll see a banner at the top of the dashboard with a "configure" button which will allow you to make changes to the default dashboard.
 If you are a `standard` user, then you will not be able to see the banner.
 
-The editor banner looks like this;
+The admin banner looks like this;
 
 <img src="/img/editor-banner.png" style={{ width: "100%" }} />
 
@@ -131,7 +131,7 @@ vizzly access-tokens \
   -o org_<<rest of organisation ID>> \
   -d dsh_<<rest of dashboard ID>> \
   -u "user 123456" \
-  -t editor \
+  -t admin \
   --private-key vizzly-private.pem
 ```
 
