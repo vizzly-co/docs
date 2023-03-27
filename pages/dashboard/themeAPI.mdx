@@ -50,12 +50,14 @@ export namespace VizzlyTheming {
     charts?: Charts;
     dropdowns?: Dropdown;
     popoverMenu?: PopoverMenu;
+    tables?: Tables;
   };
 
   export interface Buttons {
+    sm?: ButtonSize;
     primary?: ButtonType;
     secondary?: ButtonType;
-    area?: AreaButton;
+    add?: AddButton;
     grid?: GridButtons;
   }
 
@@ -81,9 +83,11 @@ export namespace VizzlyTheming {
     color?: CSSProperties["color"];
     border?: CSSProperties["border"];
     borderRadius?: CSSProperties["borderRadius"];
+    fontWeight?: CSSProperties["fontWeight"];
+    boxShadow?: CSSProperties["boxShadow"];
   };
 
-  export type AreaButton = {
+  export type AddButton = {
     background?: CSSProperties["background"];
     border?: CSSProperties["border"];
     boxShadow?: CSSProperties["boxShadow"];
@@ -95,11 +99,12 @@ export namespace VizzlyTheming {
       boxShadow?: CSSProperties["boxShadow"];
       color?: CSSProperties["color"];
     };
-    medium?: AreaButtonTypes;
-    large?: AreaButtonTypes;
+    small?: AddButtonTypes;
+    medium?: AddButtonTypes;
+    large?: AddButtonTypes;
   };
 
-  export type AreaButtonTypes = {
+  export type AddButtonTypes = {
     fontWeight?: CSSProperties["fontWeight"];
     fontSize?: CSSProperties["fontSize"];
   };
@@ -194,8 +199,10 @@ export namespace VizzlyTheming {
   };
 
   export type ModalFooter = {
+    background?: CSSProperties["background"];
     borderTop?: CSSProperties["borderTop"];
     padding?: CSSProperties["padding"];
+    borderRadius?: CSSProperties["borderRadius"];
   };
 
   export type Overlay = {
@@ -204,6 +211,8 @@ export namespace VizzlyTheming {
   };
 
   export interface List extends Panel {
+    title?: FontStyle;
+    fontSize?: CSSProperties["fontSize"];
     color?: CSSProperties["color"];
     icon?: ListIcon;
   }
@@ -222,6 +231,7 @@ export namespace VizzlyTheming {
     border?: CSSProperties["border"];
     boxShadow?: CSSProperties["boxShadow"];
     fontSize?: CSSProperties["fontSize"];
+    fontWeight?: CSSProperties["fontWeight"];
     separatorBorder?: CSSProperties["borderBottom"];
     selected?: Option;
     borderRadius?: CSSProperties["borderRadius"];
@@ -243,11 +253,10 @@ export namespace VizzlyTheming {
     margin?: CSSProperties["margin"];
   };
 
-  export interface PopoverMenu extends Omit<Dropdown, "selected"> {
-    noClose?: boolean;
-  }
+  export interface PopoverMenu extends Omit<Dropdown, "selected"> {}
 
   export type Tabs = {
+    borderBottom?: CSSProperties["borderBottom"];
     selected?: TabButton;
     unselected?: TabButton;
   };
@@ -278,6 +287,8 @@ export namespace VizzlyTheming {
   };
 
   export type Charts = {
+    title?: FontStyle;
+    subject?: FontStyle;
     labels?: ChartLabels;
     grid?: ChartGrid;
     axis?: ChartAxis;
@@ -286,6 +297,7 @@ export namespace VizzlyTheming {
   export type ChartLabels = {
     color?: CSSProperties["color"];
     fontWeight?: CSSProperties["fontWeight"];
+    fontSize?: CSSProperties["fontSize"];
   };
 
   export type ChartGrid = {
@@ -294,6 +306,15 @@ export namespace VizzlyTheming {
 
   export type ChartAxis = {
     stroke: CSSProperties["stroke"];
+  };
+
+  export type Tables = {
+    th?: TableTH;
+  };
+
+  export type TableTH = {
+    color?: CSSProperties["color"];
+    background?: CSSProperties["background"];
   };
 }
 ```
