@@ -1,89 +1,94 @@
 import { Callout } from "nextra-theme-docs";
 
-<Callout emoji="❗">
-  Please note, we will soon be migrating to a new query format.
-  Please contact us before building new features that rely on this soon-to-be deprecated format.
-
-  We shall continue to support this deprecated format, however all
-  new Vizzly features will rely on the new format.
-</Callout>
-
-
 ```typescript
-export namespace Query {
-  // A dimension can be thought of as a
-  // field to "group by" in a SQL statement.
-  export type Dimension = Field;
+namespace Query {
+  /**
+   * Which direction should the values be sorted in?
+  */
+  export type SortDirection = 'asc' | 'desc';
 
-  // Field ID provided in your data set.
+  /**
+   * ID of the field. This is the same ID that is used in
+   * the data sets.
+  */
   export type Field = string;
 
-  export type Limit = number;
+  /**
+   * Index of the measure to group the aggregates on.
+   * Index starts from 0.
+  */
+  export type Group = { index: number };
 
-  export type Offset = number;
-
-  export type Aggregate =
-    | "countDistinct"
-    | "count"
-    | "mean"
-    | "sum"
-    | "min"
-    | "max"
-    | "none";
-
-  export type Measure = {
-    field: Field;
-    aggregate: Aggregate;
-  };
-
+  /**
+   * Index of the measure to sort the results by.
+   * Index starts from 0.
+  */
   export type Order = {
-    field: Field;
-    direction: "asc" | "desc";
-    aggregate: Aggregate;
+    index: number;
+    direction: SortDirection;
   };
 
-  export type Operator =
-    | ">"
-    | "<"
-    | "="
-    | '!='
-    | ">="
-    | "<="
-    | "is_one_of"
-    | "is_not_one_of"
-    | "starts_with"
-    | "ends_with"
-    | "contains_substring"
-    | "does_not_contain_substring";
-
-  export type Filter = {
-    field: Field;
-    op: Operator;
+  /**
+   * Defines filters to apply on the query. This can be thought of
+   * as the WHERE clause in a SQL statement.
+  */
+  export type Filter<FieldDefinition, ComparisonOperator> = {
+    field: FieldDefinition;
+    op: ComparisonOperator;
     value: any;
   };
 
-  export namespace TimeDimension {
-    export type Truncate =
-      | "second"
-      | "minute"
-      | "hour"
-      | "day"
-      | "month"
-      | "year";
-  }
+  /**
+   * Limit the number of results returned from the query.
+  */
+  export type Limit = number;
 
-  export type TimeDimension = {
-    field: Field;
-    truncate: TimeDimension.Truncate;
-  };
+  /**
+   * Sets the offset of results to return.
+  */
+  export type Offset = number;
+
+  /**
+   * Fields can be;
+   * - Literal numbers
+   * - Sub-queries
+   * - Fields with no function. `function` will be 'none'.
+   * - Fields with a function. e.g `function` will be a supported aggregate or supported time function from the query engine config.
+  */
+  export type FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp> =
+    | number
+    | [
+        FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>,
+        MathsOp,
+        FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>
+      ]
+    | { field: string; function: SupportedFunction }
+    | SubQuery<SupportedFunction, ComparisonOperator, MathsOp>;
 }
 
-export type Query = {
-  dataSetId: string;
-  measure: Array<Query.Measure>;
-  dimension: Array<Query.Dimension>;
-  timeDimension: Query.TimeDimension | null;
+export type SubQuery<
+  SupportedFunction = string,
+  ComparisonOperator = string,
+  MathsOp = string
+> = {
+  measure: [
+    Query.FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>
+  ];
+  filter: Query.Filter<
+    Query.FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>,
+    ComparisonOperator
+  >[][];
+};
 
+export type Query<
+  SupportedFunction = string,
+  ComparisonOperator = string,
+  MathsOp = string
+> = {
+  dataSetId: string;
+  measure: Array<
+    Query.FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>
+  >;
   /*
     The following filter structure
     [
@@ -93,8 +98,12 @@ export type Query = {
     would be read as;
     accept data records where (filter 1 and filter 2 are truthy), or (filter 3 and filter 4 are truthy)
   */
-  filter: Array<Array<Query.Filter>>;
+  filter: Query.Filter<
+    Query.FieldDefinition<SupportedFunction, ComparisonOperator, MathsOp>,
+    ComparisonOperator
+  >[][];
   order: Array<Query.Order>;
+  group: Array<Query.Group>;
   limit?: Query.Limit;
   offset?: Query.Offset;
 };
