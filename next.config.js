@@ -71,6 +71,26 @@ const nextJsConfig = {
         source: '/performance',
         destination: '/query-engines/self-hosted/performance',
         permanent: false
+      },
+      {
+        source: '/dashboard/callbacks/identity',
+        destination: '/dashboard/properties/identity',
+        permanent: false
+      },
+      {
+        source: '/dashboard/callbacks/runQueriesCallback',
+        destination: '/dashboard/properties/runQueries',
+        permanent: false
+      },
+      {
+        source: '/dashboard/callbacks/loadDataCallback',
+        destination: '/dashboard/properties/data',
+        permanent: false
+      },
+      {
+        source: '/dashboard/callbacks/loadDataSetsCallback',
+        destination: '/dashboard/properties/dataSets',
+        permanent: false
       }
     ]
   }

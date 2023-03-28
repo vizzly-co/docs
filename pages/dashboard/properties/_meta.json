@@ -1,0 +1,7 @@
+{
+  "identity": "Identity",
+  "data": "Load data",
+  "dataSets": "Load data sets",
+  "runQueries": "Run queries",
+  "queryEngineConfig": "Load query engine config"
+}
